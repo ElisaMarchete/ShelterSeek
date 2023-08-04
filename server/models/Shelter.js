@@ -1,20 +1,27 @@
 import { Schema, model } from "mongoose";
 import Pet from "./Pet";
 
-const PetSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+const PetSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    animal: {
+      type: String,
+      required: true,
+    },
+    breed: [String],
+    birthday: Number,
+    color: [String],
+    media: [String],
   },
-  animal: {
-    type: String,
-    required: true,
-  },
-  breed: [String],
-  birthday: Number,
-  color: [String],
-  media: [String],
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 PetSchema.virtual("age").get(function () {
   return new Date().getFullYear() - this.birthday;
