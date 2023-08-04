@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
+import Pet from "./Pet.js";
 
-const ShelterSchema = new mongoose.Schema(
+const ShelterSchema = new Schema(
   {
     name: {
       type: String,
@@ -23,7 +24,7 @@ const ShelterSchema = new mongoose.Schema(
       },
     },
     media: [String],
-    pets: [PetSchema],
+    pets: [Pet.schema],
   },
   {
     toJSON: {
@@ -37,4 +38,4 @@ ShelterSchema.virtual("petCount").get(function () {
   return this.pets.length;
 });
 
-export default mongoose.model("Shelter", ShelterSchema);
+export default model("Shelter", ShelterSchema);

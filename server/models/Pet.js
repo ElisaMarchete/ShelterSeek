@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const PetSchema = new mongoose.Schema({
+const PetSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -19,4 +19,4 @@ PetSchema.virtual("age").get(function () {
   return new Date().getFullYear() - this.birthday;
 });
 
-export default mongoose.model("Pet", PetSchema);
+export default model("Pet", PetSchema);

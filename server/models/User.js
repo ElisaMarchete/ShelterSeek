@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { hashPassword } from "../utils/helpers.js";
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     name: {
       type: String,
@@ -46,3 +46,5 @@ const UserSchema = new mongoose.Schema(
     },
   }
 );
+
+export default model("User", UserSchema);
