@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { hashPassword } from "../utils/helpers.js";
+import { hashPassword, checkPassword } from "../utils/helpers.js";
 
 const UserSchema = new Schema(
   {
@@ -14,13 +14,19 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
       required: true,
     },
     role: {
-      enum: ["user", "shelter"],
+      type: String,
+      required: true,
+      enum: {
+        values: ["user", "shelter"],
+        message: "{VALUE} is not supported. Must have role of user or shelter.",
+      },
     },
     phone: {
       type: String,
@@ -32,12 +38,6 @@ const UserSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Shelter",
-      },
-    ],
-    savedPets: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Pet",
       },
     ],
   },
@@ -58,5 +58,7 @@ UserSchema.pre("save", async function (next) {
   }
   next();
 });
+
+UserSchema.methods.checkPassword = checkPassword;
 
 export default model("User", UserSchema);
