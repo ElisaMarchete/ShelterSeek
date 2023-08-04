@@ -3,7 +3,11 @@ import { hashPassword } from "../utils/helpers.js";
 
 const UserSchema = new Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
@@ -14,12 +18,9 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      set: hashPassword,
     },
     role: {
       enum: ["user", "shelter"],
-      default: "user",
-      required: true,
     },
     phone: {
       type: String,
@@ -46,5 +47,16 @@ const UserSchema = new Schema(
     },
   }
 );
+
+UserSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await hashPassword(this.password);
+  }
+  next();
+});
 
 export default model("User", UserSchema);

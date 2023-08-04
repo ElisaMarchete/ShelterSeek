@@ -1,15 +1,9 @@
 import mongoose from "mongoose";
 
-export default connectToDB = async () => {
+const connectToDB = async () => {
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shelter_seek_db",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-      }
+      process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shelterSeekDB"
     );
 
     const db = mongoose.connection;
@@ -25,3 +19,5 @@ export default connectToDB = async () => {
     console.error(err);
   }
 };
+
+export default connectToDB;

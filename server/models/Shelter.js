@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import Pet from "./Pet.js";
+import Pet from "./Pet";
 
 const ShelterSchema = new Schema(
   {
