@@ -50,7 +50,7 @@ const ShelterSchema = new Schema(
       },
     },
     media: [String],
-    pets: [Pet.schema],
+    pets: [PetSchema],
   },
   {
     toJSON: {
