@@ -2,7 +2,7 @@
 const { Shelter, Donation } = require("../models");
 // const { signToken } = require("../utils/auth");
 const stripe = require("stripe")(
-  "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"
+  "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
 
 // resolvers graphQL = ROUTES in RESTful APIs
@@ -17,8 +17,10 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
+
+      // new donation - shelterId, amount
       const donation = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
+        payment_method_types: ["card  "],
         line_items: [
           {
             price_data: {
@@ -44,12 +46,11 @@ const resolvers = {
       return shelter;
     },
     addDonation: async (parent, args) => {
-      const donation = await Donation.create(args);
+      const donation = new Donation(args);
 
-      const shelter = await Shelter.findOneAndUpdate(
+      await Shelter.findOneAndUpdate(
         { _id: args.shelterId },
-        { $addToSet: { donations: donation._id } },
-        { new: true }
+        { $push: { donations: donation } }
       );
     },
   },
