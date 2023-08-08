@@ -1,11 +1,19 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
-async function connectToDB() {
-  await mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shelterSeekDB"
-  );
-}
+// async function connectToDB() {
+//   await mongoose.connect(
+//     process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shelterSeekDB"
+//   );
+// }
 
-connectToDB();
+// connectToDB();
 
-export default mongoose.connection;
+// export default mongoose.connection;
+
+const mongoose = require("mongoose");
+
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shelterSeekDB"
+);
+
+module.exports = mongoose.connection;
