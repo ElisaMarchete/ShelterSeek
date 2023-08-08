@@ -25,17 +25,3 @@ const start = async () => {
 };
 
 start();
-// testing db connection.
-// delete this later.
-import User from "./models/User.js";
-const testUserInfo = {
-  firstName: "Daler",
-  lastName: "Singh",
-  email: "dalersingh1234@email.com",
-  password: "password",
-  role: "shelter",
-  phone: "123-456-7890",
-  address: "123 Main St",
-};
-const testUser = new User(testUserInfo);
-testUser.save({ testUser });
