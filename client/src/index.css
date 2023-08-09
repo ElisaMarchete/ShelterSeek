@@ -15,14 +15,18 @@ code {
 /* HEADER / NAVBAR CSS */
 .Header {
   display: flex;
-  background-color: grey;
+  background-color: rgb(42, 93, 129);
   height: 100px;
+  vertical-align: middle;
 }
 
 .Header h1 {
   display: flex;
   flex: 1;
   margin: auto 20px;
+  cursor: default;
+  user-select: none;
+  color: white;
 }
 
 .Nav {
@@ -30,28 +34,40 @@ code {
   flex: 1;
   justify-content: end;
   align-items: center;
-  margin-right: 30px;
-}
-.Nav .Nav-button {
-  margin: 5px;
-  background-color: grey;
-  padding: 10px;
 }
 
-.Nav .Nav-button.active {
-  margin: 5px;
-  background-color: green;
+.Header .header-button {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: auto 5px;
+  padding: 0px 10px;
+  color: black;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.Nav .header-button.active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+.Header .header-button:hover {
+  color: white;
+  cursor: pointer;
 }
 
 /* Hero CSS */
 .Hero {
   display: flex;
   justify-content: center;
-  height: 350px;
+  width: 100vw;
   /* border-bottom: solid black 5px; */
   box-shadow: 0px 5px 15px;
+  filter:brightness(70%);
 }
 
 .Hero-image {
   height: 100%;
+
 }

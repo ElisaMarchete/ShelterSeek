@@ -43,14 +43,17 @@ function App() {
     {
       name: "Home",
       component: Home,
+      path: "/",
     },
     {
       name: "Shelters",
       // component: Shelters,
+      path: "/shelters",
     },
     {
       name: "Pets",
       // component: Pets,
+      path: "/pets",
     },
   ];
 
