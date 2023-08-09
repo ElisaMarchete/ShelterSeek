@@ -61,13 +61,50 @@ code {
 .Hero {
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   /* border-bottom: solid black 5px; */
   box-shadow: 0px 5px 15px;
   filter:brightness(70%);
 }
 
 .Hero-image {
-  height: 100%;
+  width: 100%;
 
+}
+
+/* Shelter List CSS */
+.ShelterList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shelters-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.shelter-card {
+  cursor: pointer;
+  width: 27%;
+  margin: 10px 10px 30px 10px;
+  /* height: 200px; */
+  box-sizing: border-box;
+}
+
+.shelter-card img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+.shelter-info {
+
+}
+
+.shelter-info h1, .shelter-info h2 {
+  margin: 10px 0px;
+  font-size: 90%;
 }

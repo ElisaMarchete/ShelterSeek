@@ -1,11 +1,13 @@
 import React from "react";
-import Donation from "../components/Donation";
 import Hero from "../components/Hero";
+import ShelterList from "../components/ShelterList";
+import Donation from "../components/Donation";
 
 const Home = () => {
   return (
     <div className="Home">
       <Hero />
+      <ShelterList />
       <Donation />
     </div>
   );
