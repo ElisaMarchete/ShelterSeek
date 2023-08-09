@@ -23,7 +23,8 @@ const Donation = () => {
   const submitCheckout = async (event) => {
     event.preventDefault();
     // get the shelter id from the url
-    const shelterId = window.location.pathname.split("/").pop();
+    // const shelterId = window.location.pathname.split("/").pop();
+    const shelterId = "64d2dcd0f737eeb85b86fd71";
     // get the donation amount from the input
     const amount = document.querySelector("input").value;
     // run the getCheckout query

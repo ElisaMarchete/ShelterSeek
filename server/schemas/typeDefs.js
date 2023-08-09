@@ -4,6 +4,13 @@ const { gql } = require("apollo-server-express");
 // query is a GET request (reading) - mutation is a POST, PUT, or DELETE request
 
 const typeDefs = gql`
+  type Donation {
+    _id: ID
+    donationDate: String
+    amount: Float
+    shelter: Shelter
+  }
+
   type Shelter {
     _id: ID
     name: String
@@ -14,13 +21,6 @@ const typeDefs = gql`
     description: String
     image: String
     donations: [Donation]
-  }
-
-  type Donation {
-    _id: ID
-    purchaseDate: String
-    amount: Float
-    shelter: Shelter
   }
 
   type Checkout {
@@ -38,8 +38,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    shelters: [Shelter]
     donation(_id: ID!): Donation
+    shelters: [Shelter]
     checkout(donation: [DonationInput]): Checkout
   }
 
@@ -57,6 +57,7 @@ const typeDefs = gql`
       BankInstitutionNumber: String!
       BankAccount: String!
     ): Shelter
+    addDonation(shelter: ID!): Donation
   }
 `;
 module.exports = typeDefs;
