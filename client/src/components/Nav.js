@@ -7,7 +7,7 @@ function Nav(props) {
       {props.pages.map((page) => {
         return (
           <Link
-            className={`Nav-button ${
+            className={`header-button ${
               props.currentPage.name === page.name ? "active" : ""
             }`}
             key={page.name}
