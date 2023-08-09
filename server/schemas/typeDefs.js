@@ -32,9 +32,15 @@ const typeDefs = gql`
     session: ID
   }
 
+  input DonationInput {
+    shelter: ID
+    amount: Float
+  }
+
   type Query {
     shelters: [Shelter]
-    checkout(shelterId: ID!, amount: Float!): Checkout
+    donation(id: ID!): Donation
+    checkout(donation: [DonationInput]): Checkout
   }
 
   type Mutation {

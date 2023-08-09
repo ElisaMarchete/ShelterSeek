@@ -15,39 +15,36 @@ const resolvers = {
       return await Shelter.find();
     },
 
-    // payment will be processed by stripe but we want receipt to be saved in our database
-    // checkout: async (parent, args, context) => {
-    //   // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
-    //   const url = new URL(context.headers.referer).origin;
-
-    //   // create a new donation
-    //   await Donation.create(args.donation);
-    //   console.log(args.donation);
-
-    //   const line_items = [
-    //     {
-    //       price_data: {
-    //         currency: "usd",
-    //         product_data: {
-    //           name: "Donation to Shelter Seek",
-    //           description: "Help animals in shelters and rescues",
-    //         },
-    //         unit_amount: amount * 100, // Convert the amount to cents
-    //       },
-    //       quantity: 1,
-    //     },
-    //   ];
-
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ["card"],
-    //     line_items,
-    //     mode: "payment",
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`,
-    //   });
-
-    //   return { session: session.id };
-    // },
+    checkout: async (parent, args, context) => {
+      // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
+      const url = new URL(context.headers.referer).origin;
+      // create a new donation
+      const donation = new Donation({ shelter: args.shelter });
+      // save the donation
+      await donation.save();
+      // get the shelter
+      const shelter = await Shelter.findById(args.shelter);
+      // stripe checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        // success url will be the url of the client
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+        // line_items is the donation
+        line_items: [
+          {
+            name: shelter.name,
+            description: donation._id,
+            // amount is in cents
+            amount: 100,
+            currency: "cad",
+            quantity: 1,
+          },
+        ],
+        mode: "payment",
+      });
+      return { session: session.id };
+    },
   },
 
   Mutation: {
