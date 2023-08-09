@@ -11,3 +11,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* HEADER / NAVBAR CSS */
+.Header {
+  display: flex;
+  background-color: grey;
+  height: 100px;
+}
+
+.Header h1 {
+  display: flex;
+  flex: 1;
+  margin: auto 20px;
+}
+
+.Nav {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+  align-items: center;
+  margin-right: 30px;
+}
+.Nav .Nav-button {
+  margin: 5px;
+  background-color: grey;
+  padding: 10px;
+}
+
+.Nav .Nav-button.active {
+  margin: 5px;
+  background-color: green;
+}
+
+/* Hero CSS */
+.Hero {
+  display: flex;
+  justify-content: center;
+  height: 350px;
+  /* border-bottom: solid black 5px; */
+  box-shadow: 0px 5px 15px;
+}
+
+.Hero-image {
+  height: 100%;
+}
