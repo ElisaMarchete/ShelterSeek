@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type Donation {
     _id: ID
-    amount: float
+    amount: Float
     data: String
   }
 
@@ -31,32 +31,30 @@ const typeDefs = gql`
 
   type Auth {
     token: ID
-    user: User
+    shelters: Shelter
   }
 
   type Query {
     shelters: [Shelter]
     donations: [Donation]
-    checkout(amount: Float!): Checkout
-    }
+    checkout: Checkout
+  }
 
-    type Mutation {
-        addShelter(
-            name: String!
-            address: String!
-            phone: String!
-            email: String!  
-            website: String!
-            hours: String!
-            description: String!
-            image: String!
-            BankTransitNumber: String!
-            BankInstitutionNumber: String!
-            BankAccount: String!
-        ): Shelter
-        addDonation(
-            amount: float!
-            data: String!
-        ): Donation
+  type Mutation {
+    addShelter(
+      name: String!
+      address: String!
+      phone: String!
+      email: String!
+      website: String!
+      hours: String!
+      description: String!
+      image: String!
+      BankTransitNumber: String!
+      BankInstitutionNumber: String!
+      BankAccount: String!
+    ): Shelter
+    addDonation(amount: Float!, data: String!): Donation
+  }
 `;
 module.exports = typeDefs;
