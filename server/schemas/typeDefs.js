@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server-express");
 
 // typeDefs = schema Define data in GraphQL
-// query is a GET request - mutation is a POST, PUT, or DELETE request
+// query is a GET request (reading) - mutation is a POST, PUT, or DELETE request
 
 const typeDefs = gql`
   type Shelter {
@@ -13,16 +13,14 @@ const typeDefs = gql`
     website: String
     description: String
     image: String
-    BankTransitNumber: String
-    BankInstitutionNumber: String
-    BankAccount: String
     donations: [Donation]
   }
 
   type Donation {
     _id: ID
+    purchaseDate: String
     amount: Float
-    data: String
+    shelter: Shelter
   }
 
   type Checkout {
@@ -31,13 +29,18 @@ const typeDefs = gql`
 
   type Auth {
     token: ID
-    shelters: Shelter
+    shelter: Shelter
+  }
+
+  input DonationInput {
+    shelter: ID
+    amount: Float
   }
 
   type Query {
     shelters: [Shelter]
-    donations: [Donation]
-    checkout: Checkout
+    donation(_id: ID!): Donation
+    checkout(donation: [DonationInput]): Checkout
   }
 
   type Mutation {
@@ -46,15 +49,14 @@ const typeDefs = gql`
       address: String!
       phone: String!
       email: String!
-      website: String!
-      hours: String!
+      password: String!
+      website: String
       description: String!
       image: String!
       BankTransitNumber: String!
       BankInstitutionNumber: String!
       BankAccount: String!
     ): Shelter
-    addDonation(amount: Float!, data: String!): Donation
   }
 `;
 module.exports = typeDefs;

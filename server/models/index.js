@@ -6,7 +6,8 @@
 //   Shelter,
 // };
 
-const Donation = require("./Donation");
+// const Donation = require("./Donation");
 const Shelter = require("./Shelter");
+const Donation = require("./Donation");
 
-module.exports = { Donation, Shelter };
+module.exports = { Shelter, Donation };

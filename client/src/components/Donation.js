@@ -9,6 +9,7 @@ const stripePromise = loadStripe(
 );
 
 const Donation = () => {
+  // useLazyQuery from apollo is the same as useQuery but for queries that need to be run on an event
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
@@ -19,9 +20,16 @@ const Donation = () => {
     }
   }, [data]);
 
-  const handleClick = async (event) => {
+  const submitCheckout = async (event) => {
     event.preventDefault();
-    getCheckout();
+    // get the shelter id from the url
+    const shelterId = window.location.pathname.split("/").pop();
+    // get the donation amount from the input
+    const amount = document.querySelector("input").value;
+    // run the getCheckout query
+    getCheckout({
+      variables: { donation: { shelter: shelterId, amount: Number(amount) } },
+    });
   };
 
   // add amout to the donation and button to submit
@@ -29,7 +37,7 @@ const Donation = () => {
     <div>
       <h1>Donate</h1>
       <input type="number" placeholder="Amount" />
-      <button onClick={handleClick}>Donate</button>
+      <button onClick={submitCheckout}>Donate</button>
     </div>
   );
 };
