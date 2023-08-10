@@ -63,23 +63,21 @@ function App() {
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
       <Router>
-        <div>
-          {/* <Navbar /> */}
-          <Header>
-            <Nav
-              pages={pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="*"
-              element={<h1 className="display-2">Wrong page!</h1>}
-            />
-          </Routes>
-        </div>
+        {/* <Navbar /> */}
+        <Header>
+          <Nav
+            pages={pages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </Header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="*"
+            element={<h1 className="display-2">Wrong page!</h1>}
+          />
+        </Routes>
       </Router>
     </ApolloProvider>
   );
