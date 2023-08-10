@@ -1,57 +1,101 @@
 // const { AuthenticationError } = require("apollo-server-express");
-const { Shelter, Donation } = require("../models");
 // const { signToken } = require("../utils/auth");
+const { Shelter, Donation } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
 
 // resolvers graphQL = ROUTES in RESTful APIs
+// randle the queries and mutations
+// constext from apollo-server to get the headers
 
 const resolvers = {
   Query: {
     shelters: async () => {
       return await Shelter.find();
     },
-    shelter: async (parent, { shelterId }) => {
-      return await Shelter.findOne({ _id: shelterId });
-    },
-    checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
 
-      // new donation - shelterId, amount
-      const donation = await stripe.checkout.sessions.create({
-        payment_method_types: ["card  "],
+    checkout: async (parent, args, context) => {
+      // get the shelterid and amount from the client utils/queries.js
+      const shelterId = args.shelterId;
+      const amount = args.amount;
+      // console.log(shelterId, amount);
+      // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
+      const url = new URL(context.headers.referer).origin;
+      // create a new donation
+      const donation = new Donation({ shelter: shelterId, amount });
+      // console.log("donation", donation);
+      // save the donation
+      await donation.save();
+      // get the shelterid from the database
+      const shelter = await Shelter.findById(shelterId);
+      // stripe checkout session
+      // console.log("shelter", shelter);
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        // success url will be the url of the client
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+        // line_items is the donation
         line_items: [
           {
             price_data: {
               currency: "cad",
               product_data: {
-                name: "Donation",
+                name: shelter.name,
+                description:
+                  "Please complete your donation using the secure Stripe payment form. Thank you!",
               },
-              unit_amount: args.amount * 100,
+              unit_amount: parseInt(amount * 100),
             },
             quantity: 1,
           },
         ],
         mode: "payment",
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`,
       });
-      return donation;
+      return { session: session.id };
     },
   },
+
   Mutation: {
-    addShelter: async (parent, args) => {
-      const shelter = await Shelter.create(args);
+    addShelter: async (
+      parent,
+      {
+        name,
+        address,
+        phone,
+        email,
+        password,
+        website,
+        description,
+        image,
+        BankTransitNumber,
+        BankInstitutionNumber,
+        BankAccount,
+      }
+    ) => {
+      const shelter = await Shelter.create({
+        name,
+        address,
+        phone,
+        email,
+        password,
+        website,
+        description,
+        image,
+        BankTransitNumber,
+        BankInstitutionNumber,
+        BankAccount,
+      });
       return shelter;
     },
-    addDonation: async (parent, args) => {
-      const donation = new Donation(args);
-
-      await Shelter.findOneAndUpdate(
-        { _id: args.shelterId },
-        { $push: { donations: donation } }
+    addDonation: async (parent, { shelterId, donation }) => {
+      const shelter = await Shelter.findOneAndUpdate(
+        { _id: shelterId },
+        { $push: { donations: donation } },
+        { new: true }
       );
+      return shelter;
     },
   },
 };

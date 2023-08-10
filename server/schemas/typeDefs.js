@@ -1,9 +1,16 @@
 const { gql } = require("apollo-server-express");
 
 // typeDefs = schema Define data in GraphQL
-// query is a GET request - mutation is a POST, PUT, or DELETE request
+// query is a GET request (reading) - mutation is a POST, PUT, or DELETE request
 
 const typeDefs = gql`
+  type Donation {
+    _id: ID
+    donationDate: String
+    amount: Float
+    shelter: Shelter
+  }
+
   type Shelter {
     _id: ID
     name: String
@@ -13,50 +20,40 @@ const typeDefs = gql`
     website: String
     description: String
     image: String
-    BankTransitNumber: String
-    BankInstitutionNumber: String
-    BankAccount: String
     donations: [Donation]
-  }
-
-  type Donation {
-    _id: ID
-    amount: float
-    data: String
   }
 
   type Checkout {
     session: ID
   }
 
-  type Auth {
-    token: ID
-    user: User
+  input DonationInput {
+    shelter: ID
+    amount: Float
   }
 
   type Query {
     shelters: [Shelter]
-    donations: [Donation]
-    checkout(amount: Float!): Checkout
-    }
+    donation(id: ID!): Donation
+    checkout(shelterId: String, amount: Float): Checkout
+  }
 
-    type Mutation {
-        addShelter(
-            name: String!
-            address: String!
-            phone: String!
-            email: String!  
-            website: String!
-            hours: String!
-            description: String!
-            image: String!
-            BankTransitNumber: String!
-            BankInstitutionNumber: String!
-            BankAccount: String!
-        ): Shelter
-        addDonation(
-            amount: float!
-            data: String!
-        ): Donation
+  type Mutation {
+    addShelter(
+      name: String!
+      address: String!
+      phone: String!
+      email: String!
+      password: String!
+      website: String
+      description: String!
+      image: String!
+      BankTransitNumber: String!
+      BankInstitutionNumber: String!
+      BankAccount: String!
+    ): Shelter
+
+    addDonation(amount: Float!, shelterId: ID!): Shelter
+  }
 `;
 module.exports = typeDefs;

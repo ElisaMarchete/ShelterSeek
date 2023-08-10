@@ -66,63 +66,71 @@
 
 // export default model("Shelter", ShelterSchema);
 
-const mongoose = require("mongoose");
-
-const { Schema } = mongoose;
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Donation = require("./Donation");
 
-const shelterSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+// this schema in models connects with mongoose database
+
+const shelterSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      require: true,
+    },
+    phone: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+      match: [/.+@.+\..+/, "Must use a valid email address"],
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 5,
+    },
+    website: {
+      type: String,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: true,
+      maxlength: 150,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    BankTransitNumber: {
+      type: String,
+      required: true,
+    },
+    BankInstitutionNumber: {
+      type: String,
+      required: true,
+    },
+    BankAccount: {
+      type: String,
+      required: true,
+    },
+    donations: [Donation.schema],
   },
-  address: {
-    type: String,
-    require: true,
-  },
-  phone: {
-    type: String,
-    require: true,
-  },
-  email: {
-    type: String,
-    require: true,
-    unique: true,
-    match: [/.+@.+\..+/, "Must match an email address!"],
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  website: {
-    type: String,
-    trim: true,
-  },
-  description: {
-    type: String,
-    required: true,
-    maxlength: 150,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  BankTransitNumber: {
-    type: String,
-    required: true,
-  },
-  BankInstitutionNumber: {
-    type: String,
-    required: true,
-  },
-  BankAccount: {
-    type: String,
-    required: true,
-  },
-  donations: [Donation.schema],
-});
-const Shelter = mongoose.model("Shelter", shelterSchema);
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
+
+const Shelter = model("Shelter", shelterSchema);
 
 module.exports = Shelter;

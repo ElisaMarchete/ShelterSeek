@@ -11,3 +11,100 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* HEADER / NAVBAR CSS */
+.Header {
+  display: flex;
+  background-color: rgb(42, 93, 129);
+  height: 100px;
+  vertical-align: middle;
+}
+
+.Header h1 {
+  display: flex;
+  flex: 1;
+  margin: auto 20px;
+  cursor: default;
+  user-select: none;
+  color: white;
+}
+
+.Nav {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+  align-items: center;
+}
+
+.Header .header-button {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: auto 5px;
+  padding: 0px 10px;
+  color: black;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.Nav .header-button.active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+.Header .header-button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* Hero CSS */
+.Hero {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* border-bottom: solid black 5px; */
+  box-shadow: 0px 5px 15px;
+  filter:brightness(70%);
+}
+
+.Hero-image {
+  width: 100%;
+
+}
+
+/* Shelter List CSS */
+.ShelterList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shelters-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.shelter-card {
+  cursor: pointer;
+  width: 27%;
+  margin: 10px 10px 30px 10px;
+  /* height: 200px; */
+  box-sizing: border-box;
+}
+
+.shelter-card img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+.shelter-info {
+
+}
+
+.shelter-info h1, .shelter-info h2 {
+  margin: 10px 0px;
+  font-size: 90%;
+}

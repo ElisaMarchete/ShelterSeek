@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
-
-const { Schema } = mongoose;
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const donationSchema = new Schema({
-  date: {
+  purchaseDate: {
     type: Date,
     default: Date.now,
   },
@@ -12,8 +11,12 @@ const donationSchema = new Schema({
     required: true,
     min: 0.99,
   },
+  shelter: {
+    type: Schema.Types.ObjectId,
+    ref: "Shelter",
+  },
 });
 
-const Donation = mongoose.model("Donation", donationSchema);
+const Donation = model("Donation", donationSchema);
 
 module.exports = Donation;
