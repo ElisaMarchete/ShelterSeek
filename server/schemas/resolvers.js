@@ -16,15 +16,20 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
+      const shelterId = args.shelterId;
+      const amount = args.amount;
+      console.log(shelterId, amount);
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
       // create a new donation
-      const donation = new Donation({ shelter: args.shelter });
+      const donation = new Donation({ shelter: shelterId, amount });
+      // console.log("donation", donation);
       // save the donation
       await donation.save();
-      // get the shelter
-      const shelter = await Shelter.findById(args.shelter);
+      // // get the shelter
+      const shelter = await Shelter.findById(shelterId);
       // stripe checkout session
+      console.log("shelter", shelter);
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         // success url will be the url of the client
@@ -33,11 +38,14 @@ const resolvers = {
         // line_items is the donation
         line_items: [
           {
-            name: shelter.name,
-            description: donation._id,
-            // amount is in cents
-            amount: 100,
-            currency: "cad",
+            price_data: {
+              currency: "cad",
+              product_data: {
+                name: shelter.name,
+                description: donation._id,
+              },
+              unit_amount: parseInt(amount * 100),
+            },
             quantity: 1,
           },
         ],

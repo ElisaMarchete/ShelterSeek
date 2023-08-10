@@ -40,7 +40,7 @@ const typeDefs = gql`
   type Query {
     shelters: [Shelter]
     donation(id: ID!): Donation
-    checkout(donation: [DonationInput]): Checkout
+    checkout(shelterId: String, amount: Float): Checkout
   }
 
   type Mutation {

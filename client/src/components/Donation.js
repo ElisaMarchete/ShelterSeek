@@ -29,7 +29,7 @@ const Donation = () => {
     const amount = document.querySelector("input").value;
     // run the getCheckout query
     getCheckout({
-      variables: { donation: { shelter: shelterId, amount: Number(amount) } },
+      variables: { shelterId, amount: parseFloat(amount) },
     });
   };
 
