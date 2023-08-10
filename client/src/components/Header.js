@@ -5,7 +5,7 @@ import AccountMenu from "./AccountMenu/";
 
 // Get this from the global context.
 function isLoggedIn() {
-  return false;
+  return true;
 }
 
 function Header({ children }) {
