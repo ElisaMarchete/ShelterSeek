@@ -23,11 +23,6 @@ const typeDefs = gql`
     donations: [Donation]
   }
 
-  type Auth {
-    token: ID
-    shelter: Shelter
-  }
-
   type Checkout {
     session: ID
   }

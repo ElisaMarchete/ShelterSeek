@@ -22,8 +22,7 @@ const Donation = (props) => {
 
   const submitCheckout = async (event) => {
     event.preventDefault();
-    // get the shelter id from the url
-    // const shelterId = window.location.pathname.split("/").pop();
+    // get the shelter id from the props
     const shelterId = props.shelterId;
     // get the donation amount from the input
     const amount = document.querySelector("input").value;
@@ -36,7 +35,7 @@ const Donation = (props) => {
   // add amout to the donation and button to submit
   return (
     <div>
-      <h1>Donate {props.shelterId}</h1>
+      <h1>Donate</h1>
       <input type="number" placeholder="Amount" />
       <button onClick={submitCheckout}>Donate</button>
     </div>

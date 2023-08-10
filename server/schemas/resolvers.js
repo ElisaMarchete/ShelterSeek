@@ -16,9 +16,10 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
+      // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
-      console.log(shelterId, amount);
+      // console.log(shelterId, amount);
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
       // create a new donation
@@ -26,10 +27,10 @@ const resolvers = {
       // console.log("donation", donation);
       // save the donation
       await donation.save();
-      // // get the shelter
+      // get the shelterid from the database
       const shelter = await Shelter.findById(shelterId);
       // stripe checkout session
-      console.log("shelter", shelter);
+      // console.log("shelter", shelter);
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         // success url will be the url of the client
@@ -42,7 +43,8 @@ const resolvers = {
               currency: "cad",
               product_data: {
                 name: shelter.name,
-                description: shelterId,
+                description:
+                  "Please complete your donation using the secure Stripe payment form. Thank you!",
               },
               unit_amount: parseInt(amount * 100),
             },
