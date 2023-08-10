@@ -8,7 +8,7 @@ const Home = () => {
     <div className="Home">
       <Hero />
       <ShelterList />
-      <Donation />
+      <Donation shelterId="64d2dcd0f737eeb85b86fd71" />
     </div>
   );
 };
