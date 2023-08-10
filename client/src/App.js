@@ -79,6 +79,10 @@ function App() {
               element={<h1 className="display-2">Wrong page!</h1>}
             />
           </Routes>
+
+          <div>
+            <h1>Shelter</h1>
+          </div>
         </div>
       </Router>
     </ApolloProvider>

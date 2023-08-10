@@ -42,7 +42,7 @@ const resolvers = {
               currency: "cad",
               product_data: {
                 name: shelter.name,
-                description: donation._id,
+                description: shelterId,
               },
               unit_amount: parseInt(amount * 100),
             },
