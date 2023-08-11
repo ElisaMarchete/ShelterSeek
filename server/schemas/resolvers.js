@@ -19,14 +19,8 @@ const resolvers = {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
-      // console.log(shelterId, amount);
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
-      // create a new donation
-      // const donation = new Donation({ shelter: shelterId, amount });
-      // console.log("donation", donation);
-      // save the donation
-      // await donation.save();
       // get the shelterid from the database
       const shelter = await Shelter.findById(shelterId);
       // stripe checkout session
@@ -53,7 +47,6 @@ const resolvers = {
         ],
         mode: "payment",
       });
-      // console.log("SESSION:", session.id);
       return { session: session.id };
     },
   },
@@ -94,14 +87,10 @@ const resolvers = {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
-      // console.log(shelterId, amount);
       // create a new donation
       const donation = new Donation({ shelterId, amount });
-      // console.log("donation", donation);
       // save the donation
       await donation.save();
-      // get the shelterid from the database
-      // const shelter = await Shelter.findById(shelterId);
 
       return donation;
     },

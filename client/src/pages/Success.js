@@ -9,8 +9,8 @@ const Success = () => {
   // get query from url
   let [searchParams] = useSearchParams();
 
-  console.log(searchParams.get("shelterId"));
-  console.log(searchParams.get("amount"));
+  // console.log(searchParams.get("shelterId"));
+  // console.log(searchParams.get("amount"));
 
   // shelterId and amount from the callback url stripe sends back
   const shelterId = searchParams.get("shelterId");
@@ -21,7 +21,7 @@ const Success = () => {
     addDonation({
       variables: { shelterId, amount: parseFloat(amount) },
     });
-  }, [addDonation, shelterId, amount]);
+  }, []);
 
   return (
     <div className="Success">
