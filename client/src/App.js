@@ -9,6 +9,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import Home from "./pages/Home";
+import Shelters from "./pages/Shelters"
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 
@@ -48,7 +49,7 @@ function App() {
     {
       name: "Shelters",
       // component: Shelters,
-      path: "/shelters",
+      path: "/Shelters",
     },
     {
       name: "Pets",
@@ -73,6 +74,7 @@ function App() {
         </Header>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Shelters" element={<Shelters />} />
           <Route
             path="*"
             element={<h1 className="display-2">Wrong page!</h1>}
