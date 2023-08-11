@@ -1,21 +1,23 @@
 import * as React from "react";
 import { AccountMenuBtn } from "./atoms";
-import { AccountMenuPopover } from "./molecules";
+import { AccountMenuPopover } from "./organisms";
 
-export default function AccountMenu(props) {
+export default function AccountMenu({ isLoggedIn }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <>
-      <AccountMenuBtn {...{ open, handleClick }} />
-      <AccountMenuPopover {...{ open, handleClose, anchorEl }} />
+      <AccountMenuBtn {...{ open, handleMenuClick }} />
+      <AccountMenuPopover
+        {...{ open, handleMenuClose, anchorEl, isLoggedIn }}
+      />
     </>
   );
 }

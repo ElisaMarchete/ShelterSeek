@@ -1,3 +1,4 @@
-import AccountMenuPopover from "./AccountMenuPopover";
+import LoggedInMenuList from "./LoggedInMenuList";
+import LoggedOutMenuList from "./LoggedOutMenuList";
 
-export { AccountMenuPopover };
+export { LoggedInMenuList, LoggedOutMenuList };

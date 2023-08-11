@@ -3,13 +3,13 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
-export default function AccountMenuBtn({ handleClick, open, isLoggedIn }) {
+export default function AccountMenuBtn({ handleMenuClick, open, isLoggedIn }) {
   return (
     <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
       {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography>
         <Typography sx={{ minWidth: 100 }}>Profile</Typography> */}
       <IconButton
-        onClick={handleClick}
+        onClick={handleMenuClick}
         size="small"
         sx={{ ml: 2 }}
         aria-controls={open ? "account-menu" : undefined}
