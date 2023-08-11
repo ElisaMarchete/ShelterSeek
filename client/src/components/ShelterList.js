@@ -81,10 +81,10 @@ function ShelterList() {
         {shelters.map((shelter) => {
           return (
             <Link
-            to={{
-              pathname: `/shelters/${shelter._id}`,
-              state: { shelter } // Pass shelter as state
-            }}
+              to={{
+                pathname: `/shelters/${shelter._id}`,
+                state: { shelter }, // Pass shelter as state
+              }}
               style={{ textDecoration: "initial", color: "initial" }}
             >
               <Card
