@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Hero from "../components/Hero";
 import { useSearchParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_DONATION } from "../utils/mutations";
@@ -24,10 +23,14 @@ const Success = () => {
   }, []);
 
   return (
-    <div className="Success">
-      <Hero />
-      <h1>Thank you</h1>
-      <div>We received {amount}</div>
+    <div className="Successpage">
+      <h1 className="success-text">
+        Thank you for being a hero to our furry friends. Your generosity fills
+        their lives with joy and gratitude.
+        <br />
+        We are so grateful for your donation of ${amount}!
+      </h1>
+      <img src="/assets/successpage/Thank-You-Dog-and-Cat.jpg" alt="dog" />
     </div>
   );
 };

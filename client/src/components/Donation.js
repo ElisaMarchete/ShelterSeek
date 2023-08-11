@@ -12,6 +12,7 @@ const stripePromise = loadStripe(
 );
 
 const Donation = (props) => {
+  console.log(props);
   // useLazyQuery from apollo is the same as useQuery but for queries that need to be run on an event
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
@@ -29,9 +30,18 @@ const Donation = (props) => {
     const shelterId = props.shelterId;
     // get the donation amount from the input
     const amount = document.querySelector("input").value;
-    getCheckout({
-      variables: { shelterId, amount: parseFloat(amount) },
-    });
+
+    if (!amount) {
+      alert("Please enter an amount");
+    } else if (amount < 1) {
+      alert("Please enter a valid amount");
+    } else if (isNaN(amount)) {
+      alert("Please enter a valid amount");
+    } else {
+      getCheckout({
+        variables: { shelterId, amount: parseFloat(amount) },
+      });
+    }
   };
 
   return (
