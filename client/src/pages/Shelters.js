@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { styled } from '@mui/system';
 import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
-
+import { useParams } from 'react-router-dom';
 const pets = [
   {
     petId : "0",
@@ -11,22 +11,27 @@ const pets = [
   },
   {
     petId : "1",
+    name: 'test 1',
     image: "https://i.imgur.com/iiQT5Pa.jpeg",
   },
   {
     petId : "2",
+    name: 'test 2',
     image: "https://i.imgur.com/q2g2rID.jpeg",
   },
   {
     petId : "3",
+    name: 'test 3',
     image: "https://i.imgur.com/90Ylvl1.jpeg",
   },
   {
     petId : "4",
+    name: 'test 4',
     image: "https://i.imgur.com/TQbD1c7.jpeg",
   },
   {
     petId : "5",
+    name: 'test 5',
     image: "https://i.imgur.com/UAtc9KX.jpeg",
   },
 ];
@@ -47,24 +52,26 @@ const useStyles = styled((theme) => ({
     textAlign: 'center', 
   },
 }));
-
+//update this when we set up back end
 const ShelterInfo = () => {
+  const { id } = useParams();
+  const selectedShelter = pets.find((pet) => pet.petId === id); 
   const classes = useStyles();
   const { loading, data } = useQuery(QUERY_CHECKOUT);
-
+  
   return (
     <>
       <div className={classes.imageContainer}>
         <Container>
           <Typography variant="h4" style={{ textAlign: 'center' }}>
-            Shelter Name 
+            {selectedShelter.name} 
           </Typography>
           <Grid container justifyContent="center">
             <Grid item xs={12} sm={6}>
               <Card>
                 <CardMedia
                   component="img"
-                  src="https://static.wixstatic.com/media/06af3a_feeb0b4a58ed4898b1b4876e680c11c5~mv2.jpg/v1/crop/x_0,y_57,w_5577,h_1877/fill/w_795,h_265,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Website%20Header%20Artwork.jpg" 
+                  src= {`${selectedShelter.image}`}
                   alt="Description of the image"
                   className={`${classes.imgFluid} ${classes.image}`}
                 />

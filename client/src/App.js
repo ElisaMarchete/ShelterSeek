@@ -74,7 +74,7 @@ function App() {
         </Header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Shelters" element={<Shelters />} />
+          <Route path="/shelters/:id" element={<Shelters />} />
           <Route
             path="*"
             element={<h1 className="display-2">Wrong page!</h1>}
