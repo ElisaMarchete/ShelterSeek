@@ -32,7 +32,6 @@ const Donation = (props) => {
     });
   };
 
-  // add amout to the donation and button to submit
   return (
     <div>
       <h1>Donate</h1>

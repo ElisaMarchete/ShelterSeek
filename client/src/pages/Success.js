@@ -1,31 +1,35 @@
 import React, { useEffect } from "react";
+import Hero from "../components/Hero";
+import { useSearchParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_DONATION } from "../utils/mutations";
-import Jumbotron from "../components/Jumbotron";
 
-function Success() {
+const Success = () => {
   const [addDonation] = useMutation(ADD_DONATION);
+  // get query from url
+  let [searchParams] = useSearchParams();
 
+  console.log(searchParams.get("shelterId"));
+  console.log(searchParams.get("amount"));
+
+  // shelterId and amount from the callback url stripe sends back
+  const shelterId = searchParams.get("shelterId");
+  const amount = searchParams.get("amount");
+
+  // add the donation to the database
   useEffect(() => {
-    async function saveOrder() {
-      const shelterId = window.location.pathname.split("/").pop();
-      const amount = document.querySelector("input").value;
-      await addDonation({
-        variables: { donation: { shelter: shelterId, amount: Number(amount) } },
-      });
-    }
-    saveOrder();
-  }, [addDonation]);
+    addDonation({
+      variables: { shelterId, amount: parseFloat(amount) },
+    });
+  }, [addDonation, shelterId, amount]);
 
   return (
-    <div>
-      <Jumbotron>
-        <h1>Success!</h1>
-        <h2>Thank you for your Donation!</h2>
-        <h2>You will now be redirected to the home page</h2>
-      </Jumbotron>
+    <div className="Success">
+      <Hero />
+      <h1>Thank you</h1>
+      <div>We received {amount}</div>
     </div>
   );
-}
+};
 
 export default Success;

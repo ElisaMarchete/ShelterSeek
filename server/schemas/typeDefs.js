@@ -8,7 +8,7 @@ const typeDefs = gql`
     _id: ID
     donationDate: String
     amount: Float
-    shelter: Shelter
+    shelterId: Shelter
   }
 
   type Shelter {
@@ -53,7 +53,7 @@ const typeDefs = gql`
       BankAccount: String!
     ): Shelter
 
-    addDonation(amount: Float!, shelterId: ID!): Shelter
+    addDonation(shelterId: String, amount: Float): Donation
   }
 `;
 module.exports = typeDefs;

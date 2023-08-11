@@ -11,6 +11,7 @@ import { setContext } from "@apollo/client/link/context";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Success from "./pages/Success";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -55,6 +56,11 @@ function App() {
       // component: Pets,
       path: "/pets",
     },
+    {
+      name: "",
+      component: Success,
+      path: "/success",
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -73,6 +79,7 @@ function App() {
         </Header>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/success" element={<Success />} />
           <Route
             path="*"
             element={<h1 className="display-2">Wrong page!</h1>}
