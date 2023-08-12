@@ -15,7 +15,7 @@ export default function AccountMenuPopover({
       open={open}
       // Lets you close the menu by clicking away from it
       onClose={handleMenuClose}
-      // onClick={handleMenuClose}
+      onClick={handleMenuClose}
       PaperProps={{
         elevation: 0,
         sx: {
