@@ -91,7 +91,7 @@ const ShelterInfo = () => {
                       Where the description will go.
                     </Typography>
                     <div className={classes.donateButton}>
-                      <Donation />
+                      <Donation shelterId={id} />
                     </div>
                   </Grid>
                 </CardContent>

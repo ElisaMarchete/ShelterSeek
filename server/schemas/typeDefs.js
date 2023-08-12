@@ -27,11 +27,6 @@ const typeDefs = gql`
     session: ID
   }
 
-  input DonationInput {
-    shelter: ID
-    amount: Float
-  }
-
   type Query {
     shelters: [Shelter]
     donation(id: ID!): Donation
