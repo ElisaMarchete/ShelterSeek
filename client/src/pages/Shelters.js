@@ -1,77 +1,87 @@
-import React from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_CHECKOUT } from '../utils/queries';
-import { styled } from '@mui/system';
-import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_CHECKOUT } from "../utils/queries";
+import { styled } from "@mui/system";
+import {
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+} from "@mui/material";
+import { useParams } from "react-router-dom";
+import Donation from "../components/Donation";
+
 const pets = [
   {
-    petId : "0",
+    petId: "64d2dcd0f737eeb85b86fd71",
     image: "https://i.imgur.com/HQebKXY.jpeg",
   },
   {
-    petId : "1",
-    name: 'test 1',
+    petId: "64d2dcd0f737eeb85b86fd71",
+    name: "test 1",
     image: "https://i.imgur.com/iiQT5Pa.jpeg",
   },
   {
-    petId : "2",
-    name: 'test 2',
+    petId: "64d2dcd0f737eeb85b86fd72",
+    name: "test 2",
     image: "https://i.imgur.com/q2g2rID.jpeg",
   },
   {
-    petId : "3",
-    name: 'test 3',
+    petId: "64d2dcd0f737eeb85b86fd72",
+    name: "test 3",
     image: "https://i.imgur.com/90Ylvl1.jpeg",
   },
   {
-    petId : "4",
-    name: 'test 4',
+    petId: "64d3aab060abe4a8d7f4cd85",
+    name: "test 4",
     image: "https://i.imgur.com/TQbD1c7.jpeg",
   },
   {
-    petId : "5",
-    name: 'test 5',
+    petId: "64d3aab060abe4a8d7f4cd85",
+    name: "test 5",
     image: "https://i.imgur.com/UAtc9KX.jpeg",
   },
 ];
 
 const useStyles = styled((theme) => ({
   imageContainer: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: theme.spacing(2),
   },
   image: {
-    maxWidth: '100%',
+    maxWidth: "100%",
   },
   description: {
     marginTop: theme.spacing(2),
   },
   donateButton: {
     marginTop: theme.spacing(1),
-    textAlign: 'center', 
+    textAlign: "center",
   },
 }));
 //update this when we set up back end
 const ShelterInfo = () => {
   const { id } = useParams();
-  const selectedShelter = pets.find((pet) => pet.petId === id); 
+  const selectedShelter = pets.find((pet) => pet.petId === id);
   const classes = useStyles();
   const { loading, data } = useQuery(QUERY_CHECKOUT);
-  
+
   return (
     <>
       <div className={classes.imageContainer}>
         <Container>
-          <Typography variant="h4" style={{ textAlign: 'center' }}>
-            {selectedShelter.name} 
+          <Typography variant="h4" style={{ textAlign: "center" }}>
+            {selectedShelter.name}
           </Typography>
           <Grid container justifyContent="center">
             <Grid item xs={12} sm={6}>
               <Card>
                 <CardMedia
                   component="img"
-                  src= {`${selectedShelter.image}`}
+                  src={`${selectedShelter.image}`}
                   alt="Description of the image"
                   className={`${classes.imgFluid} ${classes.image}`}
                 />
@@ -81,9 +91,7 @@ const ShelterInfo = () => {
                       Where the description will go.
                     </Typography>
                     <div className={classes.donateButton}>
-                      <Button variant="contained" color="primary">
-                        Donate
-                      </Button>
+                      <Donation shelterId={id} />
                     </div>
                   </Grid>
                 </CardContent>
@@ -94,7 +102,9 @@ const ShelterInfo = () => {
       </div>
       <div className="p-5">
         <Container>
-          <Typography variant="h5" style={{ textAlign: 'center' }}>Viewing Shelter's pets!</Typography>
+          <Typography variant="h5" style={{ textAlign: "center" }}>
+            Viewing Shelter's pets!
+          </Typography>
         </Container>
       </div>
       <Container>
@@ -109,9 +119,9 @@ const ShelterInfo = () => {
                       src={pet.image}
                       alt={`A Pet`}
                       sx={{
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: '300px', 
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "300px",
                       }}
                     />
                   )}

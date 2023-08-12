@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../utils/queries";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import TextField from "@mui/material/TextField";
 
 // stripePromise returns a promise with the stripe object as soon as the Stripe package loads
 const stripePromise = loadStripe(
@@ -9,8 +12,15 @@ const stripePromise = loadStripe(
 );
 
 const Donation = (props) => {
+  console.log(props);
   // useLazyQuery from apollo is the same as useQuery but for queries that need to be run on an event
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+
+  const [amount, setAmount] = useState("");
+
+  function handleChange(event) {
+    setAmount(event.target.value);
+  }
 
   useEffect(() => {
     if (data) {
@@ -24,20 +34,50 @@ const Donation = (props) => {
     event.preventDefault();
     // get the shelter id from the props
     const shelterId = props.shelterId;
-    // get the donation amount from the input
-    const amount = document.querySelector("input").value;
-    // run the getCheckout query
-    getCheckout({
-      variables: { shelterId, amount: parseFloat(amount) },
-    });
+
+    if (!amount) {
+      alert("Please enter an amount");
+    } else if (amount < 1) {
+      alert("Please enter an amount greater than $1.00");
+    } else if (isNaN(amount)) {
+      alert("Please enter a valid amount");
+    } else {
+      getCheckout({
+        variables: { shelterId, amount: parseFloat(amount) },
+      });
+    }
   };
 
-  // add amout to the donation and button to submit
   return (
-    <div>
-      <h1>Donate</h1>
-      <input type="number" placeholder="Amount" />
-      <button onClick={submitCheckout}>Donate</button>
+    <div className="donation" id="donate">
+      <TextField
+        id="outlined-basic"
+        label="Amount"
+        variant="outlined"
+        type="text"
+        placeholder="CAD"
+        size="small"
+        value={amount}
+        onChange={handleChange}
+        style={{
+          height: "39px",
+          width: "100px",
+        }}
+      />
+      <Button
+        onClick={submitCheckout}
+        variant="contained"
+        endIcon={<SendIcon />}
+        size="large"
+        style={{
+          height: "39px",
+          width: "110px",
+          fontSize: "14px",
+          fontWeight: "bold",
+        }}
+      >
+        Donate
+      </Button>
     </div>
   );
 };

@@ -80,15 +80,15 @@ const shelterSchema = new Schema(
     },
     address: {
       type: String,
-      require: true,
+      required: true,
     },
     phone: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
       match: [/.+@.+\..+/, "Must use a valid email address"],
     },

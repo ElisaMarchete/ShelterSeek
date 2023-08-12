@@ -19,14 +19,8 @@ const resolvers = {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
-      // console.log(shelterId, amount);
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
-      // create a new donation
-      const donation = new Donation({ shelter: shelterId, amount });
-      // console.log("donation", donation);
-      // save the donation
-      await donation.save();
       // get the shelterid from the database
       const shelter = await Shelter.findById(shelterId);
       // stripe checkout session
@@ -34,8 +28,8 @@ const resolvers = {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         // success url will be the url of the client
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`,
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}&shelterId=${shelterId}&amount=${amount}`,
+        cancel_url: `${url}/failed`,
         // line_items is the donation
         line_items: [
           {
@@ -89,13 +83,16 @@ const resolvers = {
       });
       return shelter;
     },
-    addDonation: async (parent, { shelterId, donation }) => {
-      const shelter = await Shelter.findOneAndUpdate(
-        { _id: shelterId },
-        { $push: { donations: donation } },
-        { new: true }
-      );
-      return shelter;
+    addDonation: async (parent, args, context) => {
+      // get the shelterid and amount from the client utils/queries.js
+      const shelterId = args.shelterId;
+      const amount = args.amount;
+      // create a new donation
+      const donation = new Donation({ shelterId, amount });
+      // save the donation
+      await donation.save();
+
+      return donation;
     },
   },
 };

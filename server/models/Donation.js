@@ -11,7 +11,7 @@ const donationSchema = new Schema({
     required: true,
     min: 0.99,
   },
-  shelter: {
+  shelterId: {
     type: Schema.Types.ObjectId,
     ref: "Shelter",
   },
