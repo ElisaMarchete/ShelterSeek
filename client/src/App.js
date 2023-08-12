@@ -13,8 +13,10 @@ import { DialogsProvider } from "./utils/contexts/DialogsContext";
 import DialogsContainer from "./components/AccountDialogs";
 
 import Home from "./pages/Home";
+import Shelters from "./pages/Shelters";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Success from "./pages/Success";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -52,12 +54,17 @@ function App() {
     {
       name: "Shelters",
       // component: Shelters,
-      path: "/shelters",
+      path: "/Shelters",
     },
     {
       name: "Pets",
       // component: Pets,
       path: "/pets",
+    },
+    {
+      name: "",
+      component: Success,
+      path: "/success",
     },
   ];
 
