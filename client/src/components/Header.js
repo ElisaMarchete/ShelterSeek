@@ -1,11 +1,11 @@
-import AccountMenu from "./AccountMenu/";
+import AccountMenu from "./AccountMenu";
 
 // check if the user is logged in
 // TODO: replace this with a real function
 
 // Get this from the global context.
 function isLoggedIn() {
-  return true;
+  return false;
 }
 
 function Header({ children }) {

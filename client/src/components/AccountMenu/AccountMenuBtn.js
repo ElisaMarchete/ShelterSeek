@@ -4,6 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 export default function AccountMenuBtn({ handleMenuClick, open, isLoggedIn }) {
+  const initial = "P";
+
   return (
     <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
       {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography>
@@ -18,7 +20,7 @@ export default function AccountMenuBtn({ handleMenuClick, open, isLoggedIn }) {
       >
         {isLoggedIn ? (
           // TODO: Replace with username's first letter
-          <Avatar sx={{ width: 32, height: 32 }}>P</Avatar>
+          <Avatar sx={{ width: 32, height: 32 }}>{initial}</Avatar>
         ) : (
           <AccountCircle sx={{ width: 32, height: 32 }} />
         )}

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { AccountMenuBtn } from "./atoms";
-import { AccountMenuPopover } from "./organisms";
+import AccountMenuBtn from "./AccountMenuBtn";
+import AccountMenuPopover from "./AccountMenuPopover";
 
 export default function AccountMenu({ isLoggedIn }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
