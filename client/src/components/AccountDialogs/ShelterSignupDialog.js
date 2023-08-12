@@ -7,13 +7,13 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-export default function LoginDialog({
-  dialogOpen,
-  handleDialogClose,
-  handleLogin,
-}) {
+import { useDialogs, DialogTypes } from "../../utils/contexts/DialogsContext";
+
+export default function ShelterSignupDialog({ handleLogin }) {
+  const { openDialog, close } = useDialogs();
+
   return (
-    <Dialog open={dialogOpen} onClose={handleDialogClose}>
+    <Dialog open={openDialog === DialogTypes.SHELTER_SIGNUP} onClose={close}>
       <DialogTitle>Login</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -23,7 +23,7 @@ export default function LoginDialog({
           required
           autoFocus
           margin="dense"
-          id="email"
+          id="shelter-email"
           label="Email Address"
           type="email"
           fullWidth
@@ -32,7 +32,7 @@ export default function LoginDialog({
         <TextField
           required
           margin="dense"
-          id="password"
+          id="shelter-password"
           label="Password"
           type="password"
           fullWidth
@@ -40,8 +40,8 @@ export default function LoginDialog({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDialogClose}>Cancel</Button>
-        <Button onClick={handleLogin}>Continue</Button>
+        <Button onClick={close}>Cancel</Button>
+        <Button onClick={handleLogin}>Sign up</Button>
       </DialogActions>
     </Dialog>
   );
