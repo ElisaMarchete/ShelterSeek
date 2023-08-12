@@ -8,8 +8,6 @@ export default function AccountMenuBtn({ handleMenuClick, open, isLoggedIn }) {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-      {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography> */}
       <IconButton
         onClick={handleMenuClick}
         size="small"

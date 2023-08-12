@@ -13,28 +13,29 @@ export default function UserSignupDialog({ handleLogin }) {
   const { openDialog, close } = useDialogs();
 
   return (
-    <Dialog open={openDialog === DialogTypes.LOGIN} onClose={close}>
-      <DialogTitle>Login</DialogTitle>
+    <Dialog open={openDialog === DialogTypes.USER_SIGNUP} onClose={close}>
+      <DialogTitle>Sign Up</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Login to your ShelterSeek account to access your account information.
+          Create a ShelterSeek to account to add shelters to your watchlist.
+          blah blah.
         </DialogContentText>
         <TextField
           required
           autoFocus
           margin="dense"
-          id="email"
+          id="email2"
           label="Email Address"
-          type="email"
+          type="user-email"
           fullWidth
           variant="filled"
         />
         <TextField
           required
           margin="dense"
-          id="password"
+          id="password2"
           label="Password"
-          type="password"
+          type="user-password"
           fullWidth
           variant="filled"
         />

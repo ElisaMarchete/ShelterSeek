@@ -13,7 +13,7 @@ export default function ShelterSignupDialog({ handleLogin }) {
   const { openDialog, close } = useDialogs();
 
   return (
-    <Dialog open={openDialog === DialogTypes.LOGIN} onClose={close}>
+    <Dialog open={openDialog === DialogTypes.SHELTER_SIGNUP} onClose={close}>
       <DialogTitle>Login</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -23,7 +23,7 @@ export default function ShelterSignupDialog({ handleLogin }) {
           required
           autoFocus
           margin="dense"
-          id="email"
+          id="shelter-email"
           label="Email Address"
           type="email"
           fullWidth
@@ -32,7 +32,7 @@ export default function ShelterSignupDialog({ handleLogin }) {
         <TextField
           required
           margin="dense"
-          id="password"
+          id="shelter-password"
           label="Password"
           type="password"
           fullWidth
@@ -41,7 +41,7 @@ export default function ShelterSignupDialog({ handleLogin }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
-        <Button onClick={handleLogin}>Continue</Button>
+        <Button onClick={handleLogin}>Sign up</Button>
       </DialogActions>
     </Dialog>
   );

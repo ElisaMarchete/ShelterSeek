@@ -23,7 +23,7 @@ export default function LoginDialog({ handleLogin }) {
           required
           autoFocus
           margin="dense"
-          id="email"
+          id="login-email"
           label="Email Address"
           type="email"
           fullWidth
@@ -32,7 +32,7 @@ export default function LoginDialog({ handleLogin }) {
         <TextField
           required
           margin="dense"
-          id="password"
+          id="login-password"
           label="Password"
           type="password"
           fullWidth
@@ -41,7 +41,7 @@ export default function LoginDialog({ handleLogin }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
-        <Button onClick={handleLogin}>Continue</Button>
+        <Button onClick={handleLogin}>Login</Button>
       </DialogActions>
     </Dialog>
   );

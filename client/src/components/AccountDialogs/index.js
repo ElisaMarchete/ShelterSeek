@@ -8,12 +8,9 @@ export default function DialogsContainer() {
 
   return (
     <>
-      <LoginDialog />
-      <UserSignupDialog />
-      <ShelterSignupDialog />
-      {/* {openDialog === DialogTypes.LOGIN && <LoginDialog />}
+      {openDialog === DialogTypes.LOGIN && <LoginDialog />}
       {openDialog === DialogTypes.USER_SIGNUP && <UserSignupDialog />}
-      {openDialog === DialogTypes.SHELTER_SIGNUP && <ShelterSignupDialog />} */}
+      {openDialog === DialogTypes.SHELTER_SIGNUP && <ShelterSignupDialog />}
     </>
   );
 }
