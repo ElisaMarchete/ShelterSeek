@@ -33,9 +33,9 @@ export default function UserSignupDialog() {
       const { data } = await addUser({
         variables: {
           userInput: {
-            usernameInput,
-            emailInput,
-            passwordInput,
+            username: usernameInput,
+            email: emailInput,
+            password: passwordInput,
           },
         },
       });

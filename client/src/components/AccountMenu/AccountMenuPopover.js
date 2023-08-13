@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "@mui/material/Menu";
-import { LoggedOutMenuList } from "./AccountMenuLists";
+import { LoggedInMenuList, LoggedOutMenuList } from "./AccountMenuLists";
+import Auth from "../../utils/auth";
 
 export default function AccountMenuPopover({
   anchorEl,
@@ -44,13 +45,11 @@ export default function AccountMenuPopover({
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <LoggedOutMenuList {...{ handleMenuClose }} />
-      {/* {isLoggedIn ? (
-        // Reuse the handleMenuClose function to close the menu when a menu item is clicked
+      {Auth.loggedIn() ? (
         <LoggedInMenuList {...{ handleMenuClose }} />
       ) : (
         <LoggedOutMenuList {...{ handleMenuClose }} />
-      )} */}
+      )}
     </Menu>
   );
 }
