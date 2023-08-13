@@ -14,7 +14,7 @@ export default function ShelterSignupDialog({ handleLogin }) {
 
   return (
     <Dialog open={openDialog === DialogTypes.SHELTER_SIGNUP} onClose={close}>
-      <DialogTitle>Login</DialogTitle>
+      <DialogTitle>Shelter Sign Up</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Login to your ShelterSeek account to access your account information.

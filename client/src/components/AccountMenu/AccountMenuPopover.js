@@ -6,7 +6,6 @@ export default function AccountMenuPopover({
   anchorEl,
   open,
   handleMenuClose,
-  isLoggedIn,
 }) {
   return (
     <Menu
