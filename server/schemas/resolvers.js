@@ -81,6 +81,7 @@ const resolvers = {
         BankInstitutionNumber,
         BankAccount,
       });
+      console.log(shelter);
       return shelter;
     },
     addDonation: async (parent, args, context) => {
