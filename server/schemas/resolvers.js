@@ -1,6 +1,6 @@
-// const { AuthenticationError } = require("apollo-server-express");
-// const { signToken } = require("../utils/auth");
-const { Shelter, Donation } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken } = require("../utils/auth");
+const { User, Shelter, Donation } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
@@ -11,8 +11,17 @@ const stripe = require("stripe")(
 
 const resolvers = {
   Query: {
-    shelters: async () => {
-      return await Shelter.find();
+    // The currently logged in user.
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+
+        return userData;
+      }
+
+      throw new AuthenticationError("Not logged in");
     },
 
     checkout: async (parent, args, context) => {
@@ -52,6 +61,29 @@ const resolvers = {
   },
 
   Mutation: {
+    login: async (parent, { loginName, loginPassword }) => {
+      if (!loginName)
+        throw new AuthenticationError("Need a username or email!");
+
+      // User can login with username OR email.
+      const user = await User.findOne({
+        $or: [{ username: loginName }, { email: loginName }],
+      });
+
+      // The user does not exist or the password is incorrect.
+      if (!user || !(await user.checkPassword(loginPassword, user.password))) {
+        throw new AuthenticationError("Incorrect credentials.");
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+    addUser: async (parent, { userInput }) => {
+      const user = await User.create(userInput);
+      const token = signToken(user);
+
+      return { token, user };
+    },
     addShelter: async (
       parent,
       {

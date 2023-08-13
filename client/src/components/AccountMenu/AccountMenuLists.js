@@ -2,6 +2,7 @@ import React from "react";
 import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import Auth from "../../utils/auth";
 
 // Icons
 import Dashboard from "@mui/icons-material/Dashboard";
@@ -56,7 +57,12 @@ export function LoggedOutMenuList() {
   );
 }
 
-export function LoggedInMenuList({ handleClose }) {
+export function LoggedInMenuList() {
+  const handleLogout = () => {
+    Auth.logout();
+    window.location.replace("/");
+  };
+
   return (
     <>
       <MenuItem>
@@ -72,7 +78,7 @@ export function LoggedInMenuList({ handleClose }) {
         My account
       </MenuItem>
       <Divider />
-      <MenuItem>
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <Logout />
         </ListItemIcon>
