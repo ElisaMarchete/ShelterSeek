@@ -1,13 +1,9 @@
-import { Schema, model } from "mongoose";
-import { hashPassword, checkPassword } from "../utils/helpers.js";
+const { Schema, model } = require("mongoose");
+const { hashPassword, checkPassword } = require("../utils/helpers.js");
 
 const UserSchema = new Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
+    username: {
       type: String,
       required: true,
     },
@@ -20,26 +16,6 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      required: true,
-      enum: {
-        values: ["user", "shelter"],
-        message: "{VALUE} is not supported. Must have role of user or shelter.",
-      },
-    },
-    phone: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
-    savedShelters: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Shelter",
-      },
-    ],
   },
   {
     toJSON: {
@@ -47,10 +23,6 @@ const UserSchema = new Schema(
     },
   }
 );
-
-UserSchema.virtual("fullName").get(function () {
-  return `${this.firstName} ${this.lastName}`;
-});
 
 UserSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
@@ -61,4 +33,6 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.methods.checkPassword = checkPassword;
 
-export default model("User", UserSchema);
+const User = model("User", UserSchema);
+
+module.exports = User;

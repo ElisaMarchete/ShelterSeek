@@ -7,11 +7,16 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+// Contexts
+import { DialogsProvider } from "./utils/contexts/DialogsContext";
+// AccountDialogs
+import DialogsContainer from "./components/AccountDialogs";
 
 import Home from "./pages/Home";
 import Shelters from "./pages/Shelters";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Success from "./pages/Success";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -56,6 +61,11 @@ function App() {
       // component: Pets,
       path: "/pets",
     },
+    {
+      name: "",
+      component: Success,
+      path: "/success",
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -63,24 +73,27 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
-      <Router>
-        {/* <Navbar /> */}
-        <Header>
-          <Nav
-            pages={pages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </Header>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Shelters" element={<Shelters />} />
-          <Route
-            path="*"
-            element={<h1 className="display-2">Wrong page!</h1>}
-          />
-        </Routes>
-      </Router>
+      <DialogsProvider>
+        <Router>
+          {/* <Navbar /> */}
+          <Header>
+            <Nav
+              pages={pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </Header>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Shelters" element={<Shelters />} />
+            <Route
+              path="*"
+              element={<h1 className="display-2">Wrong page!</h1>}
+            />
+          </Routes>
+        </Router>
+        <DialogsContainer />
+      </DialogsProvider>
     </ApolloProvider>
   );
 }

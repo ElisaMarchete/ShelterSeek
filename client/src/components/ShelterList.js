@@ -8,12 +8,13 @@ import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import Donation from "./Donation";
 
 function ShelterList() {
   // TODO: DELETE SHELTERS ARRAY BELOW, PULL FROM DATABASE INSTEAD. BELOW ARRAY IS FOR DEVELOPMENT PURPOSES ONLY
   const shelters = [
     {
-      _id: 1,
+      _id: "64d2dcd0f737eeb85b86fd71",
       name: "Shelter 1",
       address: "1234 Main St.",
       phone: "555-555-5555",
@@ -28,7 +29,7 @@ function ShelterList() {
       rating: 3,
     },
     {
-      _id: 2,
+      _id: "64d2dcd0f737eeb85b86fd72",
       name: "Shelter 2",
       address: "1234 Main St.",
       phone: "555-555-5555",
@@ -43,7 +44,7 @@ function ShelterList() {
       rating: 4,
     },
     {
-      _id: 3,
+      _id: "64d3aab060abe4a8d7f4cd85",
       name: "Shelter 3",
       address: "1234 Main St.",
       phone: "555-555-5555",
@@ -80,15 +81,18 @@ function ShelterList() {
       <div className="shelters-section">
         {shelters.map((shelter) => {
           return (
-            <Link
+            <Card
+              sx={{ maxWidth: 400 }}
+              className="shelter-card"
+              key={shelter._id}
               to={`/shelters/${shelter._id}`}
-              style={{ textDecoration: "initial", color: "initial" }}
             >
-              <Card
-                sx={{ maxWidth: 400 }}
-                className="shelter-card"
-                key={shelter._id}
-                to={`/shelters/${shelter._id}`}
+              <Link
+                to={{
+                  pathname: `/shelters/${shelter._id}`,
+                  state: { shelter }, // Pass shelter as state
+                }}
+                style={{ textDecoration: "initial", color: "initial" }}
               >
                 <CardActionArea>
                   <CardMedia
@@ -114,8 +118,9 @@ function ShelterList() {
                     />
                   </CardContent>
                 </CardActionArea>
-              </Card>
-            </Link>
+              </Link>
+              <Donation shelterId={shelter._id} />
+            </Card>
 
             // <div className="shelter-card" key={shelter._id}>
             //   <img src={shelter.image} alt={`${shelter.name}`}></img>

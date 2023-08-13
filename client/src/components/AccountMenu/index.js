@@ -1,8 +1,8 @@
 import * as React from "react";
-import { AccountMenuBtn } from "./atoms";
-import { AccountMenuPopover } from "./organisms";
+import AccountMenuBtn from "./AccountMenuBtn";
+import AccountMenuPopover from "./AccountMenuPopover";
 
-export default function AccountMenu({ isLoggedIn }) {
+export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleMenuClick = (event) => {
@@ -15,9 +15,7 @@ export default function AccountMenu({ isLoggedIn }) {
   return (
     <>
       <AccountMenuBtn {...{ open, handleMenuClick }} />
-      <AccountMenuPopover
-        {...{ open, handleMenuClose, anchorEl, isLoggedIn }}
-      />
+      <AccountMenuPopover {...{ open, handleMenuClose, anchorEl }} />
     </>
   );
 }
