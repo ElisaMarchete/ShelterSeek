@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
-import AddShelterFrom from "../components/ShelterInfoDialog";
 
 const pets = [
   {
@@ -75,14 +74,14 @@ const ShelterInfo = () => {
       <div className={classes.imageContainer}>
         <Container>
           <Typography variant="h4" style={{ textAlign: "center" }}>
-            Selected Shelter
+            {selectedShelter.name}
           </Typography>
           <Grid container justifyContent="center">
             <Grid item xs={12} sm={6}>
               <Card>
                 <CardMedia
                   component="img"
-                  src={`https://i.imgur.com/TQbD1c7.jpeg`}
+                  src={`${selectedShelter.image}`}
                   alt="Description of the image"
                   className={`${classes.imgFluid} ${classes.image}`}
                 />
@@ -132,7 +131,6 @@ const ShelterInfo = () => {
           </Grid>
         </div>
       </Container>
-      <AddShelterFrom/>
     </>
   );
 };

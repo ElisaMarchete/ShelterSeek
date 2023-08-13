@@ -1,5 +1,5 @@
-const { AuthenticationError } = require("apollo-server-express");
-const { signToken } = require("../utils/auth");
+// const { AuthenticationError } = require("apollo-server-express");
+// const { signToken } = require("../utils/auth");
 const { Shelter, Donation } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
@@ -81,9 +81,7 @@ const resolvers = {
         BankInstitutionNumber,
         BankAccount,
       });
-      const token = signToken({username:'dummy', email: 'dummy@example.com', _id:'dummyid'});
-      console.log(shelter)
-      return {token, shelter};
+      return shelter;
     },
     addDonation: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
