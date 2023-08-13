@@ -53,7 +53,7 @@ function App() {
     },
     {
       name: "Shelters",
-      // component: Shelters,
+      component: Shelters,
       path: "/Shelters",
     },
     {
