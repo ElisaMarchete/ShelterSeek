@@ -32,19 +32,12 @@ code {
 .Nav {
   display: flex;
   flex: 1;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.Header .header-button {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  margin: auto 5px;
-  padding: 0px 10px;
-  color: black;
+.Nav a{
   text-decoration: none;
-  box-sizing: border-box;
 }
 
 .Nav .header-button.active {
