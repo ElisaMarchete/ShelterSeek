@@ -54,6 +54,10 @@ const shelterSchema = new Schema(
       required: true,
     },
     donations: [Donation.schema],
+    rating: {
+      type: Number,
+      required: false,
+    },
   },
   {
     toJSON: {

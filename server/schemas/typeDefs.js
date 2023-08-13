@@ -17,7 +17,7 @@ const typeDefs = gql`
     _id: ID
     donationDate: String
     amount: Float
-    shelterId: Shelter
+    shelterId: ID
   }
 
   type Shelter {
@@ -30,6 +30,7 @@ const typeDefs = gql`
     description: String
     image: String
     donations: [Donation]
+    rating: Float
   }
 
   type Checkout {
