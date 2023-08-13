@@ -17,6 +17,7 @@ module.exports = {
     // verify if the token received is valid chcking token number, secret and expiration if yes return the request object post, put, delete or get.
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      console.log("It works");
       req.user = data;
     } catch {
       console.log("Invalid token");
