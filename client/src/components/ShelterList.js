@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,21 +8,8 @@ import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import Donation from "./Donation";
-import { useQuery } from "@apollo/client";
-import { GET_SHELTERS } from "../utils/queries";
 
-function ShelterList() {
-  const { loading, error, data } = useQuery(GET_SHELTERS);
-  const [shelters, setShelters] = useState([]);
-
-  useEffect(() => {
-    if (data) {
-      setShelters(data.shelters);
-    }
-  }, [data]);
-
-  console.log(shelters);
-
+function ShelterList({ shelters }) {
   return (
     <div className="ShelterList">
       <h2>List of Shelters</h2>

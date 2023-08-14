@@ -9,8 +9,8 @@ export const QUERY_CHECKOUT = gql`
 `;
 
 export const GET_SHELTERS = gql`
-  query getShelters {
-    shelters {
+  query getShelters($filters: ShelterFilters) {
+    shelters(filters: $filters) {
       _id
       address
       description
@@ -19,13 +19,13 @@ export const GET_SHELTERS = gql`
       phone
       website
       email
-      rating
       donations {
         _id
         amount
         donationDate
         shelterId
       }
+      rating
     }
   }
 `;

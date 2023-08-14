@@ -24,8 +24,8 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    shelters: async (parent, args, context) => {
-      const shelters = await Shelter.find();
+    shelters: async (parent, { filters }, context) => {
+      const shelters = await Shelter.find(filters);
 
       return shelters;
     },

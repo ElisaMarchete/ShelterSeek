@@ -1,12 +1,12 @@
 import React from "react";
 import Hero from "../components/Hero";
-import ShelterList from "../components/ShelterList";
+import AllShelters from "./AllShelters";
 
 const Home = () => {
   return (
     <div className="Home">
       <Hero />
-      <ShelterList />
+      <AllShelters />
     </div>
   );
 };
