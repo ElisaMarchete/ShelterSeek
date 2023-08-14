@@ -1,6 +1,5 @@
 import { React } from "react";
 import ShelterCard from "./ShelterCard";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
 function ShelterList({ shelters }) {
   return (
