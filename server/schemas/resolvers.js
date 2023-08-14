@@ -24,6 +24,12 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    shelters: async (parent, { filters }, context) => {
+      const shelters = await Shelter.find(filters);
+
+      return shelters;
+    },
+
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
