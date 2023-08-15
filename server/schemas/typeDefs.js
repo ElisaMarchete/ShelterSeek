@@ -17,7 +17,7 @@ const typeDefs = gql`
     _id: ID
     donationDate: String
     amount: Float
-    shelterId: Shelter
+    shelterId: ID
   }
 
   type Shelter {
@@ -30,6 +30,10 @@ const typeDefs = gql`
     description: String
     image: String
     donations: [Donation]
+    rating: Int
+    cat: Boolean
+    dog: Boolean
+    rabbit: Boolean
   }
 
   type Checkout {
@@ -43,7 +47,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    shelters: [Shelter]
+    shelters(filters: ShelterFilters): [Shelter]
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout
   }
@@ -73,5 +77,14 @@ const typeDefs = gql`
     email: String!
     password: String!
   }
+
+  input ShelterFilters {
+    name: String
+    rating: Int
+    dog: Boolean
+    cat: Boolean
+    rabbit: Boolean
+  }
 `;
+
 module.exports = typeDefs;

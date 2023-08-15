@@ -110,6 +110,13 @@ code {
   padding: 10px;
 }
 
+.shelter-info .animals-kept {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 10px;
+}
+
 .donation {
   display: flex;
   flex-direction: row;

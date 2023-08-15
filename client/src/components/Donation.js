@@ -12,7 +12,6 @@ const stripePromise = loadStripe(
 );
 
 const Donation = (props) => {
-  console.log(props);
   // useLazyQuery from apollo is the same as useQuery but for queries that need to be run on an event
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 

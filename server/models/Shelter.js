@@ -54,6 +54,22 @@ const shelterSchema = new Schema(
       required: true,
     },
     donations: [Donation.schema],
+    rating: {
+      type: Number,
+      required: false,
+    },
+    dog: {
+      type: Boolean,
+      required: false,
+    },
+    cat: {
+      type: Boolean,
+      required: false,
+    },
+    rabbit: {
+      type: Boolean,
+      required: false,
+    },
   },
   {
     toJSON: {
