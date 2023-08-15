@@ -42,6 +42,16 @@ const typeDefs = gql`
     user: User
   }
 
+  type Pets {
+    _id: ID
+    name: String
+    age: Int
+    breed: String
+    description: String
+    image: String
+    shelterId: String
+  }
+
   type Query {
     me: User
     shelters(filters: ShelterFilters): [Shelter]
@@ -67,6 +77,8 @@ const typeDefs = gql`
     ): Shelter
 
     addDonation(shelterId: String, amount: Float): Donation
+
+    addPet(image: String!, shelterId: String!): Pets
   }
 
   input UserInput {

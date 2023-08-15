@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Shelter, Donation } = require("../models");
+const { User, Shelter, Donation, Pets } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
@@ -132,6 +132,16 @@ const resolvers = {
       await donation.save();
 
       return donation;
+    },
+
+    addPet: async (parent, args, context) => {
+      const pet = await Pets.create(args);
+
+      const shelter = await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { pets: pet._id } },
+        { new: true }
+      );
     },
   },
 };

@@ -18,6 +18,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Success from "./pages/Success";
 import Shelters from "./pages/Shelters";
+import Dashboard from "./pages/Dashboard";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -67,6 +68,11 @@ function App() {
       component: Success,
       path: "/success",
     },
+    {
+      name: "Dashboard",
+      component: Dashboard,
+      path: "/dashboard",
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -88,6 +94,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Shelters" element={<Shelters />} />
             <Route path="/Shelters/:Id" element={<Shelter />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
