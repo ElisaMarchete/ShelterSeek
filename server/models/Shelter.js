@@ -78,13 +78,6 @@ const shelterSchema = new Schema(
   }
 );
 
-ShelterSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await hashPassword(this.password);
-  }
-  next();
-});
-
 const Shelter = model("Shelter", shelterSchema);
 
 module.exports = Shelter;
