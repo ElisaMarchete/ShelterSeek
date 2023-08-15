@@ -19,6 +19,9 @@ db.once("open", async () => {
       BankInstitutionNumber: "456",
       BankAccount: "789",
       rating: 3,
+      cat: true,
+      dog: false,
+      rabbit: true,
     },
     {
       _id: "64d2dcd0f737eeb85b86fd72",
@@ -34,6 +37,9 @@ db.once("open", async () => {
       BankInstitutionNumber: "456",
       BankAccount: "789",
       rating: 4,
+      cat: false,
+      dog: true,
+      rabbit: false,
     },
     {
       _id: "64d3aab060abe4a8d7f4cd85",
@@ -49,9 +55,12 @@ db.once("open", async () => {
       BankInstitutionNumber: "456",
       BankAccount: "789",
       rating: 1,
+      cat: true,
+      dog: false,
+      rabbit: true,
     },
     {
-      // _id: "64d3aab060abe4a8d7f4cd934",
+      _id: "64d3aab060abe4a8d7f4cd81",
       name: "Shelter 4",
       address: "1234 Main St.",
       phone: "555-555-5555",
@@ -64,6 +73,9 @@ db.once("open", async () => {
       BankInstitutionNumber: "456",
       BankAccount: "789",
       rating: 5,
+      cat: true,
+      dog: true,
+      rabbit: true,
     },
   ]);
 
