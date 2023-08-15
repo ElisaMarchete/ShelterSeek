@@ -25,6 +25,8 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.11.1",
     "apollo-server-express": "^3.11.1",
     "express": "^4.17.2",
     "graphql": "^15.8.0"

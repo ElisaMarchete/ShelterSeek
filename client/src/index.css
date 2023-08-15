@@ -36,7 +36,7 @@ code {
   align-items: center;
 }
 
-.Nav a{
+.Nav a {
   text-decoration: none;
 }
 
@@ -137,4 +137,9 @@ code {
   line-height: 2;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: rgb(80, 80, 80);
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
