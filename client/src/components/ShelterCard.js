@@ -7,6 +7,7 @@ import Rating from "@mui/material/Rating";
 import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
 import Donation from "./Donation";
+import { DogIcon, CatIcon, RabbitIcon } from "./Icons";
 
 function ShelterCard({ shelter }) {
   return (
@@ -45,6 +46,11 @@ function ShelterCard({ shelter }) {
               style={{ color: "black" }}
               size="small"
             />
+            <div className="animals-kept">
+              {shelter.dog ? <DogIcon /> : null}
+              {shelter.cat ? <CatIcon /> : null}
+              {shelter.rabbit ? <RabbitIcon /> : null}
+            </div>
           </CardContent>
         </CardActionArea>
       </Link>

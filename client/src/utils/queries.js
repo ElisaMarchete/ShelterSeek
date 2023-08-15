@@ -26,6 +26,9 @@ export const GET_SHELTERS = gql`
         shelterId
       }
       rating
+      dog
+      cat
+      rabbit
     }
   }
 `;

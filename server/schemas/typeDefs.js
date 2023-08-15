@@ -31,6 +31,9 @@ const typeDefs = gql`
     image: String
     donations: [Donation]
     rating: Int
+    cat: Boolean
+    dog: Boolean
+    rabbit: Boolean
   }
 
   type Checkout {
@@ -78,6 +81,10 @@ const typeDefs = gql`
   input ShelterFilters {
     name: String
     rating: Int
+    dog: Boolean
+    cat: Boolean
+    rabbit: Boolean
   }
 `;
+
 module.exports = typeDefs;
