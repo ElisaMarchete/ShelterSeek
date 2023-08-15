@@ -17,6 +17,7 @@ import Shelter from "./pages/Shelter";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Success from "./pages/Success";
+import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
@@ -74,8 +75,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
-      <DialogsProvider>
-        <Router>
+      <Router>
+        <DialogsProvider>
           {/* <Navbar /> */}
           <Header>
             <Nav
@@ -87,15 +88,17 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Shelters" element={<Shelters />} />
+            <Route path="/register-shelter" element={<RegisterShelter />} />
             <Route path="/Shelters/:Id" element={<Shelter />} />
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}
             />
+            <Route path="/register-shelter" element={<RegisterShelter />} />
           </Routes>
-        </Router>
-        <DialogsContainer />
-      </DialogsProvider>
+          <DialogsContainer />
+        </DialogsProvider>
+      </Router>
     </ApolloProvider>
   );
 }

@@ -43,12 +43,12 @@ export const ADD_SHELTER = gql`
     $password: String!
     $website: String
     $description: String!
-    $image: String!
+    $image: String
     $BankTransitNumber: String!
     $BankInstitutionNumber: String!
     $BankAccount: String!
-  )   
-  {addShelter(
+  ) {
+    addShelter(
       name: $name
       address: $address
       phone: $phone
@@ -60,8 +60,7 @@ export const ADD_SHELTER = gql`
       BankTransitNumber: $BankTransitNumber
       BankInstitutionNumber: $BankInstitutionNumber
       BankAccount: $BankAccount
-    ) 
-    {
+    ) {
       _id
       name
       address
@@ -72,4 +71,4 @@ export const ADD_SHELTER = gql`
       image
     }
   }
-  `;
+`;

@@ -110,6 +110,12 @@ const resolvers = {
       return { token, user };
     },
     addUser: async (parent, { userInput }) => {
+      const existingUser = await User.findOne({ email: userInput.email });
+      const existingShelter = await Shelter.findOne({ email: userInput.email });
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
       const user = await User.create(userInput);
       const token = signToken(user);
 
@@ -131,6 +137,14 @@ const resolvers = {
         BankAccount,
       }
     ) => {
+      const existingUser = await User.findOne({ email });
+      const existingShelter = await Shelter.findOne({
+        email,
+      });
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
       const shelter = await Shelter.create({
         name,
         address,

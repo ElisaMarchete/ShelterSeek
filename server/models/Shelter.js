@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Donation = require("./Donation");
+const User = require("./User");
 
 // this schema in models connects with mongoose database
 
@@ -39,7 +40,6 @@ const shelterSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     BankTransitNumber: {
       type: String,

@@ -5,6 +5,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 
 import { useDialogs, DialogTypes } from "../../utils/contexts/DialogsContext";
@@ -49,9 +51,8 @@ export default function UserSignupDialog() {
     <Dialog open={openDialog === DialogTypes.USER_SIGNUP} onClose={close}>
       <DialogTitle>Sign Up</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        <DialogContentText sx={{ mb: 3 }}>
           Create a ShelterSeek to account to add shelters to your watchlist.
-          blah blah.
         </DialogContentText>
         <TextField
           required
@@ -61,7 +62,6 @@ export default function UserSignupDialog() {
           label="Username"
           type="username"
           fullWidth
-          variant="filled"
           value={username}
           onChange={(event) => setUsername(event.target.value)}
         />
@@ -72,7 +72,6 @@ export default function UserSignupDialog() {
           label="Email address"
           type="email"
           fullWidth
-          variant="filled"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
@@ -83,10 +82,16 @@ export default function UserSignupDialog() {
           label="Password"
           type="password"
           fullWidth
-          variant="filled"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <Link href="/register-shelter" variant="body2">
+              Signing up as a shelter? Register here.
+            </Link>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
