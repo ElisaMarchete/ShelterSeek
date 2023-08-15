@@ -5,3 +5,7 @@ mongoose.connect(
 );
 
 module.exports = mongoose.connection;
+
+/*
+mongodb+srv://elisa:Melges09%40@elisamarchete.eieztfu.mongodb.net/shelterSeekDB?retryWrites=true&w=majority
+*/
