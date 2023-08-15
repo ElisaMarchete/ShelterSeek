@@ -1,10 +1,10 @@
 import React from "react";
-import Donation from "../components/Donation";
+import Hero from "../components/Hero";
 
 const Home = () => {
   return (
-    <div className="container">
-      <Donation />
+    <div className="Home">
+      <Hero />
     </div>
   );
 };

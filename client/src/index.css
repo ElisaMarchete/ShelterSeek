@@ -11,3 +11,123 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* HEADER / NAVBAR CSS */
+.Header {
+  display: flex;
+  background-color: rgb(42, 93, 129);
+  height: 100px;
+  vertical-align: middle;
+}
+
+.Header h1 {
+  display: flex;
+  flex: 1;
+  margin: auto 20px;
+  cursor: default;
+  user-select: none;
+  color: white;
+}
+
+.Nav {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Nav a{
+  text-decoration: none;
+}
+
+.Nav .header-button.active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+.Header .header-button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* Hero CSS */
+.Hero {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* border-bottom: solid black 5px; */
+  box-shadow: 0px 5px 15px;
+  filter: brightness(70%);
+}
+
+.Hero-image {
+  width: 100%;
+
+}
+
+/* Shelter List CSS */
+.ShelterList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shelters-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.shelter-card {
+  cursor: pointer;
+  /* width: 27%; */
+  margin: 10px 10px 30px 10px;
+  /* height: 200px; */
+  box-sizing: border-box;
+}
+
+.shelter-card img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+.shelter-card .shelter-info {
+  position: relative;
+}
+
+.shelter-info h1,
+.shelter-info h2 {
+  margin: 10px 0px;
+  font-size: 90%;
+}
+
+.shelter-info .shelter-rating {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 10px;
+}
+
+.donation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.Successpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-text {
+  margin: 50px 200px 50px 200px;
+  text-align: center;
+  line-height: 2;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(80, 80, 80);
+}

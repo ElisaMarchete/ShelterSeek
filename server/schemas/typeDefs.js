@@ -1,9 +1,25 @@
 const { gql } = require("apollo-server-express");
 
 // typeDefs = schema Define data in GraphQL
-// query is a GET request - mutation is a POST, PUT, or DELETE request
+// query is a GET request (reading) - mutation is a POST, PUT, or DELETE request
 
 const typeDefs = gql`
+  type User {
+    _id: ID
+    username: String!
+    email: String!
+    password: String!
+    savedShelters: [Shelter]
+    donations: [Donation]
+  }
+
+  type Donation {
+    _id: ID
+    donationDate: String
+    amount: Float
+    shelterId: ID
+  }
+
   type Shelter {
     _id: ID
     name: String
@@ -13,16 +29,8 @@ const typeDefs = gql`
     website: String
     description: String
     image: String
-    BankTransitNumber: String
-    BankInstitutionNumber: String
-    BankAccount: String
     donations: [Donation]
-  }
-
-  type Donation {
-    _id: ID
-    amount: float
-    data: String
+    rating: Int
   }
 
   type Checkout {
@@ -30,33 +38,46 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 
   type Query {
-    shelters: [Shelter]
-    donations: [Donation]
-    checkout(amount: Float!): Checkout
-    }
+    me: User
+    shelters(filters: ShelterFilters): [Shelter]
+    donation(id: ID!): Donation
+    checkout(shelterId: String, amount: Float): Checkout
+  }
 
-    type Mutation {
-        addShelter(
-            name: String!
-            address: String!
-            phone: String!
-            email: String!  
-            website: String!
-            hours: String!
-            description: String!
-            image: String!
-            BankTransitNumber: String!
-            BankInstitutionNumber: String!
-            BankAccount: String!
-        ): Shelter
-        addDonation(
-            amount: float!
-            data: String!
-        ): Donation
+  type Mutation {
+    addUser(userInput: UserInput!): Auth
+    login(loginName: String!, loginPassword: String!): Auth
+    addShelter(
+      name: String!
+      address: String!
+      phone: String!
+      email: String!
+      password: String!
+      website: String
+      description: String!
+      image: String!
+      BankTransitNumber: String!
+      BankInstitutionNumber: String!
+      BankAccount: String!
+    ): Shelter
+
+    addDonation(shelterId: String, amount: Float): Donation
+  }
+
+  input UserInput {
+    username: String!
+    email: String!
+    password: String!
+  }
+
+  input ShelterFilters {
+    name: String
+    rating: Int
+  }
 `;
 module.exports = typeDefs;
