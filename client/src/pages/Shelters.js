@@ -4,14 +4,12 @@ import ShelterList from "../components/ShelterList";
 import { useQuery } from "@apollo/client";
 import { GET_SHELTERS } from "../utils/queries";
 
-function AllShelters() {
+function Shelters() {
   const [filters, setFilters] = useState({});
-
-  console.log(filters);
 
   const { loading, error, data } = useQuery(GET_SHELTERS, {
     variables: {
-      filters: filters, // Pass your filters object here
+      filters: filters,
     },
   });
 
@@ -20,15 +18,16 @@ function AllShelters() {
   useEffect(() => {
     if (data) {
       setShelters(data.shelters);
+      console.log(data.shelters);
     }
   }, [data, filters]);
 
   return (
     <div>
       <FilterBar filters={filters} setFilters={setFilters} />
-      <ShelterList shelters={shelters} filters={filters} />
+      <ShelterList shelters={shelters} />
     </div>
   );
 }
 
-export default AllShelters;
+export default Shelters;
