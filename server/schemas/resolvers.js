@@ -25,9 +25,37 @@ const resolvers = {
     },
 
     shelters: async (parent, { filters }, context) => {
-      const shelters = await Shelter.find(filters);
+      try {
+        let query = {};
 
-      return shelters;
+        if (filters?.name) {
+          query.name = { $regex: filters.name, $options: "i" };
+        }
+
+        if (filters?.rating !== undefined) {
+          query.rating = { $gte: filters.rating }; // Use $gte operator for greater than or equal
+        }
+
+        if (filters?.dog !== undefined) {
+          query.dog = filters.dog;
+        }
+
+        if (filters?.cat !== undefined) {
+          query.cat = filters.cat;
+        }
+
+        if (filters?.rabbit !== undefined) {
+          query.rabbit = filters.rabbit;
+        }
+
+        console.log("Query:", query);
+        console.log("Filters:", filters);
+
+        const shelters = await Shelter.find(query);
+        return shelters;
+      } catch (err) {
+        throw new Error("Error fetching shelters: " + err);
+      }
     },
 
     checkout: async (parent, args, context) => {

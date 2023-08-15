@@ -1,6 +1,5 @@
-import { React } from "react";
+import React from "react";
 import ShelterCard from "./ShelterCard";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
 function ShelterList({ shelters }) {
   return (
@@ -8,7 +7,7 @@ function ShelterList({ shelters }) {
       <h2>List of Shelters</h2>
       <div className="shelters-section">
         {shelters.map((shelter) => {
-          return <ShelterCard shelter={shelter} />;
+          return <ShelterCard shelter={shelter} key={shelter._id} />;
         })}
       </div>
     </div>

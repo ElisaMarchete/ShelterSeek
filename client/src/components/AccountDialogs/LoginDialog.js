@@ -30,8 +30,6 @@ export default function LoginDialog() {
     const loginNameInput = loginName;
     const loginPasswordInput = loginPassword;
 
-    if (error) alert(error.message);
-
     try {
       console.log(loginNameInput, loginPasswordInput);
       const { data } = await loginUser({
