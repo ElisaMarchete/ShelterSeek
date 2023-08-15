@@ -47,10 +47,6 @@ const typeDefs = gql`
 
   type Pets {
     _id: ID
-    name: String
-    age: Int
-    breed: String
-    description: String
     image: String
     shelterId: String
   }

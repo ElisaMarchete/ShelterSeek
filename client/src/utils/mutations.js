@@ -74,14 +74,9 @@ export const ADD_SHELTER = gql`
 `;
 
 export const ADD_PETS = gql`
-  mutation getPet( 
-    $image: String!
-    $shelterId: String!
-  )
-  {addPet(
-    image: String!, shelterId: String!)
-    {
+  mutation getPet($image: String!, $shelterId: String!) {
+    addPet(image: $image, shelterId: $amount) {
       _id
     }
   }
-  `;
+`;

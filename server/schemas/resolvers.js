@@ -5,8 +5,7 @@ const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
 
-// resolvers graphQL = ROUTES in RESTful APIs
-// randle the queries and mutations
+// resolvers graphQL = ROUTES in RESTful APIs -> randle the queries and mutations
 // constext from apollo-server to get the headers
 
 const resolvers = {
@@ -163,13 +162,19 @@ const resolvers = {
     },
 
     addPet: async (parent, args, context) => {
-      const pet = await Pets.create(args);
+      const shelterId = args.shelterId;
+      const image = args.image;
 
-      const shelter = await Shelter.findOneAndUpdate(
-        { _id: args.shelterId },
-        { $push: { pets: pet._id } },
-        { new: true }
-      );
+      // console.log("shelterId", shelterId);
+      // console.log("image", image);
+
+      const pet = await Pets.create({ shelterId, image });
+
+      // const shelter = await Shelter.findOneAndUpdate(
+      //   { _id: args.shelterId },
+      //   { $push: { pets: pet._id } },
+      //   { new: true }
+      // );
 
       return pet;
     },
