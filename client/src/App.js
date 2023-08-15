@@ -87,6 +87,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Shelters" element={<Shelters />} />
+            <Route path="/register-shelter" element={<Shelters />} />
             <Route path="/Shelters/:Id" element={<Shelter />} />
             <Route
               path="*"

@@ -60,7 +60,6 @@ export function LoggedOutMenuList() {
 export function LoggedInMenuList() {
   const handleLogout = () => {
     Auth.logout();
-    window.location.replace("/");
   };
 
   return (
