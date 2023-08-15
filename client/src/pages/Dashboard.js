@@ -17,7 +17,14 @@ import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ShelterDashboard = () => {
   const [addPet] = useMutation(ADD_PETS);
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
+
+  // global variable get attribute from the .setAttribute("src", result.info.secure_url);
+  // const image = result.info.secure_url;
+
+  const uploadImage = document.getElementById("uploadedimage");
+  // const image = uploadImage.getAttribute("src");
+  // console.log("URL", image);
 
   return (
     <div style={{ minHeight: "100vh" }}>

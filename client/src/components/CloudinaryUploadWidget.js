@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class CloudinaryUploadWidget extends Component {
   componentDidMount() {
-    const cloudName = "hzxyensd5"; // replace with your own cloud name
-    const uploadPreset = "aoh4fpwm"; // replace with your own upload preset
+    const cloudName = "dvz37vq43"; // replace with your own cloud name
+    const uploadPreset = "xawdeukq"; // replace with your own upload preset
 
     // Remove the comments from the code below to add
     // additional functionality.
@@ -18,8 +18,8 @@ class CloudinaryUploadWidget extends Component {
         uploadPreset: uploadPreset,
         // cropping: true, //add a cropping step
         // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-        // sources: [ "local", "url"], // restrict the upload sources to URL and local files
-        // multiple: false,  //restrict upload to a single file
+        // sources: ["local", "url"], // restrict the upload sources to URL and local files
+        // multiple: true, //restrict upload to a single file
         // folder: "user_images", //upload files to the specified folder
         // tags: ["users", "profile"], //add the given tags to the uploaded files
         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
