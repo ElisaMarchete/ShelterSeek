@@ -59,11 +59,6 @@ function App() {
       path: "/Shelters",
     },
     {
-      name: "Pets",
-      // component: Pets,
-      path: "/pets",
-    },
-    {
       name: "",
       component: Success,
       path: "/success",
