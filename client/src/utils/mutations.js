@@ -47,8 +47,8 @@ export const ADD_SHELTER = gql`
     $BankTransitNumber: String!
     $BankInstitutionNumber: String!
     $BankAccount: String!
-  )   
-  {addShelter(
+  ) {
+    addShelter(
       name: $name
       address: $address
       phone: $phone
@@ -60,8 +60,7 @@ export const ADD_SHELTER = gql`
       BankTransitNumber: $BankTransitNumber
       BankInstitutionNumber: $BankInstitutionNumber
       BankAccount: $BankAccount
-    ) 
-    {
+    ) {
       _id
       name
       address
@@ -70,6 +69,19 @@ export const ADD_SHELTER = gql`
       website
       description
       image
+    }
+  }
+`;
+
+export const ADD_PETS = gql`
+  mutation getPet( 
+    $image: String!
+    $shelterId: String!
+  )
+  {addPet(
+    image: String!, shelterId: String!)
+    {
+      _id
     }
   }
   `;

@@ -142,6 +142,8 @@ const resolvers = {
         { $push: { pets: pet._id } },
         { new: true }
       );
+
+      return pet;
     },
   },
 };
