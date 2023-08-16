@@ -36,6 +36,20 @@ const ShelterDashboard = () => {
           Shelter Dashboard
         </Typography>
 
+        {/* Donation Amount Card */}
+        <Card style={{ marginBottom: "20px", width: "400px", height: "110px" }}>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h2">
+              Donation Amount Received {/* Placeholder for donation amount */}
+            </Typography>
+          </CardContent>
+        </Card>
+
+        {/* Add Image Form */}
+        <div style={{ float: "right", marginRight: "20px" }}>
+          <CloudinaryUploadWidget refetchPets={refetch} />
+        </div>
+
         {/* Display Pets */}
         <div className="image-list-container">
           <ImageList cols={4} gap={8}>
@@ -52,20 +66,6 @@ const ShelterDashboard = () => {
               </ImageListItem>
             ))}
           </ImageList>
-        </div>
-
-        {/* Donation Amount Card */}
-        <Card style={{ float: "left", marginRight: "20px" }}>
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
-              Donation Amount: {/* Placeholder for donation amount */}
-            </Typography>
-          </CardContent>
-        </Card>
-
-        {/* Add Image Form */}
-        <div className="App">
-          <CloudinaryUploadWidget refetchPets={refetch} />
         </div>
       </div>
     </div>
