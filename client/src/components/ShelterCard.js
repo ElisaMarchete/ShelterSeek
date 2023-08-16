@@ -15,12 +15,11 @@ function ShelterCard({ shelter }) {
       sx={{ maxWidth: 400 }}
       className="shelter-card"
       key={shelter._id}
-      to={`/shelters/${shelter._id}`}
     >
       <Link
         to={{
           pathname: `/shelters/${shelter._id}`,
-          state: { shelter }, // Pass shelter as state
+          state : { shelter  }, // Pass shelter as state
         }}
         style={{ textDecoration: "initial", color: "initial" }}
       >

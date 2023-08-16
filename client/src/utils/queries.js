@@ -76,3 +76,18 @@ export const GET_SHELTERS = gql`
     }
   }
 `;
+
+export const GET_SHELTERS_BY_ID = gql`
+  query getShelterById($_id: ID!) {
+    getShelter(_id: $_id) {
+      _id
+      address
+      description
+      image
+      name
+      phone
+      website
+      email
+    }
+  }
+`;
