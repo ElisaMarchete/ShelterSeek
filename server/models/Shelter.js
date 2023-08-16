@@ -36,7 +36,6 @@ const shelterSchema = new Schema(
     description: {
       type: String,
       required: true,
-      maxlength: 150,
     },
     image: {
       type: String,

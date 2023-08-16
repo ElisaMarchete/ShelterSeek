@@ -104,13 +104,26 @@ const resolvers = {
         $or: [{ username: loginName }, { email: loginName }],
       });
 
-      // The user does not exist or the password is incorrect.
-      if (!user || !(await user.checkPassword(loginPassword, user.password))) {
+      const shelter = await Shelter.findOne({
+        email: loginName,
+      });
+
+      // The user/shelter does not exist or the password is incorrect.
+      if (
+        (!user || !(await user.checkPassword(loginPassword, user.password))) &&
+        (!shelter ||
+          !(await shelter.checkPassword(loginPassword, shelter.password)))
+      ) {
         throw new AuthenticationError("Incorrect credentials.");
       }
 
-      const token = signToken(user);
-      return { token, user };
+      const loggedInEntity = shelter || user;
+
+      const token = signToken({
+        loggedInEntity,
+        role: shelter ? "shelter" : "user",
+      });
+      return { token, loggedInEntity };
     },
     addUser: async (parent, { userInput }) => {
       const existingUser = await User.findOne({ email: userInput.email });
@@ -120,49 +133,23 @@ const resolvers = {
         throw new Error("Email already taken.");
 
       const user = await User.create(userInput);
-      const token = signToken(user);
+      const token = signToken({ loggedInEntity: user, role: "user" });
 
       return { token, user };
     },
-    addShelter: async (
-      parent,
-      {
-        name,
-        address,
-        phone,
-        email,
-        password,
-        website,
-        description,
-        image,
-        BankTransitNumber,
-        BankInstitutionNumber,
-        BankAccount,
-      }
-    ) => {
-      const existingUser = await User.findOne({ email });
+    addShelter: async (parent, { shelterInput }) => {
+      const existingUser = await User.findOne({ email: shelterInput.email });
       const existingShelter = await Shelter.findOne({
-        email,
+        email: shelterInput.email,
       });
 
       if (existingUser || existingShelter)
         throw new Error("Email already taken.");
 
-      const shelter = await Shelter.create({
-        name,
-        address,
-        phone,
-        email,
-        password,
-        website,
-        description,
-        image,
-        BankTransitNumber,
-        BankInstitutionNumber,
-        BankAccount,
-      });
-      console.log(shelter);
-      return shelter;
+      const shelter = await Shelter.create(shelterInput);
+      const token = signToken({ loggedInEntity: shelter, role: "shelter" });
+
+      return { token, user: shelter };
     },
     addDonation: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js

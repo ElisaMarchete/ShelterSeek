@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 
-import { useMutation } from "@apollo/client";
-
 export const StepTemplate = ({ children }) => {
   return (
     <Box
@@ -46,9 +44,9 @@ export const Step1Form = ({ formData, setFormData }) => {
         multiline
         rows={4}
         fullWidth
-        value={formData.shelterDescription}
+        value={formData.description}
         onChange={(event) =>
-          handleInputChange("shelterDescription", event.target.value)
+          handleInputChange("description", event.target.value)
         }
       />
     </StepTemplate>
@@ -142,7 +140,7 @@ export const Step4Form = ({ formData, setFormData }) => {
         autoFocus
         margin="dense"
         id="username"
-        label="Bank institution number"
+        label="Bank transit number"
         fullWidth
         value={formData.BankTransitNumber}
         onChange={(event) =>
@@ -154,7 +152,7 @@ export const Step4Form = ({ formData, setFormData }) => {
         required
         margin="dense"
         id="email"
-        label="Bank address"
+        label="Bank institution number"
         fullWidth
         value={formData.BankInstitutionNumber}
         onChange={(event) =>
@@ -166,11 +164,11 @@ export const Step4Form = ({ formData, setFormData }) => {
         required
         margin="dense"
         id="password"
-        label="Bank transit number"
+        label="Bank account"
         fullWidth
-        value={formData.BankAccountNumber}
+        value={formData.BankAccount}
         onChange={(event) =>
-          handleInputChange("BankAccountNumber", event.target.value)
+          handleInputChange("BankAccount", event.target.value)
         }
       />
     </StepTemplate>

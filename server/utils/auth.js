@@ -26,8 +26,8 @@ module.exports = {
   },
 
   // function with parameter username, email and _id from resolver mutation addUser in server\schemas\resolvers.js
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signToken: function ({ loggedInEntity: { username, email, _id }, role }) {
+    const payload = { username, email, _id, role };
 
     // creating token when user signs up
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });

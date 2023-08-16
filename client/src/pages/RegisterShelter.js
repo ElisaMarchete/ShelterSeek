@@ -15,6 +15,7 @@ import {
 
 import { useMutation } from "@apollo/client";
 import { ADD_SHELTER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const steps = [
   "Tell us about your organization",
@@ -29,18 +30,19 @@ export default function RegisterShelterStepper() {
 
   const initialFormData = {
     name: "",
-    shelterDescription: "",
-    email: "",
-    password: "",
     address: "",
     phone: "",
+    email: "",
+    password: "",
+    website: "",
+    description: "",
     BankTransitNumber: "",
     BankInstitutionNumber: "",
-    BankAccountNumber: "",
+    BankAccount: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [registerShelter, { error }] = useMutation(ADD_SHELTER);
+  const [addShelter, { error }] = useMutation(ADD_SHELTER);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -66,11 +68,25 @@ export default function RegisterShelterStepper() {
     setFormData(initialFormData);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (error) {
+      console.error(error);
+    }
+
     console.log(formData);
-    registerShelter({
-      variables: { ...formData },
-    });
+    try {
+      const { data } = await addShelter({
+        variables: { shelterInput: { ...formData } },
+      });
+
+      const { token, shelter } = data.addShelter;
+      console.log(token);
+      console.log(shelter);
+    } catch (err) {
+      console.error(err);
+      console.log(err.response);
+    }
+
     handleReset();
   };
 

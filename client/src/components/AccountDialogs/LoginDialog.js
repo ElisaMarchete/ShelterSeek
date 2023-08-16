@@ -59,7 +59,7 @@ export default function LoginDialog() {
           autoFocus
           margin="dense"
           id="login-name"
-          label="Username or email address"
+          label="Email address"
           type="email"
           fullWidth
           value={loginName}

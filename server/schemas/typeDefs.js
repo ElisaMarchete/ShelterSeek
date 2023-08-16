@@ -42,7 +42,14 @@ const typeDefs = gql`
 
   type Auth {
     token: ID!
-    user: User
+    user: Entity
+  }
+
+  type Entity {
+    _id: ID
+    username: String
+    name: String
+    email: String
   }
 
   type Query {
@@ -53,22 +60,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(userInput: UserInput!): Auth
     login(loginName: String!, loginPassword: String!): Auth
-    addShelter(
-      name: String!
-      address: String!
-      phone: String!
-      email: String!
-      password: String!
-      website: String
-      description: String!
-      image: String!
-      BankTransitNumber: String!
-      BankInstitutionNumber: String!
-      BankAccount: String!
-    ): Shelter
-
+    addUser(userInput: UserInput!): Auth
+    addShelter(shelterInput: ShelterInput!): Auth
     addDonation(shelterId: String, amount: Float): Donation
   }
 
@@ -76,6 +70,20 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+  }
+
+  input ShelterInput {
+    name: String!
+    address: String!
+    phone: String!
+    email: String!
+    password: String!
+    website: String
+    description: String!
+    image: String
+    BankTransitNumber: String!
+    BankInstitutionNumber: String!
+    BankAccount: String!
   }
 
   input ShelterFilters {
