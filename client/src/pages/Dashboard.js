@@ -11,21 +11,9 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-import { useMutation } from "@apollo/client";
-import { ADD_PETS } from "../utils/mutations";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ShelterDashboard = () => {
-  const [addPet] = useMutation(ADD_PETS);
-  // const [image, setImage] = useState("");
-
-  // global variable get attribute from the .setAttribute("src", result.info.secure_url);
-  // const image = result.info.secure_url;
-
-  const uploadImage = document.getElementById("uploadedimage");
-  // const image = uploadImage.getAttribute("src");
-  // console.log("URL", image);
-
   return (
     <div style={{ minHeight: "100vh" }}>
       <div style={{ padding: "20px" }}>
@@ -42,16 +30,16 @@ const ShelterDashboard = () => {
         </Typography>
 
         {/* Profile Card */}
-        <Card style={{ float: "left", marginRight: "20px" }}>
-          <CardContent>
-            {/* Placeholder for grabbing image from a URL */}
-            <img
+        {/* <Card style={{ float: "left", marginRight: "20px" }}>
+          <CardContent> */}
+        {/* Placeholder for grabbing image from a URL */}
+        {/* <img
               src="YOUR_PROFILE_IMAGE_URL"
               alt="Profile"
               style={{ width: "100px", height: "100px" }}
-            />
-          </CardContent>
-        </Card>
+            /> */}
+        {/* </CardContent>
+        </Card> */}
 
         {/* Donation Amount Card */}
         <Card style={{ float: "left", marginRight: "20px" }}>
@@ -66,25 +54,6 @@ const ShelterDashboard = () => {
         {/* adding image with Cloudinary */}
         <div className="App">
           <CloudinaryUploadWidget />
-          <p>
-            <a
-              href="https://cloudinary.com/documentation/upload_widget"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {/* Upload Widget User Guide */}
-            </a>
-          </p>
-          <p>
-            <a
-              href="https://cloudinary.com/documentation/upload_widget_reference"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {/* Upload Widget Reference */}
-            </a>
-          </p>
-          <img id="uploadedimage" src=""></img>
         </div>
       </div>
     </div>
