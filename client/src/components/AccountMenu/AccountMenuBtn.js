@@ -2,11 +2,12 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Pets from "@mui/icons-material/Pets";
 import Auth from "../../utils/auth";
 
 export default function AccountMenuBtn({ handleMenuClick, open }) {
-  const name = Auth.loggedIn() && Auth.getProfile().data.username;
+  const name =
+    Auth.loggedIn() &&
+    (Auth.getProfile().data.username || Auth.getProfile().data.name);
 
   const iconSize = {
     width: 48,
@@ -54,11 +55,7 @@ export default function AccountMenuBtn({ handleMenuClick, open }) {
         aria-expanded={open ? "true" : undefined}
       >
         {Auth.loggedIn() ? (
-          Auth.getProfile().data.role === "user" ? (
-            <Avatar {...stringAvatar(name)}></Avatar>
-          ) : (
-            <Pets sx={{ ...iconSize }} />
-          )
+          <Avatar {...stringAvatar(name)}></Avatar>
         ) : (
           <AccountCircle sx={{ ...iconSize }} />
         )}

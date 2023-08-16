@@ -6,6 +6,11 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import { DialogTypes, useDialogs } from "../utils/contexts/DialogsContext";
+import {
+  ShelterProfileForm,
+  ManageShelterForm,
+  PaymentInfoForm,
+} from "../components/ShelterProfile";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,7 +54,7 @@ export default function ShelterProfile() {
 
   useEffect(() => {
     if (shelterIsNew()) {
-      setValue(2);
+      setValue(1);
       open(DialogTypes.COMPLETE_YOUR_PROFILE);
       return;
     }
@@ -66,20 +71,21 @@ export default function ShelterProfile() {
           value={value}
           onChange={handleChange}
           aria-label="Shelter profile tabs"
+          centered
         >
-          <Tab label="Basic information" {...a11yProps(0)} />
-          <Tab label="Payment information" {...a11yProps(1)} />
-          <Tab label="Manage media" {...a11yProps(2)} />
+          <Tab label="Profile" {...a11yProps(0)} />
+          <Tab label="Manage shelter" {...a11yProps(1)} />
+          <Tab label="Payment information" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
+        <ShelterProfileForm />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <ManageShelterForm />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <PaymentInfoForm />
       </CustomTabPanel>
     </Box>
   );

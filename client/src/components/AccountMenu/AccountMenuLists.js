@@ -11,6 +11,7 @@ import Logout from "@mui/icons-material/Logout";
 import Login from "@mui/icons-material/Login";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import AddBusiness from "@mui/icons-material/AddBusiness";
+import Pets from "@mui/icons-material/Pets";
 
 // Dialogs
 import { DialogTypes, useDialogs } from "../../utils/contexts/DialogsContext";
@@ -70,12 +71,23 @@ export function LoggedInMenuList() {
         </ListItemIcon>
         Dashboard
       </MenuItem>
-      <MenuItem>
-        <ListItemIcon>
-          <AccountCircle />
-        </ListItemIcon>
-        My account
-      </MenuItem>
+
+      {Auth.getProfile().data.role === "shelter" ? (
+        <MenuItem>
+          <ListItemIcon>
+            <Pets />
+          </ListItemIcon>
+          My shelter
+        </MenuItem>
+      ) : (
+        <MenuItem>
+          <ListItemIcon>
+            <AccountCircle />
+          </ListItemIcon>
+          My account
+        </MenuItem>
+      )}
+
       <Divider />
       <MenuItem onClick={handleLogout}>
         <ListItemIcon>
