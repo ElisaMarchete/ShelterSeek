@@ -28,7 +28,6 @@ const shelterSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minlength: 5,
     },
     website: {
       type: String,
@@ -60,15 +59,15 @@ const shelterSchema = new Schema(
     },
     dog: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     cat: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     rabbit: {
       type: Boolean,
-      required: false,
+      default: false,
     },
   },
   {

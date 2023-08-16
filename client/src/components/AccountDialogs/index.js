@@ -3,6 +3,8 @@ import LoginDialog from "./LoginDialog";
 import UserSignupDialog from "./UserSignupDialog";
 import ShelterSignupDialog from "./ShelterSignupDialog";
 import CompleteYourProfileDialog from "./CompleteYourProfile";
+import PleaseLoginDialog from "./PleaseLogin";
+import SuccessSnackbar from "../Snackbars/SuccessSnackbar";
 
 export default function DialogsContainer() {
   const { openDialog } = useDialogs();
@@ -15,6 +17,8 @@ export default function DialogsContainer() {
       {openDialog === DialogTypes.COMPLETE_YOUR_PROFILE && (
         <CompleteYourProfileDialog />
       )}
+      {openDialog === DialogTypes.PLEASE_LOGIN && <PleaseLoginDialog />}
+      {openDialog === DialogTypes.SUCCESS_SNACKBAR && <SuccessSnackbar />}
     </>
   );
 }

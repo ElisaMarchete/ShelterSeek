@@ -26,6 +26,29 @@ export const ADD_SHELTER = gql`
   }
 `;
 
+export const UPDATE_SHELTER = gql`
+  mutation updateShelter($shelterInput: UpdateShelterInput!) {
+    updateShelter(shelterInput: $shelterInput) {
+      _id
+      name
+      address
+      phone
+      email
+      website
+      description
+      image
+      donations {
+        donationDate
+        amount
+      }
+      rating
+      cat
+      dog
+      rabbit
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation login($loginName: String!, $loginPassword: String!) {
     login(loginName: $loginName, loginPassword: $loginPassword) {

@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 import { DialogTypes, useDialogs } from "../utils/contexts/DialogsContext";
 import {
@@ -65,7 +66,7 @@ export default function ShelterProfile() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Container sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -87,6 +88,6 @@ export default function ShelterProfile() {
       <CustomTabPanel value={value} index={2}>
         <PaymentInfoForm />
       </CustomTabPanel>
-    </Box>
+    </Container>
   );
 }

@@ -10,6 +10,8 @@ export const DialogTypes = {
   USER_SIGNUP: "USER_SIGNUP",
   SHELTER_SIGNUP: "SHELTER_SIGNUP",
   COMPLETE_YOUR_PROFILE: "COMPLETE_YOUR_PROFILE",
+  PLEASE_LOGIN: "PLEASE_LOGIN",
+  SUCCESS_SNACKBAR: "SUCCESS_SNACKBAR",
 };
 
 export function DialogsProvider({ children }) {

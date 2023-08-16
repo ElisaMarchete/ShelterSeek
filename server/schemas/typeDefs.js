@@ -31,6 +31,9 @@ const typeDefs = gql`
     image: String
     donations: [Donation]
     rating: Int
+    BankTransitNumber: String!
+    BankInstitutionNumber: String!
+    BankAccount: String!
     cat: Boolean
     dog: Boolean
     rabbit: Boolean
@@ -65,6 +68,7 @@ const typeDefs = gql`
     login(loginName: String!, loginPassword: String!): Auth
     addUser(userInput: UserInput!): Auth
     addShelter(shelterInput: ShelterInput!): Auth
+    updateShelter(shelterInput: UpdateShelterInput!): Shelter
     addDonation(shelterId: String, amount: Float): Donation
   }
 
@@ -86,6 +90,26 @@ const typeDefs = gql`
     BankTransitNumber: String!
     BankInstitutionNumber: String!
     BankAccount: String!
+    rabbit: Boolean
+    dog: Boolean
+    cat: Boolean
+  }
+
+  input UpdateShelterInput {
+    name: String
+    address: String
+    phone: String
+    email: String
+    password: String
+    website: String
+    description: String
+    image: String
+    BankTransitNumber: String
+    BankInstitutionNumber: String
+    BankAccount: String
+    rabbit: Boolean
+    dog: Boolean
+    cat: Boolean
   }
 
   input ShelterFilters {

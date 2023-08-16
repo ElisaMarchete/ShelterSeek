@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const { User, Shelter, Donation } = require("../models");
+const { hashPassword } = require("../utils/helpers");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
@@ -24,7 +25,6 @@ const resolvers = {
     me: async (parent, args, context) => {
       const role = context.user.role;
       const id = context.user._id;
-      console.log("User:", context.user);
       try {
         if (role === "user") {
           const userData = await User.findOne({
@@ -173,6 +173,29 @@ const resolvers = {
       const token = signToken({ loggedInEntity: shelter, role: "shelter" });
 
       return { token, user: shelter };
+    },
+    updateShelter: async (parent, { shelterInput }, context) => {
+      const id = context.user._id;
+
+      // Mongoose's pre save hook is not called when using findOneAndUpdate.
+      // Hash password here before updating in db.
+      if (shelterInput.password) {
+        shelterInput.password = await hashPassword(shelterInput.password);
+      }
+
+      const updatedShelter = await Shelter.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            ...shelterInput,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      console.log(updatedShelter);
+      return updatedShelter;
     },
     addDonation: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js

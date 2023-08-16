@@ -3,6 +3,7 @@ import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Auth from "../../utils/auth";
+import { Link } from "react-router-dom";
 
 // Icons
 import Dashboard from "@mui/icons-material/Dashboard";
@@ -73,7 +74,7 @@ export function LoggedInMenuList() {
       </MenuItem>
 
       {Auth.getProfile().data.role === "shelter" ? (
-        <MenuItem>
+        <MenuItem component={Link} to="/shelter-profile">
           <ListItemIcon>
             <Pets />
           </ListItemIcon>

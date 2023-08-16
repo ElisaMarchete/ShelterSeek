@@ -27,6 +27,9 @@ export const GET_ME = gql`
           _id
         }
         rating
+        BankAccount
+        BankInstitutionNumber
+        BankTransitNumber
         dog
         cat
         rabbit

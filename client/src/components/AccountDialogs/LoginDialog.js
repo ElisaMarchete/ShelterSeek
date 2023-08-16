@@ -18,7 +18,7 @@ export default function LoginDialog() {
   const { openDialog, close } = useDialogs();
   const [loginName, setLoginName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const { open } = useDialogs();
 
@@ -26,12 +26,15 @@ export default function LoginDialog() {
     open(DialogTypes.USER_SIGNUP);
   };
 
+  const openSuccessSnackbar = () => {
+    open(DialogTypes.SUCCESS_SNACKBAR);
+  };
+
   const handleLogin = async (event) => {
     const loginNameInput = loginName;
     const loginPasswordInput = loginPassword;
 
     try {
-      console.log(loginNameInput, loginPasswordInput);
       const { data } = await loginUser({
         variables: {
           loginName: loginNameInput,
@@ -39,11 +42,9 @@ export default function LoginDialog() {
         },
       });
       Auth.login(data.login.token);
+      openSuccessSnackbar();
     } catch (err) {
       console.error(err);
-      if (err.message) {
-        alert(err.message);
-      }
     }
   };
 
