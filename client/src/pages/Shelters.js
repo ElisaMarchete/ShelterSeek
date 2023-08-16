@@ -7,7 +7,7 @@ import { GET_SHELTERS } from "../utils/queries";
 function Shelters() {
   const [filters, setFilters] = useState({});
 
-  const { loading, error, data } = useQuery(GET_SHELTERS, {
+  const { data } = useQuery(GET_SHELTERS, {
     variables: {
       filters: filters,
     },

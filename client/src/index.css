@@ -15,7 +15,6 @@ code {
 /* HEADER / NAVBAR CSS */
 .Header {
   display: flex;
-  background-color: rgb(42, 93, 129);
   height: 100px;
   vertical-align: middle;
 }
@@ -27,6 +26,10 @@ code {
   cursor: default;
   user-select: none;
   color: white;
+}
+
+.Header, .Footer {
+  background-color: rgb(42, 93, 129);
 }
 
 .Nav {

@@ -16,6 +16,7 @@ import Home from "./pages/Home";
 import Shelter from "./pages/Shelter";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Success from "./pages/Success";
 import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
@@ -91,6 +92,7 @@ function App() {
             />
             <Route path="/register-shelter" element={<RegisterShelter />} />
           </Routes>
+          <Footer />
           <DialogsContainer />
         </DialogsProvider>
       </Router>
