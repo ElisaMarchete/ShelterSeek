@@ -18,7 +18,6 @@ function Shelters() {
   useEffect(() => {
     if (data) {
       setShelters(data.shelters);
-      console.log(data.shelters);
     }
   }, [data, filters]);
 
