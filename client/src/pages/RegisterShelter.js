@@ -72,16 +72,13 @@ export default function RegisterShelterStepper() {
     if (error) {
       console.error(error);
     }
-
-    console.log(formData);
     try {
       const { data } = await addShelter({
         variables: { shelterInput: { ...formData } },
       });
 
-      const { token, shelter } = data.addShelter;
-      console.log(token);
-      console.log(shelter);
+      // const { token, user } = data.addShelter;
+      Auth.login(data.addShelter.token);
     } catch (err) {
       console.error(err);
       console.log(err.response);
