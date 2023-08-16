@@ -5,6 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { DialogTypes, useDialogs } from "../utils/contexts/DialogsContext";
 
 import {
   Step1Form,
@@ -15,6 +16,7 @@ import {
 
 import { useMutation } from "@apollo/client";
 import { ADD_SHELTER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const steps = [
   "Tell us about your organization",
@@ -29,18 +31,24 @@ export default function RegisterShelterStepper() {
 
   const initialFormData = {
     name: "",
-    shelterDescription: "",
-    email: "",
-    password: "",
     address: "",
     phone: "",
+    email: "",
+    password: "",
+    website: "",
+    description: "",
     BankTransitNumber: "",
     BankInstitutionNumber: "",
-    BankAccountNumber: "",
+    BankAccount: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [registerShelter, { error }] = useMutation(ADD_SHELTER);
+  const [addShelter, { error }] = useMutation(ADD_SHELTER);
+  const { open } = useDialogs();
+
+  const openSuccessSnackbar = () => {
+    open(DialogTypes.SUCCESS_SNACKBAR);
+  };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -66,11 +74,21 @@ export default function RegisterShelterStepper() {
     setFormData(initialFormData);
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
-    registerShelter({
-      variables: { ...formData },
-    });
+  const handleSubmit = async () => {
+    if (error) {
+      console.error(error);
+    }
+    try {
+      const { data } = await addShelter({
+        variables: { shelterInput: { ...formData } },
+      });
+
+      Auth.login(data.addShelter.token);
+      openSuccessSnackbar();
+    } catch (err) {
+      console.error(err);
+    }
+
     handleReset();
   };
 

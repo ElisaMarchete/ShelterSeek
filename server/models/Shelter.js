@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Donation = require("./Donation");
-const User = require("./User");
+
+const { checkPassword, hashPassword } = require("../utils/helpers");
 
 // this schema in models connects with mongoose database
 
@@ -27,7 +28,6 @@ const shelterSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minlength: 5,
     },
     website: {
       type: String,
@@ -36,7 +36,6 @@ const shelterSchema = new Schema(
     description: {
       type: String,
       required: true,
-      maxlength: 150,
     },
     image: {
       type: String,
@@ -60,15 +59,15 @@ const shelterSchema = new Schema(
     },
     dog: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     cat: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     rabbit: {
       type: Boolean,
-      required: false,
+      default: false,
     },
   },
   {
@@ -77,6 +76,15 @@ const shelterSchema = new Schema(
     },
   }
 );
+
+shelterSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await hashPassword(this.password);
+  }
+  next();
+});
+
+shelterSchema.methods.checkPassword = checkPassword;
 
 const Shelter = model("Shelter", shelterSchema);
 

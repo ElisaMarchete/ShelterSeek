@@ -5,7 +5,9 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Auth from "../../utils/auth";
 
 export default function AccountMenuBtn({ handleMenuClick, open }) {
-  const name = Auth.loggedIn() && Auth.getProfile().data.username;
+  const name =
+    Auth.loggedIn() &&
+    (Auth.getProfile().data.username || Auth.getProfile().data.name);
 
   const iconSize = {
     width: 48,
