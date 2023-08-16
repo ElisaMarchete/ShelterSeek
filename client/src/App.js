@@ -74,25 +74,33 @@ function App() {
       <Router>
         <DialogsProvider>
           {/* <Navbar /> */}
-          <Header>
-            <Nav
-              pages={pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Shelters" element={<Shelters />} />
-            <Route path="/register-shelter" element={<RegisterShelter />} />
-            <Route path="/Shelters/:Id" element={<Shelter />} />
-            <Route
-              path="*"
-              element={<h1 className="display-2">Wrong page!</h1>}
-            />
-            <Route path="/register-shelter" element={<RegisterShelter />} />
-          </Routes>
-          <Footer />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }}
+          >
+            <Header>
+              <Nav
+                pages={pages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </Header>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Shelters" element={<Shelters />} />
+              <Route path="/register-shelter" element={<RegisterShelter />} />
+              <Route path="/Shelters/:Id" element={<Shelter />} />
+              <Route
+                path="*"
+                element={<h1 className="display-2">Wrong page!</h1>}
+              />
+              <Route path="/register-shelter" element={<RegisterShelter />} />
+            </Routes>
+            <Footer />
+          </div>
           <DialogsContainer />
         </DialogsProvider>
       </Router>

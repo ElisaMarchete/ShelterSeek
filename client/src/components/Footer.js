@@ -1,6 +1,5 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { Box } from "@mui/material";
@@ -27,6 +26,7 @@ function Footer() {
         py: 3,
         px: 2,
         mt: "auto",
+        width: "100%",
       }}
     >
       <Container maxWidth="sm">
