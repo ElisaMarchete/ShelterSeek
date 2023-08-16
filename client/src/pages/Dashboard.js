@@ -36,17 +36,27 @@ const ShelterDashboard = () => {
           Shelter Dashboard
         </Typography>
 
-        {/* Donation Amount Card */}
-        <Card style={{ marginBottom: "20px", width: "400px", height: "110px" }}>
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
-              Donation Amount Received {/* Placeholder for donation amount */}
-            </Typography>
-          </CardContent>
-        </Card>
-
-        {/* Add Image Form */}
-        <div style={{ float: "right", marginRight: "20px" }}>
+        {/* Donation Amount and Button Container */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <Card style={{ width: "400px", height: "110px" }}>
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="h2"
+                align="center"
+              >
+                Donation Amount Received {/* Placeholder for donation amount */}
+              </Typography>
+            </CardContent>
+          </Card>
           <CloudinaryUploadWidget refetchPets={refetch} />
         </div>
 
