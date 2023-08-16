@@ -9,6 +9,7 @@ export const DialogTypes = {
   LOGIN: "LOGIN",
   USER_SIGNUP: "USER_SIGNUP",
   SHELTER_SIGNUP: "SHELTER_SIGNUP",
+  COMPLETE_YOUR_PROFILE: "COMPLETE_YOUR_PROFILE",
 };
 
 export function DialogsProvider({ children }) {

@@ -81,7 +81,6 @@ export default function RegisterShelterStepper() {
       Auth.login(data.addShelter.token);
     } catch (err) {
       console.error(err);
-      console.log(err.response);
     }
 
     handleReset();

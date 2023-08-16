@@ -19,6 +19,7 @@ import Nav from "./components/Nav";
 import Success from "./pages/Success";
 import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
+import ShelterProfile from "./pages/ShelterProfile";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -89,6 +90,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Shelters" element={<Shelters />} />
             <Route path="/register-shelter" element={<RegisterShelter />} />
+            <Route path="/shelter-profile" element={<ShelterProfile />} />
             <Route path="/Shelters/:Id" element={<Shelter />} />
             <Route
               path="*"
