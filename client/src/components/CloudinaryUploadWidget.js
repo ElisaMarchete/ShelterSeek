@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_PETS } from "../utils/mutations";
 import Button from "@mui/material/Button";
 
-const CloudinaryUploadWidget = (props) => {
+const CloudinaryUploadWidget = ({ refetchPets }) => {
   const [addPets] = useMutation(ADD_PETS);
   //usestate
   // const [imageURL, setImageURL] = useState("");
@@ -26,6 +26,9 @@ const CloudinaryUploadWidget = (props) => {
           shelterId: shelterId,
         },
       });
+
+      // Refetch the pets so the new pet appears on the page
+      refetchPets();
 
       console.log("Pet added successfully!");
     } catch (error) {
