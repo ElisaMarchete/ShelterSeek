@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { GET_PETS } from "../utils/queries";
+import { GET_PETS, GET_SHELTERS } from "../utils/queries";
 import { Card, CardContent, Typography } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
