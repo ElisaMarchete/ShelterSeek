@@ -163,6 +163,12 @@ const resolvers = {
       // save the donation
       await donation.save();
 
+      // update the shelter with the new donation
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { donations: donation } },
+        { new: true }
+      );
       return donation;
     },
 
