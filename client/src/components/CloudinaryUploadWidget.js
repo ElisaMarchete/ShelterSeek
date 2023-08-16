@@ -61,12 +61,6 @@ const CloudinaryUploadWidget = ({ refetchPets }) => {
       <Button onClick={addPicture} variant="contained" size="large">
         Add Pets for Adoption
       </Button>
-      {/* {imageURL && (
-        <div>
-          <p>Uploaded Image URL:</p>
-          <img src={imageURL} alt="Uploaded Pet" />
-        </div>
-      )} */}
     </div>
   );
 };

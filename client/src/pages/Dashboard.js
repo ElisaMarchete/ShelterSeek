@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_PETS } from "../utils/queries";
 import { Card, CardContent, Typography } from "@mui/material";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ShelterDashboard = () => {
@@ -35,21 +37,22 @@ const ShelterDashboard = () => {
         </Typography>
 
         {/* Display Pets */}
-        <Card style={{ float: "left", marginRight: "20px" }}>
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
-              Pets in Shelter
-            </Typography>
+        <div className="image-list-container">
+          <ImageList cols={4} gap={8}>
             {petList.map((pet) => (
-              <Card key={pet.id} style={{ marginBottom: "20px" }}>
-                <CardContent>
-                  <Typography variant="body1">{pet.name}</Typography>
-                  <img src={pet.image} alt="pet" style={{ maxWidth: "100%" }} />
-                </CardContent>
-              </Card>
+              <ImageListItem key={pet.image} sx={{ width: 350, height: 300 }}>
+                <div className="image-container">
+                  <img
+                    src={`${pet.image}?w=164&h=164&fit=crop&auto=format`}
+                    srcSet={`${pet.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    alt={pet.name}
+                    loading="lazy"
+                  />
+                </div>
+              </ImageListItem>
             ))}
-          </CardContent>
-        </Card>
+          </ImageList>
+        </div>
 
         {/* Donation Amount Card */}
         <Card style={{ float: "left", marginRight: "20px" }}>
