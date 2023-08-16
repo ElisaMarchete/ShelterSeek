@@ -1,19 +1,24 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActionArea,
-  Typography,
-  TextField,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import { GET_PETS } from "../utils/queries";
+import { Card, CardContent, Typography } from "@mui/material";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ShelterDashboard = () => {
+  const [getPets, { loading, error, data }] = useLazyQuery(GET_PETS);
+
+  // get the shelter id
+  const shelterId = "64d2dcd0f737eeb85b86fd72";
+
+  useEffect(() => {
+    getPets({ variables: { shelterId: shelterId } });
+  }, []);
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
+  console.log(data);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <div style={{ padding: "20px" }}>
@@ -29,16 +34,20 @@ const ShelterDashboard = () => {
           Shelter Dashboard
         </Typography>
 
-        {/* Profile Card */}
         {/* <Card style={{ float: "left", marginRight: "20px" }}>
-          <CardContent> */}
-        {/* Placeholder for grabbing image from a URL */}
-        {/* <img
-              src="YOUR_PROFILE_IMAGE_URL"
-              alt="Profile"
-              style={{ width: "100px", height: "100px" }}
-            /> */}
-        {/* </CardContent>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h2">
+              Pets in Shelter
+            </Typography>
+            {data.getPets.map((pet) => (
+              <Card key={pet.id} style={{ marginBottom: "20px" }}>
+                <CardContent>
+                  <Typography variant="body1">{pet.name}</Typography>
+                  <img src={pet.image} alt="pet" style={{ maxWidth: "100%" }} />
+                </CardContent>
+              </Card>
+            ))}
+          </CardContent>
         </Card> */}
 
         {/* Donation Amount Card */}
@@ -51,7 +60,7 @@ const ShelterDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* adding image with Cloudinary */}
+        {/* open the add image form */}
         <div className="App">
           <CloudinaryUploadWidget />
         </div>

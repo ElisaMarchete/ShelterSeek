@@ -91,6 +91,11 @@ const resolvers = {
       });
       return { session: session.id };
     },
+
+    pets: async (parent, args, context) => {
+      const pets = await Pets.find({ shelterId: args.shelterId });
+      return pets;
+    },
   },
 
   Mutation: {
@@ -165,16 +170,13 @@ const resolvers = {
       const shelterId = args.shelterId;
       const image = args.image;
 
-      // console.log("shelterId", shelterId);
-      // console.log("image", image);
-
       const pet = await Pets.create({ shelterId, image });
 
-      // const shelter = await Shelter.findOneAndUpdate(
-      //   { _id: args.shelterId },
-      //   { $push: { pets: pet._id } },
-      //   { new: true }
-      // );
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { pets: pet._id } },
+        { new: true }
+      );
 
       return pet;
     },

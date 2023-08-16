@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const petsSchema = new Schema({
   image: {
     type: String,
-    required: true,
   },
   shelterId: {
     type: Schema.Types.ObjectId,
@@ -11,6 +10,6 @@ const petsSchema = new Schema({
   },
 });
 
-const Pet = model("Pets", petsSchema);
+const Pets = model("Pets", petsSchema);
 
-module.exports = Pet;
+module.exports = Pets;

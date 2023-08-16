@@ -20,6 +20,12 @@ const typeDefs = gql`
     shelterId: ID
   }
 
+  type Pets {
+    _id: ID
+    image: String
+    shelterId: String
+  }
+
   type Shelter {
     _id: ID
     name: String
@@ -34,6 +40,7 @@ const typeDefs = gql`
     cat: Boolean
     dog: Boolean
     rabbit: Boolean
+    pets: [Pets]
   }
 
   type Checkout {
@@ -45,14 +52,9 @@ const typeDefs = gql`
     user: User
   }
 
-  type Pets {
-    _id: ID
-    image: String
-    shelterId: String
-  }
-
   type Query {
     me: User
+    pets(shelterId: String): [Pets]
     shelters(filters: ShelterFilters): [Shelter]
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout

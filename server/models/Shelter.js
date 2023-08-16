@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Donation = require("./Donation");
+const Pets = require("./Pets");
 
 // this schema in models connects with mongoose database
 
@@ -70,6 +71,7 @@ const shelterSchema = new Schema(
       type: Boolean,
       required: false,
     },
+    pets: [Pets.schema],
   },
   {
     toJSON: {

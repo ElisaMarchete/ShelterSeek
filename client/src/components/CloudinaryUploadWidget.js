@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 const CloudinaryUploadWidget = (props) => {
   const [addPets] = useMutation(ADD_PETS);
   //usestate
-  const [imageURL, setImageURL] = useState("");
+  // const [imageURL, setImageURL] = useState("");
 
   const cloudName = "dvz37vq43";
   const uploadPreset = "xawdeukq";
@@ -17,7 +17,7 @@ const CloudinaryUploadWidget = (props) => {
   const handleImageUpload = async (secureUrl) => {
     try {
       // Save the image URL to state
-      setImageURL(secureUrl);
+      // setImageURL(secureUrl);
 
       // Call the addPets mutation with the image URL
       await addPets({
@@ -58,12 +58,12 @@ const CloudinaryUploadWidget = (props) => {
       <Button onClick={addPicture} variant="contained" size="large">
         Add Pets for Adoption
       </Button>
-      {imageURL && (
+      {/* {imageURL && (
         <div>
           <p>Uploaded Image URL:</p>
           <img src={imageURL} alt="Uploaded Pet" />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

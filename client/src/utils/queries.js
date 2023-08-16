@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+// getCheckout from client side
+// checkout from server side
 export const QUERY_CHECKOUT = gql`
   query getCheckout($shelterId: String, $amount: Float) {
     checkout(shelterId: $shelterId, amount: $amount) {
@@ -19,6 +21,10 @@ export const GET_SHELTERS = gql`
       phone
       website
       email
+      pets {
+        _id
+        image
+      }
       donations {
         _id
         amount
@@ -29,6 +35,16 @@ export const GET_SHELTERS = gql`
       dog
       cat
       rabbit
+    }
+  }
+`;
+
+export const GET_PETS = gql`
+  query getPets($shelterId: String!) {
+    pets(shelterId: $shelterId) {
+      _id
+      image
+      shelterId
     }
   }
 `;
