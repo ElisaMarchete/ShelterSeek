@@ -7,6 +7,10 @@ import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 const ShelterDashboard = () => {
   const [getPets, { loading, error, data }] = useLazyQuery(GET_PETS);
 
+  // const [petData, setPetData] = useState({
+  //   image: "",
+  // });
+
   // get the shelter id
   const shelterId = "64d2dcd0f737eeb85b86fd72";
 
@@ -14,10 +18,10 @@ const ShelterDashboard = () => {
     getPets({ variables: { shelterId: shelterId } });
   }, []);
 
+  console.log(data.pets[0].image);
+
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
-  console.log(data);
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -34,12 +38,12 @@ const ShelterDashboard = () => {
           Shelter Dashboard
         </Typography>
 
-        {/* <Card style={{ float: "left", marginRight: "20px" }}>
+        <Card style={{ float: "left", marginRight: "20px" }}>
           <CardContent>
             <Typography gutterBottom variant="h6" component="h2">
               Pets in Shelter
             </Typography>
-            {data.getPets.map((pet) => (
+            {data.pets.map((pet) => (
               <Card key={pet.id} style={{ marginBottom: "20px" }}>
                 <CardContent>
                   <Typography variant="body1">{pet.name}</Typography>
@@ -48,7 +52,7 @@ const ShelterDashboard = () => {
               </Card>
             ))}
           </CardContent>
-        </Card> */}
+        </Card>
 
         {/* Donation Amount Card */}
         <Card style={{ float: "left", marginRight: "20px" }}>
