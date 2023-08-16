@@ -10,20 +10,43 @@ const stripe = require("stripe")(
 // constext from apollo-server to get the headers
 
 const resolvers = {
-  Query: {
-    // The currently logged in user.
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
-
-        return userData;
+  MeResult: {
+    __resolveType(obj, contextValue, info) {
+      if (obj.description) {
+        return "Shelter";
       }
-
-      throw new AuthenticationError("Not logged in");
+      if (obj.username) {
+        return "User";
+      }
     },
+  },
+  Query: {
+    me: async (parent, args, context) => {
+      const role = context.user.role;
+      const id = context.user._id;
+      console.log("User:", context.user);
+      try {
+        if (role === "user") {
+          const userData = await User.findOne({
+            _id: id,
+          }).select("-__v -password");
 
+          return userData;
+        }
+
+        if (role === "shelter") {
+          const shelterData = await Shelter.findOne({
+            _id: id,
+          }).select("-__v -password");
+
+          return shelterData;
+        }
+
+        throw new AuthenticationError("Not logged in");
+      } catch (err) {
+        console.error(err);
+      }
+    },
     shelters: async (parent, { filters }, context) => {
       try {
         let query = {};

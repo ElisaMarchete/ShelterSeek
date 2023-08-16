@@ -22,12 +22,12 @@ const typeDefs = gql`
 
   type Shelter {
     _id: ID
-    name: String
-    address: String
-    phone: String
-    email: String
+    name: String!
+    address: String!
+    phone: String!
+    email: String!
     website: String
-    description: String
+    description: String!
     image: String
     donations: [Donation]
     rating: Int
@@ -52,8 +52,10 @@ const typeDefs = gql`
     email: String
   }
 
+  union MeResult = User | Shelter
+
   type Query {
-    me: User
+    me: MeResult
     shelters(filters: ShelterFilters): [Shelter]
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout

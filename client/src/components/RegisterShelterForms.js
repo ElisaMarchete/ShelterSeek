@@ -24,7 +24,6 @@ export const Step1Form = ({ formData, setFormData }) => {
   };
   return (
     <StepTemplate>
-      <Typography variant="p">Hello</Typography>
       <TextField
         sx={{ m: 2 }}
         required
@@ -39,6 +38,7 @@ export const Step1Form = ({ formData, setFormData }) => {
       />
       <TextField
         sx={{ m: 2 }}
+        required
         id="shelter-description"
         label="Description"
         multiline
