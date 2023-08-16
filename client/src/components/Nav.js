@@ -56,7 +56,7 @@ function Nav(props) {
             display: { xs: "block", md: "none" },
           }}
         >
-          {props.pages.map((page) => (
+          {props.pages.slice(0, 2).map((page) => (
             <MenuItem
               key={page.name}
               onClick={handleCloseNavMenu}
@@ -76,7 +76,7 @@ function Nav(props) {
           justifyContent: "flex-end",
         }}
       >
-        {props.pages.map((page) => (
+        {props.pages.slice(0, 2).map((page) => (
           <Button
             key={page.name}
             onClick={handleCloseNavMenu}

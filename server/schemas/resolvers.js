@@ -71,9 +71,6 @@ const resolvers = {
           query.rabbit = filters.rabbit;
         }
 
-        console.log("Query:", query);
-        console.log("Filters:", filters);
-
         const shelters = await Shelter.find(query);
         return shelters;
       } catch (err) {
