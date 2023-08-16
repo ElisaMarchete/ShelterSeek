@@ -1,7 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const { User, Shelter, Donation } = require("../models");
-const { hashPassword } = require("../utils/helpers");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
@@ -11,42 +10,34 @@ const stripe = require("stripe")(
 // constext from apollo-server to get the headers
 
 const resolvers = {
-  MeResult: {
-    __resolveType(obj, contextValue, info) {
-      if (obj.description) {
-        return "Shelter";
-      }
-      if (obj.username) {
-        return "User";
-      }
-    },
-  },
   Query: {
+    // The currently logged in user.
     me: async (parent, args, context) => {
-      const role = context.user.role;
-      const id = context.user._id;
-      try {
-        if (role === "user") {
-          const userData = await User.findOne({
-            _id: id,
-          }).select("-__v -password");
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
 
-          return userData;
-        }
+        return userData;
+      }
 
-        if (role === "shelter") {
-          const shelterData = await Shelter.findOne({
-            _id: id,
-          }).select("-__v -password");
+      throw new AuthenticationError("Not logged in");
+    },
 
-          return shelterData;
-        }
-
-        throw new AuthenticationError("Not logged in");
-      } catch (err) {
-        console.error(err);
+    getShelter: async (parent, args) => {
+      const _id = args._id;
+      try{
+       
+        const shelter = await Shelter.findOne({_id:_id});
+        console.log(shelter);
+        return shelter;
+      } catch (error) {
+        throw new Error("Error fetching shelter: " + error.message);
       }
     },
+
+    
+
     shelters: async (parent, { filters }, context) => {
       try {
         let query = {};
@@ -71,12 +62,18 @@ const resolvers = {
           query.rabbit = filters.rabbit;
         }
 
+        console.log("Query:", query);
+        console.log("Filters:", filters);
+
         const shelters = await Shelter.find(query);
         return shelters;
       } catch (err) {
         throw new Error("Error fetching shelters: " + err);
       }
     },
+
+  
+
 
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
@@ -124,26 +121,13 @@ const resolvers = {
         $or: [{ username: loginName }, { email: loginName }],
       });
 
-      const shelter = await Shelter.findOne({
-        email: loginName,
-      });
-
-      // The user/shelter does not exist or the password is incorrect.
-      if (
-        (!user || !(await user.checkPassword(loginPassword, user.password))) &&
-        (!shelter ||
-          !(await shelter.checkPassword(loginPassword, shelter.password)))
-      ) {
+      // The user does not exist or the password is incorrect.
+      if (!user || !(await user.checkPassword(loginPassword, user.password))) {
         throw new AuthenticationError("Incorrect credentials.");
       }
 
-      const loggedInEntity = shelter || user;
-
-      const token = signToken({
-        loggedInEntity,
-        role: shelter ? "shelter" : "user",
-      });
-      return { token, loggedInEntity };
+      const token = signToken(user);
+      return { token, user };
     },
     addUser: async (parent, { userInput }) => {
       const existingUser = await User.findOne({ email: userInput.email });
@@ -153,46 +137,49 @@ const resolvers = {
         throw new Error("Email already taken.");
 
       const user = await User.create(userInput);
-      const token = signToken({ loggedInEntity: user, role: "user" });
+      const token = signToken(user);
 
       return { token, user };
     },
-    addShelter: async (parent, { shelterInput }) => {
-      const existingUser = await User.findOne({ email: shelterInput.email });
+    addShelter: async (
+      parent,
+      {
+        name,
+        address,
+        phone,
+        email,
+        password,
+        website,
+        description,
+        image,
+        BankTransitNumber,
+        BankInstitutionNumber,
+        BankAccount,
+      }
+    ) => {
+      const existingUser = await User.findOne({ email });
       const existingShelter = await Shelter.findOne({
-        email: shelterInput.email,
+        email,
       });
 
       if (existingUser || existingShelter)
         throw new Error("Email already taken.");
 
-      const shelter = await Shelter.create(shelterInput);
-      const token = signToken({ loggedInEntity: shelter, role: "shelter" });
-
-      return { token, user: shelter };
-    },
-    updateShelter: async (parent, { shelterInput }, context) => {
-      const id = context.user._id;
-
-      // Mongoose's pre save hook is not called when using findOneAndUpdate.
-      // Hash password here before updating in db.
-      if (shelterInput.password) {
-        shelterInput.password = await hashPassword(shelterInput.password);
-      }
-
-      const updatedShelter = await Shelter.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            ...shelterInput,
-          },
-        },
-        {
-          new: true,
-        }
-      );
-      console.log(updatedShelter);
-      return updatedShelter;
+      const shelter = await Shelter.create({
+        name,
+        address,
+        phone,
+        email,
+        password,
+        website,
+        description,
+        image,
+        BankTransitNumber,
+        BankInstitutionNumber,
+        BankAccount,
+      });
+      console.log(shelter);
+      return shelter;
     },
     addDonation: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js

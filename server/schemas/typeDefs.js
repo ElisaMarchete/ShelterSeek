@@ -22,18 +22,15 @@ const typeDefs = gql`
 
   type Shelter {
     _id: ID
-    name: String!
-    address: String!
-    phone: String!
-    email: String!
+    name: String
+    address: String
+    phone: String
+    email: String
     website: String
-    description: String!
+    description: String
     image: String
     donations: [Donation]
     rating: Int
-    BankTransitNumber: String!
-    BankInstitutionNumber: String!
-    BankAccount: String!
     cat: Boolean
     dog: Boolean
     rabbit: Boolean
@@ -45,30 +42,34 @@ const typeDefs = gql`
 
   type Auth {
     token: ID!
-    user: Entity
+    user: User
   }
-
-  type Entity {
-    _id: ID
-    username: String
-    name: String
-    email: String
-  }
-
-  union MeResult = User | Shelter
 
   type Query {
-    me: MeResult
+    me: User
     shelters(filters: ShelterFilters): [Shelter]
+    getShelter(_id: ID!): Shelter
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout
   }
 
   type Mutation {
-    login(loginName: String!, loginPassword: String!): Auth
     addUser(userInput: UserInput!): Auth
-    addShelter(shelterInput: ShelterInput!): Auth
-    updateShelter(shelterInput: UpdateShelterInput!): Shelter
+    login(loginName: String!, loginPassword: String!): Auth
+    addShelter(
+      name: String!
+      address: String!
+      phone: String!
+      email: String!
+      password: String!
+      website: String
+      description: String!
+      image: String!
+      BankTransitNumber: String!
+      BankInstitutionNumber: String!
+      BankAccount: String!
+    ): Shelter
+
     addDonation(shelterId: String, amount: Float): Donation
   }
 
@@ -76,40 +77,6 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-  }
-
-  input ShelterInput {
-    name: String!
-    address: String!
-    phone: String!
-    email: String!
-    password: String!
-    website: String
-    description: String!
-    image: String
-    BankTransitNumber: String!
-    BankInstitutionNumber: String!
-    BankAccount: String!
-    rabbit: Boolean
-    dog: Boolean
-    cat: Boolean
-  }
-
-  input UpdateShelterInput {
-    name: String
-    address: String
-    phone: String
-    email: String
-    password: String
-    website: String
-    description: String
-    image: String
-    BankTransitNumber: String
-    BankInstitutionNumber: String
-    BankAccount: String
-    rabbit: Boolean
-    dog: Boolean
-    cat: Boolean
   }
 
   input ShelterFilters {
@@ -122,3 +89,4 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+

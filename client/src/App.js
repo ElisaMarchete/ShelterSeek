@@ -92,11 +92,11 @@ function App() {
             </Header>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Shelters" element={<Shelters />} />
+              <Route path="/shelters" element={<Shelters />} />
               <Route path="/register-shelter" element={<RegisterShelter />} />
               {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
               <Route path="/shelter-profile" element={<ShelterProfile />} />)}
-              <Route path="/Shelters/:Id" element={<Shelter />} />
+              <Route path="/shelters/:id" element={<Shelter />} />
               <Route
                 path="*"
                 element={<h1 className="display-2">Wrong page!</h1>}
