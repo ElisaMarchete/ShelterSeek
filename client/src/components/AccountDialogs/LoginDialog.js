@@ -9,7 +9,12 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 
-import { useDialogs, DialogTypes } from "../../utils/contexts/DialogsContext";
+import {
+  useDialogs,
+  DialogTypes,
+  useSnackbars,
+  SnackbarTypes,
+} from "../../utils/contexts";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
@@ -21,13 +26,18 @@ export default function LoginDialog() {
   const [loginUser] = useMutation(LOGIN_USER);
 
   const { open } = useDialogs();
+  const { open: snack } = useSnackbars();
 
   const openUserSignupDialog = () => {
     open(DialogTypes.USER_SIGNUP);
   };
 
+  const openErrorSnackbar = () => {
+    snack(SnackbarTypes.ERROR_SNACKBAR);
+  };
+
   const openSuccessSnackbar = () => {
-    open(DialogTypes.SUCCESS_SNACKBAR);
+    snack(SnackbarTypes.SUCCESS_SNACKBAR);
   };
 
   const handleLogin = async (event) => {
@@ -45,6 +55,7 @@ export default function LoginDialog() {
       openSuccessSnackbar();
     } catch (err) {
       console.error(err);
+      openErrorSnackbar();
     }
   };
 

@@ -34,10 +34,6 @@ export function LoggedOutMenuList() {
     open(DialogTypes.SHELTER_SIGNUP);
   };
 
-  const openShelterProfileDialog = () => {
-    open(DialogTypes.ShelterDashboard);
-  };
-
   return (
     <>
       <MenuItem onClick={openLoginDialog}>
@@ -59,12 +55,6 @@ export function LoggedOutMenuList() {
         </ListItemIcon>
         Register your shelter
       </MenuItem>
-      <MenuItem component={Link} to="/dashboard">
-        <ListItemIcon>
-          <Dashboard />
-        </ListItemIcon>
-        Dashboard
-      </MenuItem>
     </>
   );
 }
@@ -76,22 +66,20 @@ export function LoggedInMenuList() {
 
   return (
     <>
-      {Auth.getProfile().data.role === "shelter" ? (
+      <MenuItem component={Link} to="/dashboard">
+        <ListItemIcon>
+          <Dashboard />
+        </ListItemIcon>
+        Dashboard
+      </MenuItem>
+      {Auth.getProfile().data.role === "shelter" && (
         <MenuItem component={Link} to="/shelter-profile">
           <ListItemIcon>
             <Pets />
           </ListItemIcon>
           My shelter
         </MenuItem>
-      ) : (
-        <MenuItem>
-          <ListItemIcon>
-            <AccountCircle />
-          </ListItemIcon>
-          My account
-        </MenuItem>
       )}
-
       <Divider />
       <MenuItem onClick={handleLogout}>
         <ListItemIcon>
