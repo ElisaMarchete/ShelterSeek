@@ -72,22 +72,14 @@ export function LoggedInMenuList() {
         </ListItemIcon>
         Dashboard
       </MenuItem>
-      {Auth.getProfile().data.role === "shelter" ? (
+      {Auth.getProfile().data.role === "shelter" && (
         <MenuItem component={Link} to="/shelter-profile">
           <ListItemIcon>
             <Pets />
           </ListItemIcon>
           My shelter
         </MenuItem>
-      ) : (
-        <MenuItem>
-          <ListItemIcon>
-            <AccountCircle />
-          </ListItemIcon>
-          My account
-        </MenuItem>
       )}
-
       <Divider />
       <MenuItem onClick={handleLogout}>
         <ListItemIcon>
