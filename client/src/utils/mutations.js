@@ -13,6 +13,42 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_SHELTER = gql`
+  mutation addShelter($shelterInput: ShelterInput!) {
+    addShelter(shelterInput: $shelterInput) {
+      token
+      user {
+        _id
+        name
+        email
+      }
+    }
+  }
+`;
+
+export const UPDATE_SHELTER = gql`
+  mutation updateShelter($shelterInput: UpdateShelterInput!) {
+    updateShelter(shelterInput: $shelterInput) {
+      _id
+      name
+      address
+      phone
+      email
+      website
+      description
+      image
+      donations {
+        donationDate
+        amount
+      }
+      rating
+      cat
+      dog
+      rabbit
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation login($loginName: String!, $loginPassword: String!) {
     login(loginName: $loginName, loginPassword: $loginPassword) {
@@ -34,42 +70,10 @@ export const ADD_DONATION = gql`
   }
 `;
 
-export const ADD_SHELTER = gql`
-  mutation AddShelter(
-    $name: String!
-    $address: String!
-    $phone: String!
-    $email: String!
-    $password: String!
-    $website: String
-    $description: String!
-    $image: String!
-    $BankTransitNumber: String!
-    $BankInstitutionNumber: String!
-    $BankAccount: String!
-  )   
-  {addShelter(
-      name: $name
-      address: $address
-      phone: $phone
-      email: $email
-      password: $password
-      website: $website
-      description: $description
-      image: $image
-      BankTransitNumber: $BankTransitNumber
-      BankInstitutionNumber: $BankInstitutionNumber
-      BankAccount: $BankAccount
-    ) 
-    {
+export const ADD_PETS = gql`
+  mutation getPet($image: String!, $shelterId: String!) {
+    addPet(image: $image, shelterId: $shelterId) {
       _id
-      name
-      address
-      phone
-      email
-      website
-      description
-      image
     }
   }
-  `;
+`;

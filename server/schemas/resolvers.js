@@ -1,39 +1,116 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Shelter, Donation } = require("../models");
+const { User, Shelter, Donation, Pets } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
+const bcrypt = require('bcrypt');
 
-// resolvers graphQL = ROUTES in RESTful APIs
-// randle the queries and mutations
+const hashPassword = async (password) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  return hashedPassword;
+};
+
+// resolvers graphQL = ROUTES in RESTful APIs -> randle the queries and mutations
 // constext from apollo-server to get the headers
 
 const resolvers = {
+  MeResult: {
+    __resolveType(obj, contextValue, info) {
+      if (obj.description) {
+        return "Shelter";
+      }
+      if (obj.username) {
+        return "User";
+      }
+    },
+  },
   Query: {
     // The currently logged in user.
     me: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+      const role = context.user.role;
+      const id = context.user._id;
+      try {
+        if (role === "user") {
+          const userData = await User.findOne({
+            _id: id,
+          }).select("-__v -password");
 
-        return userData;
+          return userData;
+        }
+
+        if (role === "shelter") {
+          const shelterData = await Shelter.findOne({
+            _id: id,
+          }).select("-__v -password");
+
+          return shelterData;
+        }
+
+        throw new AuthenticationError("Not logged in");
+      } catch (err) {
+        console.error(err);
       }
-
-      throw new AuthenticationError("Not logged in");
+    },
+    getShelter: async (parent, args) => {
+      const _id = args._id;
+      try {
+        const shelter = await Shelter.findOne({ _id: _id });
+        console.log(shelter);
+        return shelter;
+      } catch (error) {
+        throw new Error("Error fetching shelter: " + error.message);
+      }
     },
 
-    shelters: async (parent, { filters }, context) => {
-      const shelters = await Shelter.find(filters);
+    shelters: async (parent, { filters, sort }, context) => {
+      try {
+        let query = {};
 
-      return shelters;
+        if (filters?.name) {
+          query.name = { $regex: filters.name, $options: "i" };
+        }
+
+        if (filters?.rating !== undefined) {
+          query.rating = { $gte: filters.rating }; // Use $gte operator for greater than or equal
+        }
+
+        if (filters?.dog !== undefined) {
+          query.dog = filters.dog;
+        }
+
+        if (filters?.cat !== undefined) {
+          query.cat = filters.cat;
+        }
+
+        if (filters?.rabbit !== undefined) {
+          query.rabbit = filters.rabbit;
+        }
+
+        const shelters = await Shelter.find(query);
+
+        if (sort) {
+          const { field, direction } = sort;
+          shelters.sort((a, b) => {
+            if (direction === "ASC") {
+              return a[field] - b[field];
+            } else {
+              return b[field] - a[field];
+            }
+          });
+        }
+
+        return shelters;
+      } catch (err) {
+        throw new Error("Error fetching shelters: " + err);
+      }
     },
 
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
+
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
       // get the shelterid from the database
@@ -64,6 +141,28 @@ const resolvers = {
       });
       return { session: session.id };
     },
+
+    pets: async (parent, args, context) => {
+      console.log(args);
+      const pets = await Pets.find({ shelterId: args.shelterId });
+      console.log(pets);
+      return pets;
+    },
+
+    // get total donations for a shelter
+    totalDonations: async (parent, args, context) => {
+      const shelterId = args.shelterId;
+
+      const donations = await Donation.find({ shelterId: shelterId });
+
+      let total = 0;
+
+      donations.forEach((donation) => {
+        total += donation.amount;
+      });
+
+      return total;
+    },
   },
 
   Mutation: {
@@ -76,51 +175,74 @@ const resolvers = {
         $or: [{ username: loginName }, { email: loginName }],
       });
 
-      // The user does not exist or the password is incorrect.
-      if (!user || !(await user.checkPassword(loginPassword, user.password))) {
+      const shelter = await Shelter.findOne({
+        email: loginName,
+      });
+
+      // The user/shelter does not exist or the password is incorrect.
+      if (
+        (!user || !(await user.checkPassword(loginPassword, user.password))) &&
+        (!shelter ||
+          !(await shelter.checkPassword(loginPassword, shelter.password)))
+      ) {
         throw new AuthenticationError("Incorrect credentials.");
       }
 
-      const token = signToken(user);
-      return { token, user };
+      const loggedInEntity = shelter || user;
+
+      const token = signToken({
+        loggedInEntity,
+        role: shelter ? "shelter" : "user",
+      });
+      return { token, loggedInEntity };
     },
     addUser: async (parent, { userInput }) => {
+      const existingUser = await User.findOne({ email: userInput.email });
+      const existingShelter = await Shelter.findOne({ email: userInput.email });
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
       const user = await User.create(userInput);
-      const token = signToken(user);
+      const token = signToken({ loggedInEntity: user, role: "user" });
 
       return { token, user };
     },
-    addShelter: async (
-      parent,
-      {
-        name,
-        address,
-        phone,
-        email,
-        password,
-        website,
-        description,
-        image,
-        BankTransitNumber,
-        BankInstitutionNumber,
-        BankAccount,
-      }
-    ) => {
-      const shelter = await Shelter.create({
-        name,
-        address,
-        phone,
-        email,
-        password,
-        website,
-        description,
-        image,
-        BankTransitNumber,
-        BankInstitutionNumber,
-        BankAccount,
+    addShelter: async (parent, { shelterInput }) => {
+      const existingUser = await User.findOne({ email: shelterInput.email });
+      const existingShelter = await Shelter.findOne({
+        email: shelterInput.email,
       });
-      console.log(shelter);
-      return shelter;
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
+      const shelter = await Shelter.create(shelterInput);
+      const token = signToken({ loggedInEntity: shelter, role: "shelter" });
+
+      return { token, user: shelter };
+    },
+    updateShelter: async (parent, { shelterInput }, context) => {
+      const id = context.user._id;
+
+      // Mongoose's pre save hook is not called when using findOneAndUpdate.
+      // Hash password here before updating in db.
+      if (shelterInput.password) {
+        shelterInput.password = await hashPassword(shelterInput.password);
+      }
+
+      const updatedShelter = await Shelter.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            ...shelterInput,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      return updatedShelter;
     },
     addDonation: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
@@ -131,7 +253,27 @@ const resolvers = {
       // save the donation
       await donation.save();
 
+      // update the shelter with the new donation
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { donations: donation } },
+        { new: true }
+      );
       return donation;
+    },
+    addPet: async (parent, args, context) => {
+      const shelterId = args.shelterId;
+      const image = args.image;
+
+      const pet = await Pets.create({ shelterId, image });
+
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { pets: pet._id } },
+        { new: true }
+      );
+      console.log("were blessed");
+      return pet;
     },
   },
 };

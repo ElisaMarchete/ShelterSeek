@@ -33,6 +33,7 @@ const Donation = (props) => {
     event.preventDefault();
     // get the shelter id from the props
     const shelterId = props.shelterId;
+    console.log("SHELTERID", shelterId);
 
     if (!amount) {
       alert("Please enter an amount");
@@ -46,6 +47,7 @@ const Donation = (props) => {
       });
     }
   };
+  console.log(props);
 
   return (
     <div className="donation" id="donate">
@@ -60,7 +62,8 @@ const Donation = (props) => {
         onChange={handleChange}
         style={{
           height: "39px",
-          width: "100px",
+          width: "61%",
+          margin: "auto 0",
         }}
       />
       <Button
@@ -73,6 +76,7 @@ const Donation = (props) => {
           width: "110px",
           fontSize: "14px",
           fontWeight: "bold",
+          margin: "auto 0",
         }}
       >
         Donate

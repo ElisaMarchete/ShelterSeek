@@ -8,16 +8,21 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 // Contexts
-import { DialogsProvider } from "./utils/contexts/DialogsContext";
-// AccountDialogs
+import { DialogsProvider, SnackbarsProvider } from "./utils/contexts";
 import DialogsContainer from "./components/AccountDialogs";
+import SnackbarsContainer from "./components/Snackbars";
 
 import Home from "./pages/Home";
 import Shelter from "./pages/Shelter";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Success from "./pages/Success";
+import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
+import Dashboard from "./pages/Dashboard";
+import ShelterProfile from "./pages/ShelterProfile";
+import Auth from "./utils/auth";
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -58,14 +63,14 @@ function App() {
       path: "/Shelters",
     },
     {
-      name: "Pets",
-      // component: Pets,
-      path: "/pets",
-    },
-    {
       name: "",
       component: Success,
       path: "/success",
+    },
+    {
+      name: "Dashboard",
+      component: Dashboard,
+      path: "/dashboard",
     },
   ];
 
@@ -74,28 +79,51 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
-      <DialogsProvider>
-        <Router>
-          {/* <Navbar /> */}
-          <Header>
-            <Nav
-              pages={pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Shelters" element={<Shelters />} />
-            <Route path="/Shelters/:Id" element={<Shelter />} />
-            <Route
-              path="*"
-              element={<h1 className="display-2">Wrong page!</h1>}
-            />
-          </Routes>
-        </Router>
-        <DialogsContainer />
-      </DialogsProvider>
+      <Router>
+        <SnackbarsProvider>
+          <DialogsProvider>
+            {/* <Navbar /> */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+              }}
+            >
+              <Header>
+                <Nav
+                  pages={pages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </Header>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shelters" element={<Shelters />} />
+                <Route path="/register-shelter" element={<RegisterShelter />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/success" element={<Success />} />
+                {Auth.loggedIn() &&
+                  Auth.getProfile().data.role === "shelter" && (
+                    <Route
+                      path="/shelter-profile"
+                      element={<ShelterProfile />}
+                    />
+                  )}
+                <Route path="/shelters/:id" element={<Shelter />} />
+                <Route
+                  path="*"
+                  element={<h1 className="display-2">Wrong page!</h1>}
+                />
+                <Route path="/register-shelter" element={<RegisterShelter />} />
+              </Routes>
+              <Footer />
+            </div>
+            <DialogsContainer />
+            <SnackbarsContainer />
+          </DialogsProvider>
+        </SnackbarsProvider>
+      </Router>
     </ApolloProvider>
   );
 }
