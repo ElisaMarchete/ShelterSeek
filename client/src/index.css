@@ -91,7 +91,8 @@ code {
   text-align: center;
   line-height: 2;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: rgb(255, 255, 255);
+  color: rgb(80, 80, 80);
+
 }
 
 
@@ -177,8 +178,7 @@ code {
   padding: 10px;
 }
 
-  color: rgb(80, 80, 80);
-}
+
 
 .image-container {
   width: 350px;

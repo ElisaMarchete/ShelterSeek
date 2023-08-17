@@ -6,7 +6,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { textAlign } from "@mui/system";
 
 function FilterBar({ filters, setFilters }) {
   const handleInputChange = (event, newValue) => {
@@ -97,7 +96,13 @@ function FilterBar({ filters, setFilters }) {
             >
               Animals Kept
             </Typography>
-            <FormGroup style={{ display: "flex", flexDirection: "row" }}>
+            <FormGroup
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
               <FormControlLabel
                 name="dog"
                 control={<Checkbox />}
