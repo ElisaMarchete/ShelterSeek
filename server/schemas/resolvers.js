@@ -4,6 +4,12 @@ const { User, Shelter, Donation, Pets } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
+const bcrypt = require('bcrypt');
+
+const hashPassword = async (password) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  return hashedPassword;
+};
 
 // resolvers graphQL = ROUTES in RESTful APIs -> randle the queries and mutations
 // constext from apollo-server to get the headers
