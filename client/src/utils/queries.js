@@ -106,3 +106,9 @@ export const GET_SHELTERS_BY_ID = gql`
     }
   }
 `;
+
+export const GET_DONATION = gql`
+  query getDonation($shelterId: String!) {
+    totalDonations(shelterId: $shelterId)
+  }
+`;

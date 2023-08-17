@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -30,7 +29,8 @@ code {
   color: white;
 }
 
-.Header, .Footer {
+.Header,
+.Footer {
   background-color: rgb(42, 93, 129);
 }
 
@@ -195,6 +195,11 @@ code {
 }
 
 .image-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.CloudinaryBtn {
   display: flex;
   justify-content: center;
 }

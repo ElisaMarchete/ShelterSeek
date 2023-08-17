@@ -5,11 +5,11 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import { DialogTypes, useDialogs } from "../../utils/contexts/DialogsContext";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../../utils/queries";
 import { UPDATE_SHELTER } from "../../utils/mutations";
+import { useSnackbars, SnackbarTypes } from "../../utils/contexts/";
 
 export default function PaymentInfoForm(props) {
   const { loading, error, data } = useQuery(GET_ME);
@@ -22,7 +22,7 @@ export default function PaymentInfoForm(props) {
   const initialUserData = useRef(initialFormData);
   const [updateShelter, { loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_SHELTER);
-  const { open } = useDialogs();
+  const { open } = useSnackbars();
 
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
@@ -33,14 +33,23 @@ export default function PaymentInfoForm(props) {
   };
 
   const openSuccessSnackbar = () => {
-    open(DialogTypes.SUCCESS_SNACKBAR);
+    open(SnackbarTypes.SUCCESS_SNACKBAR);
+  };
+
+  const openErrorSnackbar = () => {
+    open(SnackbarTypes.ERROR_SNACKBAR);
   };
 
   const handleSubmit = async (event) => {
-    const shelterInput = { ...formData };
-    if (!formData.password) delete shelterInput.password;
-    updateShelter({ variables: { shelterInput } });
-    openSuccessSnackbar();
+    try {
+      const shelterInput = { ...formData };
+      if (!formData.password) delete shelterInput.password;
+      await updateShelter({ variables: { shelterInput } });
+      openSuccessSnackbar();
+    } catch (err) {
+      console.error(err);
+      openErrorSnackbar();
+    }
   };
 
   // Upon successful load, update state with the user's existing data.

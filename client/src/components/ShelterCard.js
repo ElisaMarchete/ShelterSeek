@@ -12,6 +12,7 @@ import Donation from "./Donation";
 import { DogIcon, CatIcon, RabbitIcon } from "./Icons";
 
 function ShelterCard({ shelter }) {
+  console.log(shelter);
   return (
     <Card sx={{ width: 350 }} className="shelter-card" key={shelter._id}>
       <Link
