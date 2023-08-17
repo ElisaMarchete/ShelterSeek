@@ -68,15 +68,15 @@ const CloudinaryUploadWidget = ({ refetchPets }) => {
 export default CloudinaryUploadWidget;
 */
 //get images
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from '@mui/material';
 import { ADD_PETS } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-const ImageUpload = ({ refetchPets }) => {
+const ImageUpload = ({ refetchPets, shelterId }) => {
   const fileInputRef = useRef(null);
   const [addPets] = useMutation(ADD_PETS);
-  const shelterId = "64d2dcd0f737eeb85b86fd72";
+  
   
   const handleFileChange = async () => {
     const selectedFile = fileInputRef.current.files[0];

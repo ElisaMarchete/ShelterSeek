@@ -59,7 +59,7 @@ export default function ShelterProfileForm(props) {
 
   // Upon successful load, update state with the user's existing data.
   useEffect(() => {
-    if (!loading && data.me) {
+    if (!loading && data?.me) {
       setFormData({
         name: data.me.name,
         description: data.me.description,
@@ -69,8 +69,7 @@ export default function ShelterProfileForm(props) {
         email: data.me.email,
         password: "",
       });
-      initialUserData.current = data.me;
-      initialUserData.current.password = "";
+      initialUserData.current = { ...data.me, password: "" };
     }
   }, [loading, data]);
 

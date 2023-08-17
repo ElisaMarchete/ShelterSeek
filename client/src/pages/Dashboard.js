@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
+import { useLazyQuery } from "@apollo/client";
 import { GET_PETS, GET_DONATION } from "../utils/queries";
 import { Card, CardContent, Typography } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
+import auth from "../utils/auth";
 
 const ShelterDashboard = () => {
   const [getPets, { loading, error, data, refetch }] = useLazyQuery(GET_PETS);
@@ -13,38 +14,28 @@ const ShelterDashboard = () => {
     { loading: loadingDonation, error: errorDonation, data: dataDonation },
   ] = useLazyQuery(GET_DONATION);
 
-  // const [donationAmount, setDonationAmount] = useState(0);
-
-  const shelterId = "64d2dcd0f737eeb85b86fd72";
-
-  useEffect(() => {
-    getPets({ variables: { shelterId: shelterId } });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const isLoggedIn = auth.loggedIn();
+  const user = isLoggedIn ? auth.getProfile() : null;
+  const shelterId = user ? user.data._id : null;
 
   useEffect(() => {
-    getDonation({ variables: { shelterId: shelterId } });
-  }, []);
+    if (shelterId) {
+      getPets({ variables: { shelterId: shelterId } });
+      getDonation({ variables: { shelterId: shelterId } });
+    }
+  }, [shelterId]);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  // Check if data is available before accessing its properties
-  const petList = data && data.pets ? data.pets : [];
+  const petList = data?.pets || [];
+  const totalDonations = dataDonation?.totalDonations;
 
-  // Get the amount of donations
-  const totalDonations = dataDonation && dataDonation.totalDonations;
-
-  // Format the totalDonations variable
-  const formattedTotalDonations =
-    totalDonations &&
-    totalDonations.toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      useGrouping: true,
-    });
-
-  // console.log(formattedTotalDonations);
+  const formattedTotalDonations = totalDonations?.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
+  });
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -91,7 +82,7 @@ const ShelterDashboard = () => {
           </Card>
         </div>
         <div className="CloudinaryBtn">
-          <CloudinaryUploadWidget refetchPets={refetch} />
+          <CloudinaryUploadWidget refetchPets={refetch} shelterId = {shelterId} />
         </div>
 
         {/* Display Pets */}
