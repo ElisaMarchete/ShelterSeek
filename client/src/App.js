@@ -100,6 +100,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/shelters" element={<Shelters />} />
               <Route path="/register-shelter" element={<RegisterShelter />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/success" element={<Success />} />
               {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
                 <Route path="/shelter-profile" element={<ShelterProfile />} />
               )}
