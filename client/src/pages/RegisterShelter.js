@@ -12,7 +12,6 @@ import {
   Step2Form,
   Step3Form,
   Step4Form,
-  Step5Form,
 } from "../components/RegisterShelterForms";
 
 import { useMutation } from "@apollo/client";
@@ -24,7 +23,6 @@ const steps = [
   "Create login credentials",
   "Add your shelter's contact info",
   "Add your shelter's payment info",
-  "Upload a photo of your shelter",
 ];
 
 export default function RegisterShelterStepper() {
@@ -125,9 +123,12 @@ export default function RegisterShelterStepper() {
         {activeStep === 3 && (
           <Step4Form formData={formData} setFormData={setFormData} />
         )}
+<<<<<<< HEAD
         /*{activeStep === 4 && (
           <Step5Form formData={formData} setFormData={setFormData} />
         )}*/
+=======
+>>>>>>> c5900b68a97f2cf8018e326d275245cff77f3007
       </Box>
       {activeStep === steps.length ? (
         <>

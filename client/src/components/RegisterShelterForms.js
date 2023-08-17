@@ -4,7 +4,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Image from "./Image"
+import Image from "./Image";
 
 export const StepTemplate = ({ children }) => {
   return (
@@ -177,7 +177,10 @@ export const Step4Form = ({ formData, setFormData }) => {
     </StepTemplate>
   );
 };
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> c5900b68a97f2cf8018e326d275245cff77f3007
