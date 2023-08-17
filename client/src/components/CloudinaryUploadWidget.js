@@ -89,7 +89,7 @@ const ImageUpload = ({ refetchPets }) => {
       const formDataToSend = new FormData();
       formDataToSend.append('image', selectedFile);
 
-      const response = await fetch('http://localhost:3001/getimg', {
+      const response = await fetch('/getimg', {
         method: 'POST',
         body: formDataToSend,
       });
