@@ -14,12 +14,15 @@ import { GET_ME } from "../../utils/queries";
 import { UPDATE_SHELTER } from "../../utils/mutations";
 import { useSnackbars, SnackbarTypes } from "../../utils/contexts/";
 
+import Image from "../Image";
+
 export default function ManageShelterForm(props) {
   const { loading, error, data } = useQuery(GET_ME);
   const initialFormData = {
     dog: false,
     cat: false,
     rabbit: false,
+    image: "",
   };
   const [formData, setFormData] = useState(initialFormData);
   const initialUserData = useRef(initialFormData);
@@ -59,17 +62,30 @@ export default function ManageShelterForm(props) {
     }
   };
 
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleUpdateUrl = (newImageUrl) => {
+    setImageUrl(newImageUrl);
+    setFormData((prevData) => ({
+      ...prevData,
+      image: newImageUrl, // Set the image URL to the 'image' field in the form data
+    }));
+  };
+
   // Upon successful load, update state with the user's existing data.
   useEffect(() => {
-    if (!loading && data.me) {
+    if (!loading && data?.me) {
       setFormData({
         dog: data.me?.dog || false,
         cat: data.me?.cat || false,
         rabbit: data.me?.rabbit || false,
+        image: data.me?.image || "",
       });
+      handleUpdateUrl(data.me?.image);
       initialUserData.current.dog = data.me?.dog || false;
       initialUserData.current.cat = data.me?.cat || false;
       initialUserData.current.rabbit = data.me?.rabbit || false;
+      initialUserData.current.image = data.me?.image || "";
     }
   }, [loading, data]);
 
@@ -125,19 +141,23 @@ export default function ManageShelterForm(props) {
         </Box>
         <Box sx={{ m: 2 }}>
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Upload images
+            Shelter image
           </Typography>
+          {/* <img src={formData.image} alt={formData.name} /> */}
+          <Image updateUrl={handleUpdateUrl} initialImage={formData.image} />
+          {/* <img src={formData?.image} /> */}
+          {/* Make sure you're using the correct prop name */}
+          {/* Your existing form elements */}
           <TextField
             sx={{ m: 2 }}
-            disabled={true}
+            disabled
             autoFocus
             margin="dense"
-            id="shelter-name"
-            label="Name of shelter"
-            type="username"
+            id="image"
+            label="Image URL "
             fullWidth
-            // value={formData.name}
-            // onChange={(event) => handleInputChange("name", event.target.value)}
+            value={imageUrl} // Display the uploaded image URL
+            onChange={(event) => setImageUrl(event.target.value)}
           />
         </Box>
       </Container>

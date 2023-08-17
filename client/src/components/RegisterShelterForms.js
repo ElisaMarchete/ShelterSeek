@@ -4,7 +4,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Image from "./Image"
+import Image from "./Image";
 
 export const StepTemplate = ({ children }) => {
   return (
@@ -177,38 +177,3 @@ export const Step4Form = ({ formData, setFormData }) => {
     </StepTemplate>
   );
 };
-
-export const Step5Form = ({ formData, setFormData }) => {
-  const [imageUrl, setImageUrl] = useState('');
-
-  const handleUpdateUrl = (newImageUrl) => {
-    setImageUrl(newImageUrl);
-    setFormData((prevData) => ({
-      ...prevData,
-      image: newImageUrl, // Set the image URL to the 'image' field in the form data
-    }));
-  };
-
-  return (
-    <StepTemplate>
-      <Image updateUrl={handleUpdateUrl} /> {/* Make sure you're using the correct prop name */}
-      
-      {/* Your existing form elements */}
-      <TextField
-        sx={{ m: 2 }}
-        required
-        autoFocus
-        margin="dense"
-        id="image"
-        label="Add a Photo of "
-        fullWidth
-        value={imageUrl} // Display the uploaded image URL
-        onChange={(event) => setImageUrl(event.target.value)}
-      />
-    </StepTemplate>
-  );
-};
-
-
-
-
