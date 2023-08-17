@@ -209,7 +209,6 @@ const resolvers = {
           new: true,
         }
       );
-      console.log(updatedShelter);
       return updatedShelter;
     },
     addDonation: async (parent, args, context) => {
