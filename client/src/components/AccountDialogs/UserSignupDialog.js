@@ -9,7 +9,12 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 
-import { useDialogs, DialogTypes } from "../../utils/contexts/DialogsContext";
+import {
+  useDialogs,
+  DialogTypes,
+  useSnackbars,
+  SnackbarTypes,
+} from "../../utils/contexts/";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
@@ -21,15 +26,21 @@ export default function UserSignupDialog() {
   const [password, setPassword] = useState("");
   const [addUser, { error }] = useMutation(ADD_USER);
 
+  const { open } = useSnackbars();
+
+  const openErrorSnackbar = () => {
+    open(SnackbarTypes.ERROR_SNACKBAR);
+  };
+
+  const openSuccessSnackbar = () => {
+    open(SnackbarTypes.SUCCESS_SNACKBAR);
+  };
+
   const handleUserSignup = async (event) => {
     event.preventDefault();
     const usernameInput = username;
     const emailInput = email;
     const passwordInput = password;
-
-    if (error) {
-      alert(error.message);
-    }
 
     try {
       const { data } = await addUser({
@@ -42,8 +53,10 @@ export default function UserSignupDialog() {
         },
       });
       Auth.login(data.addUser.token);
+      openSuccessSnackbar();
     } catch (err) {
       console.error(err);
+      openErrorSnackbar();
     }
   };
 

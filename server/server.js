@@ -20,11 +20,11 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
-  // context: ({ req }) => ({
-  //   authMiddleware,
-  //   cloudinary,
-  // }),
+//   context: authMiddleware,
+  context: ({ req }) => ({
+    authMiddleware,
+    cloudinary,
+  }),
 });
 
 const storage = multer.memoryStorage();

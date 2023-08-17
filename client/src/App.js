@@ -8,9 +8,9 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 // Contexts
-import { DialogsProvider } from "./utils/contexts/DialogsContext";
-// AccountDialogs
+import { DialogsProvider, SnackbarsProvider } from "./utils/contexts";
 import DialogsContainer from "./components/AccountDialogs";
+import SnackbarsContainer from "./components/Snackbars";
 
 import Home from "./pages/Home";
 import Shelter from "./pages/Shelter";
@@ -80,42 +80,49 @@ function App() {
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
       <Router>
-        <DialogsProvider>
-          {/* <Navbar /> */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "100vh",
-            }}
-          >
-            <Header>
-              <Nav
-                pages={pages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-            </Header>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/shelters" element={<Shelters />} />
-              <Route path="/register-shelter" element={<RegisterShelter />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/success" element={<Success />} />
-              {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
-                <Route path="/shelter-profile" element={<ShelterProfile />} />
-              )}
-              <Route path="/shelters/:id" element={<Shelter />} />
-              <Route
-                path="*"
-                element={<h1 className="display-2">Wrong page!</h1>}
-              />
-              <Route path="/register-shelter" element={<RegisterShelter />} />
-            </Routes>
-            <Footer />
-          </div>
-          <DialogsContainer />
-        </DialogsProvider>
+        <SnackbarsProvider>
+          <DialogsProvider>
+            {/* <Navbar /> */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+              }}
+            >
+              <Header>
+                <Nav
+                  pages={pages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </Header>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shelters" element={<Shelters />} />
+                <Route path="/register-shelter" element={<RegisterShelter />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/success" element={<Success />} />
+                {Auth.loggedIn() &&
+                  Auth.getProfile().data.role === "shelter" && (
+                    <Route
+                      path="/shelter-profile"
+                      element={<ShelterProfile />}
+                    />
+                  )}
+                <Route path="/shelters/:id" element={<Shelter />} />
+                <Route
+                  path="*"
+                  element={<h1 className="display-2">Wrong page!</h1>}
+                />
+                <Route path="/register-shelter" element={<RegisterShelter />} />
+              </Routes>
+              <Footer />
+            </div>
+            <DialogsContainer />
+            <SnackbarsContainer />
+          </DialogsProvider>
+        </SnackbarsProvider>
       </Router>
     </ApolloProvider>
   );

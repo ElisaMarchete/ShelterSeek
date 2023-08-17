@@ -59,12 +59,6 @@ export function LoggedOutMenuList() {
         </ListItemIcon>
         Register your shelter
       </MenuItem>
-      <MenuItem component={Link} to="/dashboard">
-        <ListItemIcon>
-          <Dashboard />
-        </ListItemIcon>
-        Dashboard
-      </MenuItem>
     </>
   );
 }
@@ -76,6 +70,12 @@ export function LoggedInMenuList() {
 
   return (
     <>
+      <MenuItem component={Link} to="/dashboard">
+        <ListItemIcon>
+          <Dashboard />
+        </ListItemIcon>
+        Dashboard
+      </MenuItem>
       {Auth.getProfile().data.role === "shelter" ? (
         <MenuItem component={Link} to="/shelter-profile">
           <ListItemIcon>
