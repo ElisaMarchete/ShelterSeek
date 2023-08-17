@@ -5,30 +5,22 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 
 import { useDialogs, DialogTypes } from "../../utils/contexts/DialogsContext";
 
-export default function ShelterSignupDialog() {
+export default function PleaseLoginDialog() {
   const { openDialog, close } = useDialogs();
 
   return (
-    <Dialog open={openDialog === DialogTypes.SHELTER_SIGNUP} onClose={close}>
-      <DialogTitle>Register your shelter</DialogTitle>
+    <Dialog open={openDialog === DialogTypes.PLEASE_LOGIN} onClose={close}>
+      <DialogTitle>User not authenticated</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Welcome to ShelterSeek, where compassion meets action.
-          <br />
-          <br />
-          By registering your shelter, you're taking the first step in
-          connecting animals in need with the care and support they deserve.
+          Please login or sign up to continue to this page.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={close}>Cancel</Button>
-        <Button onClick={close} component={Link} to="/register-shelter">
-          Continue
-        </Button>
+        <Button onClick={close}>OK</Button>
       </DialogActions>
     </Dialog>
   );

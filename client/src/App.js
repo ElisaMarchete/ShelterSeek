@@ -16,9 +16,16 @@ import Home from "./pages/Home";
 import Shelter from "./pages/Shelter";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Success from "./pages/Success";
+import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
+<<<<<<< HEAD
 import Dashboard from "./pages/Dashboard";
+=======
+import ShelterProfile from "./pages/ShelterProfile";
+import Auth from "./utils/auth";
+>>>>>>> development
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -59,11 +66,6 @@ function App() {
       path: "/Shelters",
     },
     {
-      name: "Pets",
-      // component: Pets,
-      path: "/pets",
-    },
-    {
       name: "",
       component: Success,
       path: "/success",
@@ -80,9 +82,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {/* Router, Routes and Route follow the documentation from react-router-dom */}
-      <DialogsProvider>
-        <Router>
+      <Router>
+        <DialogsProvider>
           {/* <Navbar /> */}
+<<<<<<< HEAD
           <Header>
             <Nav
               pages={pages}
@@ -104,6 +107,40 @@ function App() {
         </Router>
         <DialogsContainer />
       </DialogsProvider>
+=======
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }}
+          >
+            <Header>
+              <Nav
+                pages={pages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </Header>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shelters" element={<Shelters />} />
+              <Route path="/register-shelter" element={<RegisterShelter />} />
+              {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
+              <Route path="/shelter-profile" element={<ShelterProfile />} />)}
+              <Route path="/shelters/:id" element={<Shelter />} />
+              <Route
+                path="*"
+                element={<h1 className="display-2">Wrong page!</h1>}
+              />
+              <Route path="/register-shelter" element={<RegisterShelter />} />
+            </Routes>
+            <Footer />
+          </div>
+          <DialogsContainer />
+        </DialogsProvider>
+      </Router>
+>>>>>>> development
     </ApolloProvider>
   );
 }

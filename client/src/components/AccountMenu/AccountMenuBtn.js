@@ -5,8 +5,44 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Auth from "../../utils/auth";
 
 export default function AccountMenuBtn({ handleMenuClick, open }) {
-  const initial =
-    Auth.loggedIn() && Auth.getProfile().data.username[0].toUpperCase();
+  const name =
+    Auth.loggedIn() &&
+    (Auth.getProfile().data.username || Auth.getProfile().data.name);
+
+  const iconSize = {
+    width: 48,
+    height: 48,
+  };
+
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        ...iconSize,
+      },
+      children: `${name[0].toUpperCase()}`,
+    };
+  }
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -19,9 +55,9 @@ export default function AccountMenuBtn({ handleMenuClick, open }) {
         aria-expanded={open ? "true" : undefined}
       >
         {Auth.loggedIn() ? (
-          <Avatar sx={{ width: 32, height: 32 }}>{initial}</Avatar>
+          <Avatar {...stringAvatar(name)}></Avatar>
         ) : (
-          <AccountCircle sx={{ width: 32, height: 32 }} />
+          <AccountCircle sx={{ ...iconSize }} />
         )}
       </IconButton>
     </Box>

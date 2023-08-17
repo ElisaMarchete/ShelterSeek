@@ -23,6 +23,20 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
+    getShelter: async (parent, args) => {
+      const _id = args._id;
+      try{
+       
+        const shelter = await Shelter.findOne({_id:_id});
+        console.log(shelter);
+        return shelter;
+      } catch (error) {
+        throw new Error("Error fetching shelter: " + error.message);
+      }
+    },
+
+    
+
     shelters: async (parent, { filters }, context) => {
       try {
         let query = {};
@@ -56,6 +70,9 @@ const resolvers = {
         throw new Error("Error fetching shelters: " + err);
       }
     },
+
+  
+
 
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
@@ -117,6 +134,12 @@ const resolvers = {
       return { token, user };
     },
     addUser: async (parent, { userInput }) => {
+      const existingUser = await User.findOne({ email: userInput.email });
+      const existingShelter = await Shelter.findOne({ email: userInput.email });
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
       const user = await User.create(userInput);
       const token = signToken(user);
 
@@ -138,6 +161,14 @@ const resolvers = {
         BankAccount,
       }
     ) => {
+      const existingUser = await User.findOne({ email });
+      const existingShelter = await Shelter.findOne({
+        email,
+      });
+
+      if (existingUser || existingShelter)
+        throw new Error("Email already taken.");
+
       const shelter = await Shelter.create({
         name,
         address,

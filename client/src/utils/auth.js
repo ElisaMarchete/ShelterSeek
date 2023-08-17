@@ -35,7 +35,12 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+
+    if (this.getProfile().data.role === "shelter") {
+      window.location.assign("/shelter-profile");
+    } else {
+      window.location.reload();
+    }
   }
 
   logout() {

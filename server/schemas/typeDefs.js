@@ -56,6 +56,7 @@ const typeDefs = gql`
     me: User
     pets(shelterId: String): [Pets]
     shelters(filters: ShelterFilters): [Shelter]
+    getShelter(_id: ID!): Shelter
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout
   }
@@ -98,3 +99,4 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
