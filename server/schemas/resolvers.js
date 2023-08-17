@@ -137,7 +137,9 @@ const resolvers = {
     },
 
     pets: async (parent, args, context) => {
+      console.log(args);
       const pets = await Pets.find({ shelterId: args.shelterId });
+      console.log(pets);
       return pets;
     },
 
@@ -264,7 +266,7 @@ const resolvers = {
         { $push: { pets: pet._id } },
         { new: true }
       );
-
+      console.log("were blessed");
       return pet;
     },
   },

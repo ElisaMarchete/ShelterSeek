@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_SHELTERS_BY_ID } from "../utils/queries";
+import { GET_SHELTERS_BY_ID, GET_PETS } from "../utils/queries";
 import { styled } from "@mui/system";
 import {
   Container,
@@ -12,39 +12,7 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
-import Image from "../components/Image";
 
-const pets = [
-  {
-    petId: "64d2dcd0f737eeb85b86fd71",
-    image: "https://i.imgur.com/HQebKXY.jpeg",
-  },
-  {
-    petId: "64d2dcd0f737eeb85b86fd71",
-    name: "test 1",
-    image: "https://i.imgur.com/iiQT5Pa.jpeg",
-  },
-  {
-    petId: "64d2dcd0f737eeb85b86fd72",
-    name: "test 2",
-    image: "https://i.imgur.com/q2g2rID.jpeg",
-  },
-  {
-    petId: "64d2dcd0f737eeb85b86fd72",
-    name: "test 3",
-    image: "https://i.imgur.com/90Ylvl1.jpeg",
-  },
-  {
-    petId: "64d3aab060abe4a8d7f4cd85",
-    name: "test 4",
-    image: "https://i.imgur.com/TQbD1c7.jpeg",
-  },
-  {
-    petId: "64d3aab060abe4a8d7f4cd85",
-    name: "test 5",
-    image: "https://i.imgur.com/UAtc9KX.jpeg",
-  },
-];
 
 const useStyles = styled((theme) => ({
   imageContainer: {
@@ -66,17 +34,36 @@ const useStyles = styled((theme) => ({
 const ShelterInfo = () => {
   const classes = useStyles();
   const { id } = useParams();
-  console.log(id);
-  const [shelter, setShelters] = useState({});
-  const { loading, error, data } = useQuery(GET_SHELTERS_BY_ID, {
-    variables: { _id : id },
+  
+  // State variables
+  const [shelter, setShelter] = useState({});
+  const [pets, setPets] = useState([]);
+
+  // Query for shelter data
+  const { loading: shelterLoading, error: shelterError, data: shelterData } = useQuery(GET_SHELTERS_BY_ID, {
+    variables: { _id: id },
   });
+
+  // Update shelter state when shelterData changes
   useEffect(() => {
-    if (data) {
-      setShelters(data.getShelter);
-      console.log(data.getShelter);
+    if (shelterData) {
+      setShelter(shelterData.getShelter);
+      console.log(shelterData.getShelter);
     }
-  }, data);
+  }, [shelterData]);
+
+  // Query for pets data
+  const { loading: petsLoading, error: petsError, data: petsData } = useQuery(GET_PETS, {
+    variables: { shelterId: id },
+  });
+
+  // Update pets state when petsData changes
+  useEffect(() => {
+    if (petsData) {
+      setPets(petsData.pets);
+      console.log(petsData.pets);
+    }
+  }, [petsData]);
 
 
   return (
@@ -141,7 +128,6 @@ const ShelterInfo = () => {
           </Grid>
         </div>
       </Container>
-      <Image />
     </>
   );
 };
