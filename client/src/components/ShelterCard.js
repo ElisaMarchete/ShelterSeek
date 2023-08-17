@@ -13,6 +13,7 @@ import { DogIcon, CatIcon, RabbitIcon } from "./Icons";
 
 function ShelterCard({ shelter }) {
   console.log(shelter);
+  // console.log(shelter._id);
   return (
     <Card sx={{ width: 350 }} className="shelter-card" key={shelter._id}>
       <Link

@@ -33,6 +33,7 @@ const Donation = (props) => {
     event.preventDefault();
     // get the shelter id from the props
     const shelterId = props.shelterId;
+    console.log("SHELTERID", shelterId);
 
     if (!amount) {
       alert("Please enter an amount");
@@ -46,6 +47,7 @@ const Donation = (props) => {
       });
     }
   };
+  console.log(props);
 
   return (
     <div className="donation" id="donate">

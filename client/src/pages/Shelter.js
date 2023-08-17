@@ -13,7 +13,6 @@ import {
 import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
 
-
 const useStyles = styled((theme) => ({
   imageContainer: {
     textAlign: "center",
@@ -34,15 +33,20 @@ const useStyles = styled((theme) => ({
 const ShelterInfo = () => {
   const classes = useStyles();
   const { id } = useParams();
-  
+
   // State variables
   const [shelter, setShelter] = useState({});
   const [pets, setPets] = useState([]);
 
   // Query for shelter data
-  const { loading: shelterLoading, error: shelterError, data: shelterData } = useQuery(GET_SHELTERS_BY_ID, {
+  const {
+    loading: shelterLoading,
+    error: shelterError,
+    data: shelterData,
+  } = useQuery(GET_SHELTERS_BY_ID, {
     variables: { _id: id },
   });
+  // console.log(id);
 
   // Update shelter state when shelterData changes
   useEffect(() => {
@@ -53,7 +57,11 @@ const ShelterInfo = () => {
   }, [shelterData]);
 
   // Query for pets data
-  const { loading: petsLoading, error: petsError, data: petsData } = useQuery(GET_PETS, {
+  const {
+    loading: petsLoading,
+    error: petsError,
+    data: petsData,
+  } = useQuery(GET_PETS, {
     variables: { shelterId: id },
   });
 
@@ -64,7 +72,6 @@ const ShelterInfo = () => {
       console.log(petsData.pets);
     }
   }, [petsData]);
-
 
   return (
     <>
@@ -88,7 +95,7 @@ const ShelterInfo = () => {
                       {shelter.description}
                     </Typography>
                     <div className={classes.donateButton}>
-                      <Donation shelterId='3' />
+                      <Donation shelterId={id} />
                     </div>
                   </Grid>
                 </CardContent>
@@ -132,4 +139,4 @@ const ShelterInfo = () => {
   );
 };
 
-export default ShelterInfo; 
+export default ShelterInfo;
