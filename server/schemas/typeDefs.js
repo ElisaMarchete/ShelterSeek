@@ -67,7 +67,7 @@ const typeDefs = gql`
   type Query {
     me: MeResult
     pets(shelterId: String): [Pets]
-    shelters(filters: ShelterFilters): [Shelter]
+    shelters(filters: ShelterFilters, sort: SortInput): [Shelter]
     getShelter(_id: ID!): Shelter
     donation(id: ID!): Donation
     totalDonations(shelterId: String): Float
@@ -142,6 +142,16 @@ const typeDefs = gql`
     dog: Boolean
     cat: Boolean
     rabbit: Boolean
+  }
+
+  input SortInput {
+    field: String
+    direction: SortDirection
+  }
+
+  enum SortDirection {
+    ASC
+    DESC
   }
 `;
 

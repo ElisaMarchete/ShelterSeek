@@ -60,7 +60,8 @@ const Donation = (props) => {
         onChange={handleChange}
         style={{
           height: "39px",
-          width: "100px",
+          width: "61%",
+          margin: "auto 0",
         }}
       />
       <Button
@@ -73,6 +74,7 @@ const Donation = (props) => {
           width: "110px",
           fontSize: "14px",
           fontWeight: "bold",
+          margin: "auto 0",
         }}
       >
         Donate
