@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_SHELTERS_BY_ID, GET_PETS } from "../utils/queries";
-import { styled } from "@mui/system";
 import {
   Container,
   Typography,
@@ -10,28 +9,12 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+import Rating from "@mui/material/Rating";
 import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
+import { DogIcon, CatIcon, RabbitIcon } from "../components/Icons";
 
-const useStyles = styled((theme) => ({
-  imageContainer: {
-    textAlign: "center",
-    marginTop: theme.spacing(2),
-  },
-  image: {
-    maxWidth: "100%",
-  },
-  description: {
-    marginTop: theme.spacing(2),
-  },
-  donateButton: {
-    marginTop: theme.spacing(1),
-    textAlign: "center",
-  },
-}));
-//update this when we set up back end
 const ShelterInfo = () => {
-  const classes = useStyles();
   const { id } = useParams();
 
   // State variables
@@ -46,13 +29,12 @@ const ShelterInfo = () => {
   } = useQuery(GET_SHELTERS_BY_ID, {
     variables: { _id: id },
   });
-  // console.log(id);
 
   // Update shelter state when shelterData changes
   useEffect(() => {
     if (shelterData) {
       setShelter(shelterData.getShelter);
-      console.log(shelterData.getShelter);
+      console.log(shelterData.getShelter.rating);
     }
   }, [shelterData]);
 
@@ -72,38 +54,50 @@ const ShelterInfo = () => {
       console.log(petsData.pets);
     }
   }, [petsData]);
+  const ratingValue = shelter.rating !== undefined ? shelter.rating : 0;
 
   return (
-    <>
-      <div className={classes.imageContainer}>
-        <Container>
-          <Typography variant="h4" style={{ textAlign: "center" }}>
-            {shelter.name}
-          </Typography>
-          <Grid container justifyContent="center">
-            <Grid item xs={12} sm={6}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  src={shelter.image}
-                  alt="Description of the image"
-                  className={`${classes.imgFluid} ${classes.image}`}
-                />
-                <CardContent>
-                  <Grid container direction="column" alignItems="center">
-                    <Typography variant="body1" className={classes.description}>
-                      {shelter.description}
-                    </Typography>
-                    <div className={classes.donateButton}>
-                      <Donation shelterId={id} />
-                    </div>
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
+    <div style={{ padding: "20px" }}>
+      <Container>
+        <Typography variant="h4" style={{ textAlign: "center" }}>
+          {shelter.name}
+        </Typography>
+        <Grid container justifyContent="center">
+          <Grid item xs={12} sm={6}>
+            <Card>
+              <CardMedia
+                component="img"
+                src={shelter.image}
+                alt="Description of the image"
+                style={{ maxWidth: "100%" }}
+              />
+              <CardContent>
+                <Grid container direction="column" alignItems="center">
+                  <Typography variant="body1" style={{ marginTop: "20px" }}>
+                    {shelter.description}
+                  </Typography>
+                  <div>
+                    <Donation shelterId={shelter._id} />
+                  </div>
+                  <Rating
+                    className="shelter-rating"
+                    name="simple-controlled"
+                    value={ratingValue}
+                    readOnly
+                    style={{ color: "black" }}
+                    size="small"
+                  />
+                  <div className="animals-kept">
+                    {shelter.dog ? <DogIcon /> : null}
+                    {shelter.cat ? <CatIcon /> : null}
+                    {shelter.rabbit ? <RabbitIcon /> : null}
+                  </div>
+                </Grid>
+              </CardContent>
+            </Card>
           </Grid>
-        </Container>
-      </div>
+        </Grid>
+      </Container>
       <div className="p-5">
         <Container>
           <Typography variant="h5" style={{ textAlign: "center" }}>
@@ -122,7 +116,7 @@ const ShelterInfo = () => {
                       component="img"
                       src={pet.image}
                       alt={`A Pet`}
-                      sx={{
+                      style={{
                         objectFit: "cover",
                         width: "100%",
                         height: "300px",
@@ -135,7 +129,7 @@ const ShelterInfo = () => {
           </Grid>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

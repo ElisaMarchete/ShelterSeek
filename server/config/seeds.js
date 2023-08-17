@@ -1,5 +1,5 @@
 const db = require("./connection");
-const { Shelter } = require("../models");
+const { Shelter, Pets } = require("../models");
 
 db.once("open", async () => {
   await Shelter.deleteMany();
