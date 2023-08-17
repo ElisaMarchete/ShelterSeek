@@ -12,7 +12,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../../utils/queries";
 import { UPDATE_SHELTER } from "../../utils/mutations";
-import { DialogTypes, useDialogs } from "../../utils/contexts/DialogsContext";
+import { useSnackbars, SnackbarTypes } from "../../utils/contexts/";
 
 export default function ManageShelterForm(props) {
   const { loading, error, data } = useQuery(GET_ME);
@@ -23,7 +23,7 @@ export default function ManageShelterForm(props) {
   };
   const [formData, setFormData] = useState(initialFormData);
   const initialUserData = useRef(initialFormData);
-  const { open } = useDialogs();
+  const { open } = useSnackbars();
 
   const [updateShelter, { loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_SHELTER);
@@ -41,13 +41,22 @@ export default function ManageShelterForm(props) {
   };
 
   const openSuccessSnackbar = () => {
-    open(DialogTypes.SUCCESS_SNACKBAR);
+    open(SnackbarTypes.SUCCESS_SNACKBAR);
+  };
+
+  const openErrorSnackbar = () => {
+    open(SnackbarTypes.ERROR_SNACKBAR);
   };
 
   const handleSubmit = async (event) => {
-    const shelterInput = { ...formData };
-    updateShelter({ variables: { shelterInput } });
-    openSuccessSnackbar();
+    try {
+      const shelterInput = { ...formData };
+      await updateShelter({ variables: { shelterInput } });
+      openSuccessSnackbar();
+    } catch (err) {
+      console.error(err);
+      openErrorSnackbar();
+    }
   };
 
   // Upon successful load, update state with the user's existing data.
@@ -77,11 +86,12 @@ export default function ManageShelterForm(props) {
       <Container
         sx={{
           display: "flex",
+          justifyContent: "space-around",
         }}
       >
         <Box sx={{ m: 2 }}>
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Animals in your shelter's care
+            Animals kept
           </Typography>
           <FormGroup>
             <FormControlLabel

@@ -7,23 +7,23 @@ import {
   SnackbarTypes,
 } from "../../utils/contexts/SnackbarsContext.js";
 
-export default function SuccessSnackbar({ msg }) {
+export default function ErrorSnackbar() {
   const { openSnackbar, close } = useSnackbars();
 
   return (
     <Snackbar
-      open={openSnackbar === SnackbarTypes.SUCCESS_SNACKBAR}
+      open={openSnackbar === SnackbarTypes.ERROR_SNACKBAR}
       autoHideDuration={5000}
       onClose={close}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert
         onClose={close}
-        severity="success"
+        severity="error"
         // variant="filled"
         sx={{ width: "100%" }}
       >
-        Success!
+        We encountered an error! Please try again.
       </Alert>
     </Snackbar>
   );
