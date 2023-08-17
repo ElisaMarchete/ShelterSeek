@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import Success from "./pages/Success";
 import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
+import Dashboard from "./pages/Dashboard";
 import ShelterProfile from "./pages/ShelterProfile";
 import Auth from "./utils/auth";
 
@@ -66,6 +67,11 @@ function App() {
       component: Success,
       path: "/success",
     },
+    {
+      name: "Dashboard",
+      component: Dashboard,
+      path: "/dashboard",
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -92,11 +98,14 @@ function App() {
             </Header>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Shelters" element={<Shelters />} />
+              <Route path="/shelters" element={<Shelters />} />
               <Route path="/register-shelter" element={<RegisterShelter />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/success" element={<Success />} />
               {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
-              <Route path="/shelter-profile" element={<ShelterProfile />} />)}
-              <Route path="/Shelters/:Id" element={<Shelter />} />
+                <Route path="/shelter-profile" element={<ShelterProfile />} />
+              )}
+              <Route path="/shelters/:id" element={<Shelter />} />
               <Route
                 path="*"
                 element={<h1 className="display-2">Wrong page!</h1>}

@@ -17,22 +17,11 @@ function ShelterCard({ shelter }) {
       sx={{ width: 350 }}
       className="shelter-card"
       key={shelter._id}
-      to={{
-        pathname: `/shelters/${shelter._id}`,
-        state: { shelter }, // Pass shelter as state
-      }}
-      style={{
-        boxShadow: "0px 0px 3px 0px",
-        margin: "10px",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-      }}
     >
       <Link
         to={{
           pathname: `/shelters/${shelter._id}`,
-          state: { shelter }, // Pass shelter as state
+          state : { shelter  }, // Pass shelter as state
         }}
         style={{
           textDecoration: "initial",

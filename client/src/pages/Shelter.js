@@ -1,6 +1,6 @@
-import React from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_CHECKOUT } from "../utils/queries";
+import { React, useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_SHELTERS_BY_ID } from "../utils/queries";
 import { styled } from "@mui/system";
 import {
   Container,
@@ -9,11 +9,10 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Button,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
-import AddShelterFrom from "../components/ShelterInfoDialog";
+import Image from "../components/Image";
 
 const pets = [
   {
@@ -65,34 +64,44 @@ const useStyles = styled((theme) => ({
 }));
 //update this when we set up back end
 const ShelterInfo = () => {
-  const { id } = useParams();
-  const selectedShelter = pets.find((pet) => pet.petId === id);
   const classes = useStyles();
-  const { loading, data } = useQuery(QUERY_CHECKOUT);
+  const { id } = useParams();
+  console.log(id);
+  const [shelter, setShelters] = useState({});
+  const { loading, error, data } = useQuery(GET_SHELTERS_BY_ID, {
+    variables: { _id : id },
+  });
+  useEffect(() => {
+    if (data) {
+      setShelters(data.getShelter);
+      console.log(data.getShelter);
+    }
+  }, data);
+
 
   return (
     <>
       <div className={classes.imageContainer}>
         <Container>
           <Typography variant="h4" style={{ textAlign: "center" }}>
-            Selected Shelter
+            {shelter.name}
           </Typography>
           <Grid container justifyContent="center">
             <Grid item xs={12} sm={6}>
               <Card>
                 <CardMedia
                   component="img"
-                  src={`https://i.imgur.com/TQbD1c7.jpeg`}
+                  src={shelter.image}
                   alt="Description of the image"
                   className={`${classes.imgFluid} ${classes.image}`}
                 />
                 <CardContent>
                   <Grid container direction="column" alignItems="center">
                     <Typography variant="body1" className={classes.description}>
-                      Where the description will go.
+                      {shelter.description}
                     </Typography>
                     <div className={classes.donateButton}>
-                      <Donation shelterId={id} />
+                      <Donation shelterId='3' />
                     </div>
                   </Grid>
                 </CardContent>
@@ -104,7 +113,7 @@ const ShelterInfo = () => {
       <div className="p-5">
         <Container>
           <Typography variant="h5" style={{ textAlign: "center" }}>
-            Viewing Shelter's pets!
+            Viewing {shelter.name}'s pets!
           </Typography>
         </Container>
       </div>
@@ -132,9 +141,9 @@ const ShelterInfo = () => {
           </Grid>
         </div>
       </Container>
-      <AddShelterFrom/>
+      <Image />
     </>
   );
 };
 
-export default ShelterInfo;
+export default ShelterInfo; 
