@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { GET_PETS, GET_SHELTERS } from "../utils/queries";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { GET_PETS, GET_DONATION } from "../utils/queries";
 import { Card, CardContent, Typography } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -8,11 +8,22 @@ import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ShelterDashboard = () => {
   const [getPets, { loading, error, data, refetch }] = useLazyQuery(GET_PETS);
+  const [
+    getDonation,
+    { loading: loadingDonation, error: errorDonation, data: dataDonation },
+  ] = useLazyQuery(GET_DONATION);
+
+  // const [donationAmount, setDonationAmount] = useState(0);
 
   const shelterId = "64d2dcd0f737eeb85b86fd72";
 
   useEffect(() => {
     getPets({ variables: { shelterId: shelterId } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    getDonation({ variables: { shelterId: shelterId } });
   }, []);
 
   if (loading) return "Loading...";
@@ -20,6 +31,20 @@ const ShelterDashboard = () => {
 
   // Check if data is available before accessing its properties
   const petList = data && data.pets ? data.pets : [];
+
+  // Get the amount of donations
+  const totalDonations = dataDonation && dataDonation.totalDonations;
+
+  // Format the totalDonations variable
+  const formattedTotalDonations =
+    totalDonations &&
+    totalDonations.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      useGrouping: true,
+    });
+
+  // console.log(formattedTotalDonations);
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -53,10 +78,19 @@ const ShelterDashboard = () => {
                 component="h2"
                 align="center"
               >
-                Donation Amount Received {/* Placeholder for donation amount */}
+                Donation Received
+              </Typography>
+              <Typography
+                variant="body1"
+                align="center"
+                style={{ fontWeight: "bold", marginTop: "10px", fontSize: 25 }}
+              >
+                {formattedTotalDonations} CAD
               </Typography>
             </CardContent>
           </Card>
+        </div>
+        <div>
           <CloudinaryUploadWidget refetchPets={refetch} />
         </div>
 

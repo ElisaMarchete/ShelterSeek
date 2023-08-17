@@ -5,9 +5,9 @@ const { authMiddleware } = require("./utils/auth");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
-const cloudinary = require("cloudinary").v2; 
-const multer = require("multer"); 
-const cors = require('cors');
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const cors = require("cors");
 
 cloudinary.config({
   cloud_name: "duzi3xpjk",
@@ -20,10 +20,11 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({
-    authMiddleware,
-    cloudinary,
-  }),
+  context: authMiddleware,
+  // context: ({ req }) => ({
+  //   authMiddleware,
+  //   cloudinary,
+  // }),
 });
 
 const storage = multer.memoryStorage();
@@ -32,7 +33,6 @@ const upload = multer({ storage: storage });
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-
 
 // app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
@@ -44,25 +44,26 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-app.post('/getimg', upload.single('image'), async (req, res) => {
+app.post("/getimg", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ message: 'No image uploaded' });
+      return res.status(400).json({ message: "No image uploaded" });
     }
 
-    const result = await cloudinary.uploader.upload_stream({ folder: 'ShelterSeek' }, (error, result) => {
-      if (error) {
-        console.error('Error uploading image:', error);
-        res.status(500).json({ message: 'Image upload failed' });
-      } else {
-        const imageUrl = result.secure_url;
-        res.status(200).json({ imageUrl });
-      }
-    }).end(req.file.buffer);
-
+    const result = await cloudinary.uploader
+      .upload_stream({ folder: "ShelterSeek" }, (error, result) => {
+        if (error) {
+          console.error("Error uploading image:", error);
+          res.status(500).json({ message: "Image upload failed" });
+        } else {
+          const imageUrl = result.secure_url;
+          res.status(200).json({ imageUrl });
+        }
+      })
+      .end(req.file.buffer);
   } catch (error) {
-    console.error('Error uploading image:', error);
-    res.status(500).json({ message: 'Image upload failed' });
+    console.error("Error uploading image:", error);
+    res.status(500).json({ message: "Image upload failed" });
   }
 });
 
