@@ -53,8 +53,8 @@ const ShelterDashboard = () => {
           variant="h4"
           align="center"
           style={{
-            marginBottom: "50px",
-            marginTop: "40px",
+            marginBottom: "30px",
+            marginTop: "10px",
             fontWeight: "bold",
           }}
         >
@@ -90,7 +90,7 @@ const ShelterDashboard = () => {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className="CloudinaryBtn">
           <CloudinaryUploadWidget refetchPets={refetch} />
         </div>
 
