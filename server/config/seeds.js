@@ -7,7 +7,7 @@ db.once("open", async () => {
   const shelters = await Shelter.insertMany([
     {
       _id: "64d2dcd0f737eeb85b86fd71",
-      name: "Shelter 1",
+      name: "Getting Wild Rescue",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "sheltertest1@gmail.com",
@@ -15,7 +15,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ultricies mattis",
       image:
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+        "https://media.istockphoto.com/id/1250060339/photo/dog-shelter.jpg?s=612x612&w=0&k=20&c=-YBjeCarIKcvzONuxHdYAr1N64DjiiDOa56QOArlvY4=",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -26,7 +26,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d2dcd0f737eeb85b86fd72",
-      name: "Shelter 2",
+      name: "Tiny Paws Foundation",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "test2@gmail.com",
@@ -34,7 +34,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ultricies mattis, tellus",
       image:
-        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+        "https://petnewsdaily.com/wp-content/uploads/2022/02/animal-shelter.jpg",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -45,7 +45,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d3aab060abe4a8d7f4cd85",
-      name: "Shelter 3",
+      name: "Fur Baby Sanctuaries",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "sheltertest3@gmail.com",
@@ -53,7 +53,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adi elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ",
       image:
-        "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80",
+        "https://static.foxnews.com/foxnews.com/content/uploads/2020/01/iStock-1085082058.jpg",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -64,7 +64,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d3aab060abe4a8d7f4cd81",
-      name: "Shelter 4",
+      name: "Big Dog Network",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "sheltertest5@gmail.com",
@@ -72,7 +72,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2948&q=80",
+        "https://www.pawtracks.com/wp-content/uploads/sites/2/2021/04/shelter-1.jpg?fit=1024%2C1024&p=1",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -83,7 +83,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d3aab060abe4a8d7f4cd80",
-      name: "Shelter 5",
+      name: "Domestic Pet Rescue",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "test6@gmail.com",
@@ -91,7 +91,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
-        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+        "https://media.istockphoto.com/id/1336952559/photo/dog-shelter.jpg?s=612x612&w=0&k=20&c=A9VZxDBu_lqgn67AXAhM2rAvcA0KuZySI-MhiTTwUz0=",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -102,7 +102,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d3aab060abe4a8d7f4cd89",
-      name: "Shelter 6",
+      name: "Beloved Pet",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "test7@gmail.com",
@@ -110,7 +110,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
-        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+        "https://www.localpetcare.com/c/assets/images/blog/Where-to-Adopt-a-Pet-in-Boston-adopting-puppy.jpg",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
@@ -121,7 +121,7 @@ db.once("open", async () => {
     },
     {
       _id: "64d3aab060abe4a8d7f4cd90",
-      name: "Shelter 7",
+      name: "Lucky Duck Rescue",
       address: "1234 Main St.",
       phone: "555-555-5555",
       email: "test8@gmail.com",
@@ -129,7 +129,7 @@ db.once("open", async () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
-        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+        "https://static.wixstatic.com/media/11062b_b6c8baa8ff984129978b3b68743fafa3~mv2.jpg/v1/fill/w_2500,h_1666,al_c/11062b_b6c8baa8ff984129978b3b68743fafa3~mv2.jpg",
       BankTransitNumber: "123",
       BankInstitutionNumber: "456",
       BankAccount: "789",
