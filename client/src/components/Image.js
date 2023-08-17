@@ -17,7 +17,7 @@ const ImageUpload = ({ updateUrl }) => {
       const formDataToSend = new FormData();
       formDataToSend.append('image', selectedFile);
 
-      const response = await fetch('/getimg', {
+      const response = await fetch('http://localhost:3001/getimg', {
         method: 'POST',
         body: formDataToSend,
       });
@@ -63,6 +63,12 @@ const ImageUpload = ({ updateUrl }) => {
   );
 };
 
+/*
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleUpdateUrl = (newImageUrl) => {
+    setImageUrl(newImageUrl);
+  };*/
 
 export default ImageUpload;
 

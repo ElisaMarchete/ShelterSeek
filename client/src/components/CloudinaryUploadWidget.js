@@ -67,7 +67,6 @@ const CloudinaryUploadWidget = ({ refetchPets }) => {
 
 export default CloudinaryUploadWidget;
 */
-//get images
 import React, { useState, useRef } from 'react';
 import { Button } from '@mui/material';
 import { ADD_PETS } from "../utils/mutations";
@@ -90,7 +89,7 @@ const ImageUpload = ({ refetchPets }) => {
       const formDataToSend = new FormData();
       formDataToSend.append('image', selectedFile);
 
-      const response = await fetch('/getimg', {
+      const response = await fetch('http://localhost:3001/getimg', {
         method: 'POST',
         body: formDataToSend,
       });
