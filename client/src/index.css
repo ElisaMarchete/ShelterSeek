@@ -18,15 +18,8 @@ code {
   display: flex;
   height: 100px;
   vertical-align: middle;
-}
-
-.Header h1 {
-  display: flex;
-  flex: 1;
-  margin: auto 20px;
-  cursor: default;
-  user-select: none;
-  color: white;
+  padding-left: 1em;
+  padding-right: 2em;
 }
 
 .Header,
@@ -53,6 +46,11 @@ code {
 .Header .header-button:hover {
   color: white;
   cursor: pointer;
+}
+
+.no-link-style {
+  text-decoration: none;
+  color: white;
 }
 
 /* Hero CSS */
@@ -97,7 +95,7 @@ code {
 
 
 /* SHELTER PAGE  */
-  /* FILTER BAR */
+/* FILTER BAR */
 .FilterBar {
   display: flex;
   flex-direction: column;
@@ -129,13 +127,14 @@ code {
 }
 
 
-.filter-selections .rating-filter, .filter-selections .animals-filter  {
+.filter-selections .rating-filter,
+.filter-selections .animals-filter {
   display: flex;
   align-items: center;
   width: 45%;
 }
 
-  /* SHELTER LIST */
+/* SHELTER LIST */
 .ShelterList {
   display: flex;
   flex-direction: column;

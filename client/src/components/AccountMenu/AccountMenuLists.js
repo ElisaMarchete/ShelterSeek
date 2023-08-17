@@ -34,10 +34,6 @@ export function LoggedOutMenuList() {
     open(DialogTypes.SHELTER_SIGNUP);
   };
 
-  const openShelterProfileDialog = () => {
-    open(DialogTypes.ShelterDashboard);
-  };
-
   return (
     <>
       <MenuItem onClick={openLoginDialog}>

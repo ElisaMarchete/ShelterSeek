@@ -5,12 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {
-  useDialogs,
-  DialogTypes,
-  useSnackbars,
-  SnackbarTypes,
-} from "../utils/contexts/";
+import { useSnackbars, SnackbarTypes } from "../utils/contexts/";
 
 import {
   Step1Form,
@@ -49,7 +44,6 @@ export default function RegisterShelterStepper() {
 
   const [formData, setFormData] = useState(initialFormData);
   const [addShelter, { error }] = useMutation(ADD_SHELTER);
-  const { open } = useDialogs();
   const { open: snack } = useSnackbars();
 
   const openErrorSnackbar = () => {

@@ -86,11 +86,12 @@ export default function ManageShelterForm(props) {
       <Container
         sx={{
           display: "flex",
+          justifyContent: "space-around",
         }}
       >
         <Box sx={{ m: 2 }}>
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Animals in your shelter's care
+            Animals kept
           </Typography>
           <FormGroup>
             <FormControlLabel
