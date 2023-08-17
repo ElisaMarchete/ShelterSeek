@@ -10,9 +10,9 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Donation from "../components/Donation";
-import AddShelterFrom from "../components/ShelterInfoDialog";
+import Image from "../components/Image";
 
 const pets = [
   {
@@ -141,6 +141,7 @@ const ShelterInfo = () => {
           </Grid>
         </div>
       </Container>
+      <Image />
     </>
   );
 };
