@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Donation = require("./Donation");
+const Pets = require("./Pets");
 
 const { checkPassword, hashPassword } = require("../utils/helpers");
 
@@ -69,6 +70,7 @@ const shelterSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    pets: [Pets.schema],
   },
   {
     toJSON: {

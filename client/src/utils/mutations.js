@@ -69,3 +69,11 @@ export const ADD_DONATION = gql`
     }
   }
 `;
+
+export const ADD_PETS = gql`
+  mutation getPet($image: String!, $shelterId: String!) {
+    addPet(image: $image, shelterId: $shelterId) {
+      _id
+    }
+  }
+`;

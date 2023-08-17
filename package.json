@@ -25,6 +25,8 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.11.1",
     "apollo-server-express": "^3.11.1",
     "cloudinary": "^1.40.0",
     "cors": "^2.8.5",

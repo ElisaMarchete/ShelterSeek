@@ -1,12 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Shelter, Donation } = require("../models");
+const { User, Shelter, Donation, Pets } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
 
-// resolvers graphQL = ROUTES in RESTful APIs
-// randle the queries and mutations
+// resolvers graphQL = ROUTES in RESTful APIs -> randle the queries and mutations
 // constext from apollo-server to get the headers
 
 const resolvers = {
@@ -109,6 +108,11 @@ const resolvers = {
       });
       return { session: session.id };
     },
+
+    pets: async (parent, args, context) => {
+      const pets = await Pets.find({ shelterId: args.shelterId });
+      return pets;
+    },
   },
 
   Mutation: {
@@ -190,7 +194,28 @@ const resolvers = {
       // save the donation
       await donation.save();
 
+      // update the shelter with the new donation
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { donations: donation } },
+        { new: true }
+      );
       return donation;
+    },
+
+    addPet: async (parent, args, context) => {
+      const shelterId = args.shelterId;
+      const image = args.image;
+
+      const pet = await Pets.create({ shelterId, image });
+
+      await Shelter.findOneAndUpdate(
+        { _id: args.shelterId },
+        { $push: { pets: pet._id } },
+        { new: true }
+      );
+
+      return pet;
     },
   },
 };
