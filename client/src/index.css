@@ -71,57 +71,6 @@ code {
 }
 
 
-/* Shelter List CSS */
-.ShelterList {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.shelters-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.shelter-card {
-  cursor: pointer;
-  /* width: 27%; */
-  margin: 10px 10px 30px 10px;
-  /* height: 200px; */
-  box-sizing: border-box;
-}
-
-.shelter-card img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 10px;
-}
-
-.shelter-card .shelter-info {
-  position: relative;
-}
-
-.shelter-info h1,
-.shelter-info h2 {
-  margin: 10px 0px;
-  font-size: 90%;
-}
-
-.shelter-info .shelter-rating {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  padding: 10px;
-}
-
-.shelter-info .animals-kept {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  padding: 10px;
-}
 
 .donation {
   display: flex;
@@ -142,5 +91,89 @@ code {
   text-align: center;
   line-height: 2;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: rgb(80, 80, 80);
+  color: rgb(255, 255, 255);
 }
+
+
+/* SHELTER PAGE  */
+  /* FILTER BAR */
+.FilterBar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* background-color: rgb(255, 255, 255); */
+}
+
+.FilterBar .filter-selections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin: 30px auto;
+  border-radius: 5px;
+  background-color: rgb(243, 242, 242);
+  box-shadow: 5px 10px 13px darkgray;
+}
+
+.filter-selections .name-filter {
+  border-radius: 5px;
+  flex: 1;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.filter-selections .name-filter label {
+  color: black;
+  text-align: center;
+}
+
+
+.filter-selections .rating-filter, .filter-selections .animals-filter  {
+  display: flex;
+  align-items: center;
+  width: 45%;
+}
+
+  /* SHELTER LIST */
+.ShelterList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shelters-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.shelter-card {
+  margin: 15px 5px 15px 5px;
+  box-sizing: border-box;
+}
+
+.shelter-card img {
+  border-radius: 10px;
+}
+
+
+
+.shelter-card .shelter-info {
+  position: relative;
+}
+
+
+.shelter-info .shelter-rating {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 10px;
+}
+
+.shelter-info .animals-kept {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 10px;
+}
+

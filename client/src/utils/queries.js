@@ -53,8 +53,8 @@ export const GET_ME = gql`
 `;
 
 export const GET_SHELTERS = gql`
-  query getShelters($filters: ShelterFilters) {
-    shelters(filters: $filters) {
+  query getShelters($filters: ShelterFilters, $sort: SortInput) {
+    shelters(filters: $filters, sort: $sort) {
       _id
       address
       description

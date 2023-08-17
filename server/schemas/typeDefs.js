@@ -59,7 +59,7 @@ const typeDefs = gql`
 
   type Query {
     me: MeResult
-    shelters(filters: ShelterFilters): [Shelter]
+    shelters(filters: ShelterFilters, sort: SortInput): [Shelter]
     donation(id: ID!): Donation
     checkout(shelterId: String, amount: Float): Checkout
   }
@@ -118,6 +118,16 @@ const typeDefs = gql`
     dog: Boolean
     cat: Boolean
     rabbit: Boolean
+  }
+
+  input SortInput {
+    field: String
+    direction: SortDirection
+  }
+
+  enum SortDirection {
+    ASC
+    DESC
   }
 `;
 

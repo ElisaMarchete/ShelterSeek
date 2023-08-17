@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import FilterBar from "../components/FilterBar";
 import ShelterList from "../components/ShelterList";
+import Divider from "@mui/material/Divider";
 import { useQuery } from "@apollo/client";
 import { GET_SHELTERS } from "../utils/queries";
 
@@ -24,6 +25,7 @@ function Shelters() {
   return (
     <div>
       <FilterBar filters={filters} setFilters={setFilters} />
+      <Divider />
       <ShelterList shelters={shelters} />
     </div>
   );

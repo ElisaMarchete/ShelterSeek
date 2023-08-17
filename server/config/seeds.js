@@ -12,7 +12,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "sheltertest1@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ultricies mattis",
       image:
         "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       BankTransitNumber: "123",
@@ -30,7 +31,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "test2@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ultricies mattis, tellus",
       image:
         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       BankTransitNumber: "123",
@@ -48,7 +50,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "sheltertest3@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adi elit. Phasellus maximus vitae felis eu accumsan. Nam pharetra est tortor, vitae imperdiet tortor scelerisque eget. Nam maximus, mauris at ",
       image:
         "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80",
       BankTransitNumber: "123",
@@ -66,7 +69,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "sheltertest5@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
         "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2948&q=80",
       BankTransitNumber: "123",
@@ -84,7 +88,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "test6@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       BankTransitNumber: "123",
@@ -102,7 +107,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "test7@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       BankTransitNumber: "123",
@@ -120,7 +126,8 @@ db.once("open", async () => {
       phone: "555-555-5555",
       email: "test8@gmail.com",
       password: "password12345",
-      description: "This is a test shelter.",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis arcu id justo lacinia, id feugiat elit vehicula. Maecenas non sem ut felis commodo facilisis nec in metus. Sed eget urna neque. Suspendisse potenti. Curabitu",
       image:
         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
       BankTransitNumber: "123",

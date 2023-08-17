@@ -47,7 +47,7 @@ const resolvers = {
         console.error(err);
       }
     },
-    shelters: async (parent, { filters }, context) => {
+    shelters: async (parent, { filters, sort }, context) => {
       try {
         let query = {};
 
@@ -72,6 +72,18 @@ const resolvers = {
         }
 
         const shelters = await Shelter.find(query);
+
+        if (sort) {
+          const { field, direction } = sort;
+          shelters.sort((a, b) => {
+            if (direction === "ASC") {
+              return a[field] - b[field];
+            } else {
+              return b[field] - a[field];
+            }
+          });
+        }
+
         return shelters;
       } catch (err) {
         throw new Error("Error fetching shelters: " + err);

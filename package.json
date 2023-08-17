@@ -25,6 +25,7 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "dependencies": {
+    "@mui/styles": "^5.14.5",
     "apollo-server-express": "^3.11.1",
     "cloudinary": "^1.40.0",
     "cors": "^2.8.5",
