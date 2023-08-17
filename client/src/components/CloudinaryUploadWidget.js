@@ -67,6 +67,7 @@ const CloudinaryUploadWidget = ({ refetchPets }) => {
 
 export default CloudinaryUploadWidget;
 */
+//get images
 import React, { useState, useRef } from 'react';
 import { Button } from '@mui/material';
 import { ADD_PETS } from "../utils/mutations";
