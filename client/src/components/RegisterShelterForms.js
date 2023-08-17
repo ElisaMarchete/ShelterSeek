@@ -202,7 +202,7 @@ export const Step5Form = ({ formData, setFormData }) => {
         id="image"
         label="Add a Photo of "
         fullWidth
-        value={imageUrl} // Display the uploaded image URL
+        value={imageUrl} // updated this
         onChange={(event) => setImageUrl(event.target.value)}
       />
     </StepTemplate>
