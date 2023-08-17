@@ -25,17 +25,14 @@ const resolvers = {
 
     getShelter: async (parent, args) => {
       const _id = args._id;
-      try{
-       
-        const shelter = await Shelter.findOne({_id:_id});
+      try {
+        const shelter = await Shelter.findOne({ _id: _id });
         console.log(shelter);
         return shelter;
       } catch (error) {
         throw new Error("Error fetching shelter: " + error.message);
       }
     },
-
-    
 
     shelters: async (parent, { filters }, context) => {
       try {
@@ -71,13 +68,11 @@ const resolvers = {
       }
     },
 
-  
-
-
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js
       const shelterId = args.shelterId;
       const amount = args.amount;
+
       // refer = localhost:3000 client will send the request and localhost:3001 server will receive the request
       const url = new URL(context.headers.referer).origin;
       // get the shelterid from the database
@@ -112,6 +107,21 @@ const resolvers = {
     pets: async (parent, args, context) => {
       const pets = await Pets.find({ shelterId: args.shelterId });
       return pets;
+    },
+
+    // get total donations for a shelter
+    totalDonations: async (parent, args, context) => {
+      const shelterId = args.shelterId;
+
+      const donations = await Donation.find({ shelterId: shelterId });
+
+      let total = 0;
+
+      donations.forEach((donation) => {
+        total += donation.amount;
+      });
+
+      return total;
     },
   },
 
