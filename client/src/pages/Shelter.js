@@ -22,10 +22,13 @@ const ShelterInfo = () => {
   const [pets, setPets] = useState([]);
 
   // Query for shelter data
-  const { loading: shelterLoading, error: shelterError, data: shelterData } =
-    useQuery(GET_SHELTERS_BY_ID, {
-      variables: { _id: id },
-    });
+  const {
+    loading: shelterLoading,
+    error: shelterError,
+    data: shelterData,
+  } = useQuery(GET_SHELTERS_BY_ID, {
+    variables: { _id: id },
+  });
 
   // Update shelter state when shelterData changes
   useEffect(() => {
@@ -36,12 +39,13 @@ const ShelterInfo = () => {
   }, [shelterData]);
 
   // Query for pets data
-  const { loading: petsLoading, error: petsError, data: petsData } = useQuery(
-    GET_PETS,
-    {
-      variables: { shelterId: id },
-    }
-  );
+  const {
+    loading: petsLoading,
+    error: petsError,
+    data: petsData,
+  } = useQuery(GET_PETS, {
+    variables: { shelterId: id },
+  });
 
   // Update pets state when petsData changes
   useEffect(() => {
@@ -69,10 +73,7 @@ const ShelterInfo = () => {
               />
               <CardContent>
                 <Grid container direction="column" alignItems="center">
-                  <Typography
-                    variant="body1"
-                    style={{ marginTop: "20px" }}
-                  >
+                  <Typography variant="body1" style={{ marginTop: "20px" }}>
                     {shelter.description}
                   </Typography>
                   <div>
