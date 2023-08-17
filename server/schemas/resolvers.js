@@ -25,9 +25,8 @@ const resolvers = {
 
     getShelter: async (parent, args) => {
       const _id = args._id;
-      try{
-       
-        const shelter = await Shelter.findOne({_id:_id});
+      try {
+        const shelter = await Shelter.findOne({ _id: _id });
         console.log(shelter);
         return shelter;
       } catch (error) {
@@ -58,9 +57,6 @@ const resolvers = {
           query.rabbit = filters.rabbit;
         }
 
-        console.log("Query:", query);
-        console.log("Filters:", filters);
-
         const shelters = await Shelter.find(query);
 
         if (sort) {
@@ -79,9 +75,6 @@ const resolvers = {
         throw new Error("Error fetching shelters: " + err);
       }
     },
-
-  
-
 
     checkout: async (parent, args, context) => {
       // get the shelterid and amount from the client utils/queries.js

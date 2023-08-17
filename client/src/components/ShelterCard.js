@@ -13,15 +13,11 @@ import { DogIcon, CatIcon, RabbitIcon } from "./Icons";
 
 function ShelterCard({ shelter }) {
   return (
-    <Card
-      sx={{ width: 350 }}
-      className="shelter-card"
-      key={shelter._id}
-    >
+    <Card sx={{ width: 350 }} className="shelter-card" key={shelter._id}>
       <Link
         to={{
           pathname: `/shelters/${shelter._id}`,
-          state : { shelter  }, // Pass shelter as state
+          state: { shelter }, // Pass shelter as state
         }}
         style={{
           textDecoration: "initial",
