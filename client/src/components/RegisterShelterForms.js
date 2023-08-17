@@ -177,10 +177,3 @@ export const Step4Form = ({ formData, setFormData }) => {
     </StepTemplate>
   );
 };
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> c5900b68a97f2cf8018e326d275245cff77f3007

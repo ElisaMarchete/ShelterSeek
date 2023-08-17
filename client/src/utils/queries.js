@@ -103,6 +103,10 @@ export const GET_SHELTERS_BY_ID = gql`
       phone
       website
       email
+      rating
+      dog
+      cat
+      rabbit
     }
   }
 `;
