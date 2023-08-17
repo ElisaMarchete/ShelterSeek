@@ -125,9 +125,9 @@ export default function RegisterShelterStepper() {
         {activeStep === 3 && (
           <Step4Form formData={formData} setFormData={setFormData} />
         )}
-        {activeStep === 4 && (
+        /*{activeStep === 4 && (
           <Step5Form formData={formData} setFormData={setFormData} />
-        )}
+        )}*/
       </Box>
       {activeStep === steps.length ? (
         <>
