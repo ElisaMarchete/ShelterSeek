@@ -20,12 +20,9 @@ import Footer from "./components/Footer";
 import Success from "./pages/Success";
 import RegisterShelter from "./pages/RegisterShelter";
 import Shelters from "./pages/Shelters";
-<<<<<<< HEAD
 import Dashboard from "./pages/Dashboard";
-=======
 import ShelterProfile from "./pages/ShelterProfile";
 import Auth from "./utils/auth";
->>>>>>> development
 
 // Create an HTTP link to connect to the GraphQL server -> The link is configured to send requests to the "/graphql" endpoint.
 // The "uri" option specifies the URL to which the requests will be sent.
@@ -85,29 +82,6 @@ function App() {
       <Router>
         <DialogsProvider>
           {/* <Navbar /> */}
-<<<<<<< HEAD
-          <Header>
-            <Nav
-              pages={pages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </Header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Shelters" element={<Shelters />} />
-            <Route path="/Shelters/:Id" element={<Shelter />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route
-              path="*"
-              element={<h1 className="display-2">Wrong page!</h1>}
-            />
-          </Routes>
-        </Router>
-        <DialogsContainer />
-      </DialogsProvider>
-=======
           <div
             style={{
               display: "flex",
@@ -127,7 +101,8 @@ function App() {
               <Route path="/shelters" element={<Shelters />} />
               <Route path="/register-shelter" element={<RegisterShelter />} />
               {Auth.loggedIn() && Auth.getProfile().data.role === "shelter" && (
-              <Route path="/shelter-profile" element={<ShelterProfile />} />)}
+                <Route path="/shelter-profile" element={<ShelterProfile />} />
+              )}
               <Route path="/shelters/:id" element={<Shelter />} />
               <Route
                 path="*"
@@ -140,7 +115,6 @@ function App() {
           <DialogsContainer />
         </DialogsProvider>
       </Router>
->>>>>>> development
     </ApolloProvider>
   );
 }
