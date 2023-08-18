@@ -1,55 +1,59 @@
 # ShelterSeek
 
 # Table of Contents
-Introduction
-Features
-Technologies Used
-Usage
-Limitations
-License
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Usage](#usage)
+- [License](#license)
+- [Screensho and URL of the deployed application](#screenshot-and-url-of-the-deployed-application)
 
 # Introduction
-Shelter Seek helps animal places and people who want to adopt pets come together. Our website lets animal places show which animals need new homes. People looking for pets can search for the right one or find animal places near them. Kind people can also give money to these places. Come see all the animals waiting for new homes!
+
+Shelter Seek is a web application that connects animal shelters with potential adopters. It is a one-stop platform for shelters to manage their profiles, list pets available for adoption, and receive donations. Users can search for shelters, filter pets, and donate to shelters. The platform is designed to be intuitive and easy to use for both shelters and users.
 
 # Features
-For Shelters:
-- Profile Management: Customize shelter profiles with address, contact information, and operating hours.
-- Pet Listings: Seamlessly add, update, or remove animals available for adoption.
-- Donation Tracker: Monitor all donations received, their amounts, and donor details.
 
-For Users:
-- Shelter Locator: Find shelters in your vicinity with geolocation or manual searches.
-- Pet Search: Use filters like type, or breed to find your specific animal
-- Donation Feature: Support shelters with easy, integrated donation options.
+Shelters can register and create a profile with their information and images.
+Shelters can add pets available for adoption.
+Shelters can receive donations.
+Shelters can access their dashboard to see the donation amount received, manage their profile and pets.
+Users can search for shelters by ranting and kind of animal.
 
 # Technologies Used
+
 Backend: Node.js with Express.js framework.
 Database: MongoDB with Mongoose ORM.
 Frontend: React.js with materiel UI
-Styling: Bootstrap and custom CSS.
+Styling: CSS and MUI styling.
 Payment Gateway: Stripe for donation processing.
-Geolocation: Google Maps API.
 Authentication: JSON Web Tokens (JWT).
 
 # Usage
+
 Setup:
-Clone the repository: git clone https://github.com/your-repo/pet-adoption-portal.git
-Navigate to the directory: cd pet-adoption-portal
+Clone the repository: git clone https://github.com/ElisaMarchete/ShelterSeek.git
+Navigate to the project directory: cd ShelterSeek
+
+```
 Install dependencies: npm install
+```
 
 Run:
-Start the server: npm start
-Access via browser at: http://localhost:3000
+Npm run develop to run the application in development mode.
 
 Navigation:
-For shelters, register via the "Shelter Sign-up". Users can start browsing immediately.
-Shelters can add pets post-registration.
-Users can filter pets, contact shelters, and donate through the portal.
-
-# Limitations
-Geolocation Accuracy: While we use Google Maps API, accuracy is not always guaranteed
-Data Completeness: Relying on shelters to provide accurate and comprehensive data. Incomplete profiles or pet listings might be encountered.
-Mobile Optimization: The platform is primarily designed for web browsers. While it is responsive, the experience might not be as refined on mobile devices.
+Access the application at https://shrouded-oasis-41043-7c0a55b2570d.herokuapp.com/
 
 # License
-The Pet Adoption Portal is licensed under the MIT License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Screenshot and URL of the deployed application
+
+![Screenshot of deployed application](./client/src/assets/screenshot/1.png)
+![Screenshot of deployed application](./client/src/assets/screenshot/2.png)
+![Screenshot of deployed application](./client/src/assets/screenshot/3.png)
+
+[Link deployed application](https://shrouded-oasis-41043-7c0a55b2570d.herokuapp.com/)

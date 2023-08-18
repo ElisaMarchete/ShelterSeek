@@ -86,9 +86,11 @@ export default function ShelterProfileForm(props) {
       <Container>
         <Container sx={{ display: "flex" }}>
           <Box sx={{ m: 2 }}>
-            <Typography variant="h5" sx={{ textAlign: "center" }}>
-              Your shelter
-            </Typography>
+            <div>
+              <Typography variant="h5" sx={{ textAlign: "center" }}>
+                Your shelter
+              </Typography>
+            </div>
             <TextField
               sx={{ m: 2 }}
               disabled={true}
@@ -117,9 +119,11 @@ export default function ShelterProfileForm(props) {
             />
           </Box>
           <Box sx={{ m: 2 }}>
-            <Typography variant="h5" sx={{ textAlign: "center" }}>
-              Contact information
-            </Typography>
+            <div>
+              <Typography variant="h5" sx={{ textAlign: "center" }}>
+                Contact information
+              </Typography>
+            </div>
             <TextField
               sx={{ m: 2 }}
               autoFocus

@@ -21,6 +21,8 @@ const ShelterInfo = () => {
   const [shelter, setShelter] = useState({});
   const [pets, setPets] = useState([]);
 
+  // console.log(shelter._id);
+
   // Query for shelter data
   const {
     loading: shelterLoading,
@@ -34,7 +36,7 @@ const ShelterInfo = () => {
   useEffect(() => {
     if (shelterData) {
       setShelter(shelterData.getShelter);
-      console.log(shelterData.getShelter.rating);
+      // console.log(shelterData.getShelter.rating);
     }
   }, [shelterData]);
 
@@ -51,7 +53,7 @@ const ShelterInfo = () => {
   useEffect(() => {
     if (petsData) {
       setPets(petsData.pets);
-      console.log(petsData.pets);
+      // console.log(petsData.pets);
     }
   }, [petsData]);
   const ratingValue = shelter.rating !== undefined ? shelter.rating : 0;
@@ -59,10 +61,12 @@ const ShelterInfo = () => {
   return (
     <div style={{ padding: "20px" }}>
       <Container>
-        <Typography variant="h4" style={{ textAlign: "center" }}>
-          {shelter.name}
-        </Typography>
-        <Grid container justifyContent="center">
+        <div>
+          <Typography variant="h4" style={{ textAlign: "center" }}>
+            {shelter.name}
+          </Typography>
+        </div>
+        <Grid container justifyContent="center" key={"static-key"}>
           <Grid item xs={12} sm={6}>
             <Card>
               <CardMedia
@@ -73,9 +77,11 @@ const ShelterInfo = () => {
               />
               <CardContent>
                 <Grid container direction="column" alignItems="center">
-                  <Typography variant="body1" style={{ marginTop: "20px" }}>
-                    {shelter.description}
-                  </Typography>
+                  <div>
+                    <Typography variant="body1" style={{ marginTop: "20px" }}>
+                      {shelter.description}
+                    </Typography>
+                  </div>
                   <div>
                     <Donation shelterId={shelter._id} />
                   </div>
@@ -98,18 +104,20 @@ const ShelterInfo = () => {
           </Grid>
         </Grid>
       </Container>
-      <div className="p-5">
+      <div className="h-5">
         <Container>
-          <Typography variant="h5" style={{ textAlign: "center" }}>
-            Viewing {shelter.name}'s pets!
-          </Typography>
+          <div>
+            <Typography variant="h5" style={{ textAlign: "center" }}>
+              Viewing {shelter.name}'s pets!
+            </Typography>
+          </div>
         </Container>
       </div>
       <Container>
-        <div>
-          <Grid container spacing={3} justifyContent="center">
-            {pets?.map((pet) => (
-              <Grid item xs={12} sm={6} md={4} key={pet.petId}>
+        <div key={shelter._id}>
+          <Grid container spacing={3} justifyContent="center" key={shelter._id}>
+            {pets?.map((pet, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card variant="outlined">
                   {pet.image && (
                     <CardMedia

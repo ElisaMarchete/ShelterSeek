@@ -21,8 +21,6 @@ function ShelterCarousel() {
     }
   }, [data]);
 
-  console.log(shelters);
-
   return (
     <div
       style={{

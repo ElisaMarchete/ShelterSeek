@@ -24,7 +24,7 @@ function Shelters() {
 
   return (
     <div>
-      <FilterBar filters={filters} setFilters={setFilters} />
+      <FilterBar filters={filters} setFilters={setFilters} key={shelters._id} />
       <Divider />
       <ShelterList shelters={shelters} />
     </div>

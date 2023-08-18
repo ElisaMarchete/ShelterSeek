@@ -4,7 +4,7 @@ const { User, Shelter, Donation, Pets } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51NctQVGRez86EpyP0cMwEAzIyp2p6I1rmiVMbiJILNs86nYitp7qn7pOchXv3aVczQO1V5OYTkHIwRtwFzfY64K500g5sb91eD"
 );
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const hashPassword = async (password) => {
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -121,7 +121,7 @@ const resolvers = {
         payment_method_types: ["card"],
         // success url will be the url of the client
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}&shelterId=${shelterId}&amount=${amount}`,
-        cancel_url: `${url}/failed`,
+        cancel_url: `${url}`,
         // line_items is the donation
         line_items: [
           {
