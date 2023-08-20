@@ -106,9 +106,11 @@ export default function ManageShelterForm(props) {
         }}
       >
         <Box sx={{ m: 2 }}>
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Animals kept
-          </Typography>
+          <div>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              Animals kept
+            </Typography>
+          </div>
           <FormGroup>
             <FormControlLabel
               control={
@@ -140,9 +142,11 @@ export default function ManageShelterForm(props) {
           </FormGroup>
         </Box>
         <Box sx={{ m: 2 }}>
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Shelter image
-          </Typography>
+          <div>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              Shelter image
+            </Typography>
+          </div>
           {/* <img src={formData.image} alt={formData.name} /> */}
           <Image updateUrl={handleUpdateUrl} initialImage={formData.image} />
           {/* <img src={formData?.image} /> */}

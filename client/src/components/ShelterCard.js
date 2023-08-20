@@ -12,7 +12,7 @@ import Donation from "./Donation";
 import { DogIcon, CatIcon, RabbitIcon } from "./Icons";
 
 function ShelterCard({ shelter }) {
-  console.log(shelter);
+  // console.log(shelter);
   // console.log(shelter._id);
   return (
     <Card sx={{ width: 350 }} className="shelter-card" key={shelter._id}>
@@ -53,19 +53,21 @@ function ShelterCard({ shelter }) {
               width: "90%",
             }}
           >
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              style={{
-                fontSize: "1.25rem",
-                fontWeight: "600",
-                verticalAlign: "center",
-                marginBottom: "30px",
-              }}
-            >
-              {shelter.name}
-            </Typography>
+            <div>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  verticalAlign: "center",
+                  marginBottom: "30px",
+                }}
+              >
+                {shelter.name}
+              </Typography>
+            </div>
             <Divider />
             <Typography
               variant="body2"

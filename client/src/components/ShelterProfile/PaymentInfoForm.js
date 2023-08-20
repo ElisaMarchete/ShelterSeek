@@ -76,9 +76,11 @@ export default function PaymentInfoForm(props) {
     <Container>
       <Container sx={{ width: "50%" }}>
         <Container sx={{ m: 2 }}>
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
-            Banking information
-          </Typography>
+          <div>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              Banking information
+            </Typography>
+          </div>
           <TextField
             sx={{ m: 2 }}
             autoFocus
